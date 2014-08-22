@@ -1,0 +1,185 @@
+{$compare = waRequest::cookie('shop_compare', array(), waRequest::TYPE_ARRAY_INT)}
+{$wishlist = waRequest::cookie('shop_wishlist', array(), waRequest::TYPE_ARRAY_INT)}
+<div class="row">
+    <div id="top_column" class="center_column col-xs-12">  
+        <div id="homepage-slider">
+            <ul id="homeslider">
+                <li class="homeslider-container  number1">
+                    <a href="#"  title="sample-1">
+                        <img src="{$wa_theme_url}img/slide-1.jpg"  width="1170" height="405" alt="sample-1"/>
+                    </a>
+                    <div class="homeslider-description"><h2>new arrivals</h2> <h3>Snowboarding</h3> <h4>gear</h4> <b>Купить сейчас!</b></div>
+                </li>
+                <li class="homeslider-container  number2">
+                    <a href="#"  title="sample-2">
+                        <img src="{$wa_theme_url}img/slide-2.jpg"  width="1170" height="405" alt="sample-2"/>
+                    </a>
+                    <div class="homeslider-description"><h2>new arrivals</h2>
+                        <h3>Alpine Climbing</h3>
+                        <h4>gear</h4>
+                        <b>Купить сейчас!</b></div>
+                </li>
+                <li class="homeslider-container  number3">
+                    <a href="#"  title="sample-2">
+                        <img src="{$wa_theme_url}img/slide-3.jpg"  width="1170" height="405" alt="sample-2"/>
+                    </a>
+                    <div class="homeslider-description"><h2>Clearance sale</h2> <h3>Skiing </h3> <b>Купить сейчас!</b></div>
+                </li>
+            </ul>
+        </div>
+
+        <div id="htmlcontent_top">
+            <ul class="htmlcontent-home clearfix row">
+                <li class="htmlcontent-item-1">
+                    <a href="#"  class="item-link" title="">
+                        <div>
+                            <img src="{$wa_theme_url}img/banner-img1.jpg"  class="item-img" title="" alt="" width="383" height="490"/>
+                            <div class="item-html">
+                                <div><h2>Winter <strong>Collection</strong></h2> <span>NEW ARRIVALS</span></div> <b>Shop now!</b>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="htmlcontent-item-2">
+                    <a href="#"  class="item-link" title="">
+                        <div>
+                            <img src="{$wa_theme_url}img/banner-img2.jpg"  class="item-img" title="" alt="" width="383" height="490"/>
+                            <div class="item-html">
+                                <div><h2>Surfing</h2> <span>Get up to 50% off</span></div> <b>Shop now!</b> <em>sale</em>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="htmlcontent-item-3">
+                    <a href="#"  class="item-link" title="">
+                        <div>
+                            <img src="{$wa_theme_url}img/banner-img3.jpg"  class="item-img" title="" alt="" width="383" height="240"/>
+                            <div class="item-html">
+                                <div><h2>Rock Climbing</h2> <span>NEW ARRIVALS</span> </div><b>Shop now!</b>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+                <li class="htmlcontent-item-4">
+                    <a href="#"  class="item-link" title="">
+                        <div>
+                            <img src="{$wa_theme_url}img/banner-img4.jpg"  class="item-img" title="" alt="" width="776" height="240"/>
+                            <div class="item-html">
+                                <div><h2>Trail Running</h2> <span>Get up to <i>50% off</i></span> <b>Shop now!</b></div> <em>sale</em>
+                            </div>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div id="left_column" class="column col-xs-12 col-sm-3"> 
+        {$bestsellers = $wa->shop->productSet('bestsellers')}
+        
+        <div id="new-products_block_right" class="block products_block">
+            <h4 class="title_block">
+                New products
+            </h4>
+            <div class="block_content products-block">
+                {include file="sidebar-products.html" products=$bestsellers class='products' inline}
+            </div>
+        </div>
+    </div>
+    <div id="center_column" class="center_column col-xs-12 col-sm-9">
+        <ul id="home-page-tabs" class="nav nav-tabs clearfix">
+            <li class="active">
+                <a data-toggle="tab" href="#blocknewproducts" class="blocknewproducts" title="New arrivals">New arrivals</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#homefeatured" class="homefeatured" title="Popular">Popular</a>
+            </li>
+            <li>
+                <a data-toggle="tab" href="#blockbestsellers" class="blockbestsellers" title="Лидеры продаж">Лидеры продаж</a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            
+            {include file='list-thumbs.html' products=$bestsellers id="blocknewproducts" class="product_list grid row blocknewproducts tab-pane active"}
+            
+            {include file='list-thumbs.html' products=$wa->shop->productSet('promo') id="homefeatured" class="product_list grid row homefeatured tab-pane"}
+            
+            {include file='list-thumbs.html' products=$bestsellers id="blockbestsellers" class="product_list grid row blockbestsellers tab-pane"}
+
+        </div>
+    </div> 
+</div> 
+<div class="clearfix block-cms-fb"> <div id="htmlcontent_home">
+        <ul class="htmlcontent-home clearfix row">
+            <li class="htmlcontent-item-1 col-xs-4 ">
+                <div>
+                    <div class="item-html">
+                        <div class="cont-1"><h4>Custom Block 1</h4> <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p>
+                            <p>Lorem ipsum dDeiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate.</p></div>
+                    </div>
+                </div>
+            </li>
+            <li class="htmlcontent-item-2 col-xs-4 ">
+                <div>
+                    <img src="{$wa_theme_url}img/img-banner4.jpg"  class="item-img" title="" alt="" width="100%" height="100%"/>
+                    <div class="item-html">
+                        <div class="cont-2"><h4>Custom Block 2</h4> <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
+                        </div>
+                    </div>
+                </div>
+            </li>
+            <li class="htmlcontent-item-3 col-xs-4 ">
+                <div>
+                    <div class="item-html">
+                        <div class="cont-3"><h4>Custom Block 3</h4> <p><strong>Lorem ipsum dolor sit amet conse ctetur </strong> Adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.</p><p><strong>Ipsum dolor sit amet conse ctetur</strong> Adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.</p></div>
+                    </div>
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div id="fb-root"></div>
+    <div id="facebook_block" class="col-xs-4">
+        <h4>Follow us on facebook</h4>
+        <div class="facebook-fanbox">
+            <div class="fb-like-box" data-href="#"  data-height="240" data-colorscheme="light" data-show-faces="true" data-header="false" data-stream="false" data-show-border="false">
+            </div>
+        </div>
+    </div>
+
+    <div id="cmsinfo_block">
+        <div class="col-xs-6"><ul>
+                <li><em class="icon-truck" id="icon-truck"></em>
+                    <div class="type-text">
+                        <h3>Free shipping</h3>
+                        <p>Suspendisse ultricies est mi blandit, euismod vestibulum purus.</p>
+                    </div>
+                </li>
+                <li><em class="icon-phone" id="icon-phone"></em>
+                    <div class="type-text">
+                        <h3>Call us: (800)2345-6789</h3>
+                        <p>Praesent ac risus orci. Pellentesque quis quam augue.</p>
+                    </div>
+                </li>
+                <li><em class="icon-credit-card" id="icon-credit-card"></em>
+                    <div class="type-text">
+                        <h3>Gift cards</h3>
+                        <p>Nunc et molestie metus. Duis cond vel lectus non tincidunt.</p>
+                    </div>
+                </li>
+            </ul></div>
+        <div class="col-xs-6"><h3>Useful links</h3>
+            <ul class="list-cms-info">
+                <li><a href="#" >Vestibulum id elementum</a></li>
+                <li><a href="#" >Curabitur cursus vel eros</a></li>
+                <li><a href="#" >Suspendisse dapibus ullamcorper</a></li>
+                <li><a href="#" >Eleifend pharetra</a></li>
+                <li><a href="#" >Donec ultrices quam</a></li>
+                <li><a href="#" >Bec erat males</a></li>
+                <li><a href="#" >Etiam ornare nisi non interdum</a></li>
+                <li><a href="#" >Phasellus eget ultrices dolor</a></li>
+                <li><a href="#" >Ut viverra urna eu</a></li>
+            </ul></div>
+    </div>
+
+</div>

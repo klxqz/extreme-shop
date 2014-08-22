@@ -1,0 +1,31 @@
+
+<ul class="bxslider clearfix">
+    {foreach $products as $p name=products}
+        <li class="item product-box ajax_block_product first_item product_accessories_description">
+            <div class="product_desc">
+                <a href="{$p.frontend_url}" title="{$p.name|escape}{if $p.summary} &mdash; {strip_tags($p.summary|escape)}{/if}" class="product-image product_image">
+                    {$wa->shop->productImgHtml($p, '190', ['class' => 'lazyOwl','itemprop' => 'image', 'alt' => $p.name, 'default' => "`$wa_theme_url`img/dummy200.png"])}
+                </a>
+            </div>
+            <div class="s_title_block">
+                <h5 class="product-name">
+                    <a title="{$p.name|escape}{if $p.summary} &mdash; {strip_tags($p.summary|escape)}{/if}" href="{$p.frontend_url}">
+                        {$p.name|escape|truncate:20}
+                    </a>
+                </h5>
+                <span class="price">
+                    {shop_currency_html($p.price)}
+                </span>
+            </div>
+            <div class="clearfix">
+                <div class="no-print">
+                    <a class="exclusive btn btn-default button ajax_add_to_cart_button" href="{$wa->getUrl('/frontendCart/add')}" data-id-product="{$p.id}" title="[`Add to cart`]">
+                        <span>[`Add to cart`]</span>
+                    </a>
+                </div>
+            </div>
+        </li>
+    {/foreach}
+</ul>
+
+

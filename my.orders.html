@@ -1,0 +1,79 @@
+<!-- Breadcrumb -->
+<div class="breadcrumb clearfix">
+    <a title="Вернуться на главную" href="{$wa_url}" class="home">
+        <i class="icon-home"></i>
+    </a>
+    {if isset($breadcrumbs) && $breadcrumbs}
+        {foreach $breadcrumbs as $breadcrumb}
+            <a title="{$breadcrumb.name|escape}" href="{$breadcrumb.url}">{$breadcrumb.name|escape}</a><span class="navigation-pipe" >&gt;</span>
+            {/foreach}
+        {/if}
+        {if isset($category)}
+        <span class="navigation_page">{$category.name|escape}</span>
+    {/if}
+    <span class="navigation-pipe">&gt;</span>
+    <span class="navigation_page">[`My orders`]</span>
+</div>
+<!-- /Breadcrumb -->
+<div class="row">
+
+    <div class="column col-xs-12 col-sm-3" id="left_column"><!-- Block layered navigation module -->
+
+        {include file="sidebar.html"}
+
+    </div>
+    <div class="center_column col-xs-12 col-sm-9" id="center_column">
+
+        {$wa->myNav('menu-h bottom-padded')}
+
+        <h1 class="page-heading bottom-indent">[`My orders`]</h1>
+
+
+        <table class="table">
+            {foreach $orders as $o}
+                <tr>
+                    <td class="nowrap">
+                        <a href="{$o.url}" class="bold">
+                            {$o.id_str}
+                        </a>
+                    </td>
+                    <td class="nowrap">
+                        <span class="nowrap order-status" style="{$o.state->getStyle(1)}">
+                            {$o.state->getName()}
+                        </span>
+                    </td>
+                    <td>
+                        {if !empty($o.items)}
+                            {foreach $o.items as $i}
+                                {$i.name|escape} <span class="gray">x {$i.quantity}</span><br />
+                            {/foreach}
+                        {/if}
+                    </td>
+                    <td>
+                        {if $o.shipping_name}
+                            {$o.shipping_name|escape}
+                        {else}
+                            &nbsp;
+                        {/if}
+                    </td>
+                    <td>
+                        {if $o.payment_name}
+                            {$o.payment_name|escape}
+                        {else}
+                            &nbsp;
+                        {/if}
+                    </td>
+                    <td>
+                        <span class="gray">{$o.create_datetime|wa_date:'humandate'}</span>
+                    </td>
+                </tr>
+            {foreachelse}
+                <tr class="no-border">
+                    <td>[`You have no order history yet.`]</td>
+                </tr>
+            {/foreach}
+        </table>
+
+
+    </div><!-- #center_column -->
+</div><!-- .row -->

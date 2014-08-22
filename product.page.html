@@ -1,0 +1,47 @@
+<script type="text/javascript" src="{$wa_app_static_url}js/rate.widget.js"></script>
+<script type="text/javascript" src="{$wa_theme_url}reviews.js"></script>
+
+<!-- Breadcrumb -->
+<div class="breadcrumb clearfix">
+    <a class="home" href="{$wa_app_url}" title="{$wa->accountName()}">
+        <i class="icon-home"></i>
+    </a><span class="navigation-pipe" >&gt;</span>
+    {if isset($breadcrumbs) && $breadcrumbs}
+        {foreach $breadcrumbs as $breadcrumb}
+            <a title="{$breadcrumb.name|escape}" href="{$breadcrumb.url}">{$breadcrumb.name|escape}</a><span class="navigation-pipe" >&gt;</span>
+
+        {/foreach}
+    {/if}
+    <span class="navigation_page">{$page.title|escape}</span>
+
+</div>
+<!-- /Breadcrumb -->
+
+
+<div class="row">
+    <div id="center_column" class="center_column col-xs-12 col-sm-12">
+        <div class="container">
+            <div class="top-hr"></div>
+
+            <!-- product page navigation -->
+            <ul class="menu-h">
+                <li><a href="{$wa->shop->productUrl($product)}">[`Overview`]</a></li>
+                <li>
+                    <a href="{$wa->shop->productUrl($product, 'reviews')}">[`Reviews`]</a>
+                    <span class="hint" itemprop="reviewCount">{$reviews_total_count}</span>
+                </li>
+                {foreach $product.pages as $p}
+                    <li{if $page.id == $p.id} class="selected"{/if}><a href="{$wa->shop->productUrl($product, 'page', ['page_url' => $p.url])}">{$p.name|escape}</a></li>
+                    {/foreach}
+            </ul>
+        </div>
+
+        <h1>{$page.title|escape}</h1>
+
+
+        {$page.content}
+
+
+
+    </div><!-- #center_column -->
+</div><!-- .row -->

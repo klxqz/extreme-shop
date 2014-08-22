@@ -1,0 +1,146 @@
+{if $wa->get('list') == 'viewed_products'}
+    {$title = 'Просмотренные товары'}
+    {$navigation = "Просмотренные товары"}
+    {$pages_count = 1}
+    {$viewed_products = waRequest::cookie('viewed_products')};
+    {if !empty($viewed_products)}
+        {$products = $wa->shop->products("id/`$viewed_products`")}
+    {else}
+        {$products = null}   
+    {/if}
+{elseif $wa->get('list') == 'wishlist'}
+    {$title = 'Избранные товары'}
+    {$navigation = "Избранные товары"}
+    {$pages_count = 1}
+    {$wishlist = waRequest::cookie('shop_wishlist')};
+    {if !empty($wishlist)}
+        {$products = $wa->shop->products("id/`$wishlist`")}
+    {else}
+        {$products = null}   
+    {/if}
+{else}
+    {$is_products_pers = true}
+    {$title = "Поиск по запросу «`$wa->get('query')|escape`»"}
+    {$navigation = "Поиск"}
+{/if}
+
+
+
+<link href="{$wa_active_theme_url}blocklayered.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
+<link href="{$wa_active_theme_url}category.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
+{$compare = waRequest::cookie('shop_compare', array(), waRequest::TYPE_ARRAY_INT)}
+{$wishlist = waRequest::cookie('shop_wishlist', array(), waRequest::TYPE_ARRAY_INT)}
+
+<!-- Breadcrumb -->
+<div class="breadcrumb clearfix">
+    <a class="home" href="{$wa_app_url}" title="{$wa->accountName()}">
+        <i class="icon-home"></i>
+    </a><span class="navigation-pipe" >&gt;</span>
+    <span class="navigation_page">{$navigation}</span>
+</div>
+
+<!-- /Breadcrumb -->
+
+<div class="row">
+    <div id="top_column" class="center_column col-xs-12"></div>
+</div>
+<div class="row">
+    <div id="left_column" class="column col-xs-12 col-sm-3">
+        {include file="sidebar.html"}
+    </div>
+    <div id="center_column" class="center_column col-xs-12 col-sm-9">
+
+        <div class="content_scene_cat">
+            <!-- Category image -->
+            <div class="content_scene_cat_bg row">
+                <div class="cat_desc  col-xs-12 col-sm-7 col-md-8 col-lg-9">
+                    <h1 class="category-name">{$title}</h1>
+                </div>
+            </div>
+        </div>
+
+        <div class="content_sortPagiBar clearfix">
+            <div class="sortPagiBar clearfix">
+                <ul class="display hidden-xs">
+                    <li class="display-title">View:</li>
+                    <li id="grid">
+                        <a rel="nofollow" href="#" title="Grid">
+                            <i class="icon-th-large"></i>
+                            Таблица
+                        </a>
+                    </li>
+                    <li id="list">
+                        <a rel="nofollow" href="#" title="List">
+                            <i class="icon-th-list"></i>
+                            Список
+                        </a>
+                    </li>
+                </ul>
+
+                {if !empty($is_products_pers)}
+                    {$products_pers = array(6,12,24,30,50,100)}
+                    <!-- nbr product/page -->
+                    <div  class="nbrItemPage">
+                        <div class="clearfix selector1">
+                            <label for="nb_item">
+                                Показать
+                            </label>
+                            <select name="n" id="nb_item" class="form-control">
+                                {if isset($smarty.cookies.products_per_page)}
+                                    {$products_per_page = $smarty.cookies.products_per_page}
+                                {else}
+                                    {$products_per_page = 50}
+                                {/if}
+                                {foreach $products_pers as $products_per}
+                                    <option value="{$products_per}" {if $products_per_page  == $products_per}selected="selected"{/if} >{$products_per}</option>
+                                {/foreach}
+                            </select>
+                        </div>
+                    </div>
+                    <!-- /nbr product/page -->
+                {/if}
+
+            </div>
+            <div class="top-pagination-content clearfix">
+
+            </div>
+        </div>
+
+        {if !$products}
+            [`No products were found.`]
+        {else}
+            {include file='list-thumbs.html' id="wishlist_list" class="product_list grid row"}
+        {/if}
+
+
+
+        <div class="content_sortPagiBar">
+            <div class="bottom-pagination-content clearfix">
+                <div class="compare-form">
+                    <a href="{$wa->getUrl('/frontend/compare/', ['id' => implode(',', $compare) ])}" class="btn btn-default button button-medium bt_compare bt_compare_bottom" {if count($compare)<2}disabled="disabled"{/if}>
+                        <span>Сравнить 
+                            (
+                            <strong class="total-compare-val">{count($compare)}</strong>
+                            )
+                            <i class="icon-chevron-right right"></i>
+                        </span>
+                    </a>
+                </div>
+
+
+
+                <!-- Pagination -->
+                <div id="pagination_bottom" class="pagination clearfix">                    
+                    {wa_pagination total=$pages_count attrs=['class' => "pagination"] next = '<i class="icon-chevron-right"></i>' prev = '<i class="icon-chevron-left"></i>'}
+                </div>
+                <!-- /Pagination -->
+
+
+            </div>
+        </div>
+
+    </div><!-- #center_column -->
+</div><!-- .row -->
+
+
+

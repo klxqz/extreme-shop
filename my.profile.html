@@ -1,0 +1,51 @@
+<!-- Breadcrumb -->
+<div class="breadcrumb clearfix">
+    <a title="Вернуться на главную" href="{$wa_url}" class="home">
+        <i class="icon-home"></i>
+    </a>
+    {if isset($breadcrumbs) && $breadcrumbs}
+        {foreach $breadcrumbs as $breadcrumb}
+            <a title="{$breadcrumb.name|escape}" href="{$breadcrumb.url}">{$breadcrumb.name|escape}</a><span class="navigation-pipe" >&gt;</span>
+            {/foreach}
+        {/if}
+        {if isset($category)}
+        <span class="navigation_page">{$category.name|escape}</span>
+    {/if}
+    <span class="navigation-pipe">&gt;</span>
+    <span class="navigation_page">[`My profile`]</span>
+</div>
+<!-- /Breadcrumb -->
+<div class="row">
+
+    <div class="column col-xs-12 col-sm-3" id="left_column"><!-- Block layered navigation module -->
+
+        {include file="sidebar.html"}
+
+    </div>
+    <div class="center_column col-xs-12 col-sm-9" id="center_column">
+
+        {$wa->myNav('menu-h bottom-padded')}
+
+        <h1 class="page-heading bottom-indent">[`My profile`]</h1>
+
+
+        {if $saved}
+            <strong><i class="icon16 saved"></i><span style="color:green">[`Contact information successfully updated!`]</span></strong>
+                {/if}
+
+        <form action="" method="post">
+            <div class="wa-form">
+
+                {$form->html()}
+
+                <div class="wa-field">
+                    <div class="wa-value">
+                        <input type="submit" value="[`Save`]">
+                    </div>
+                </div>
+            </div>
+        </form>
+
+
+    </div><!-- #center_column -->
+</div><!-- .row -->

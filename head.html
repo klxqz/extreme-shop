@@ -1,0 +1,54 @@
+<!-- shop app css -->
+<link href="{$wa_active_theme_url}custom.shop.css?v{$wa_theme_version}" rel="stylesheet" type="text/css">
+{*
+<link href="{$wa_active_theme_url}jquery.bxslider.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
+*}
+<!-- js -->
+<script type="text/javascript" src="{$wa_url}wa-content/js/jquery-wa/wa.core.js?v{$wa->version(true)}"></script>
+<script type="text/javascript" src="{$wa_active_theme_url}lazyloading.js?v{$wa_theme_version}"></script>
+{*
+<script src="{$wa_active_theme_url}jquery.bxslider.min.js?v{$wa_theme_version}"></script>
+*}
+<script type="text/javascript" src="{$wa_app_static_url}js/lazy.load.js?v{$wa->version()}"></script>
+
+
+<script type="text/javascript">
+    var cart_url = '{$wa->getUrl('shop/frontend/cart')}';
+</script>
+<script type="text/javascript" src="{$wa_active_theme_url}custom.shop.js?v{$wa_theme_version}"></script>
+{if $wa->shop->config('enable_2x')}
+    <script type="text/javascript" src="{$wa_url}wa-content/js/jquery-plugins/jquery.retina.js?v{$wa->version(true)}"></script>
+    <script type="text/javascript">$(window).load(function() {
+            $('.promo img,.product-list img,.product-page img,.cart img').retina()
+        });</script>
+    {/if}
+
+{if !empty($nofollow)}
+    <!-- "nofollow" for pages not to be indexed, e.g. customer account -->
+    <meta name="robots" content="noindex,nofollow" />
+{/if}
+
+
+<script type="text/javascript" src="{$wa_url}wa-content/js/jquery-plugins/jquery.cookie.js"></script>
+
+
+<link href="{$wa_active_theme_url}poshytip/tip-darkgray/tip-darkgray.css" rel="stylesheet" type="text/css">
+<script type="text/javascript" src="{$wa_active_theme_url}poshytip/jquery.poshytip.min.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+        $.extremeShop.init({
+            add_to_compare: '[`Add to comparison table`]',
+            remove_from_compare: '[`Remove from comparison table`]',
+            add_to_wishlist: '[`Add to wishlist`]',
+            remove_from_wishlist: '[`Remove from wishlist`]',
+            wishlist_url: '{$wa->getUrl('/frontend/search')}?list=wishlist',
+        });
+    });
+
+</script>
+
+
+<!-- plugin hook: 'frontend_head' -->
+{* @event frontend_head.%plugin_id% *}
+{foreach $frontend_head as $_}{$_}{/foreach}

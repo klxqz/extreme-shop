@@ -1,0 +1,185 @@
+{if !empty($filters)}
+    <div id="layered_block_left" class="block">
+        <p class="title_block">Фильтр</p>
+        <div class="block_content">
+
+            <div class="filters{if !empty($theme_settings.ajax_filters)} ajax{/if}">
+                <form id="layered_form" method="get" action="{$wa->currentUrl(0,1)}">
+                    {foreach $filters as $fid => $filter}
+                        <div class="layered_filter">
+                            {if $fid == 'price'}
+                                {$c = $wa->shop->currency(true)}
+                                <div class="layered_subtitle_heading">
+                                    <span class="layered_subtitle">[`Price`]</span>
+                                </div>
+                                <ul class="col-lg-12 layered_filter_ul">
+                                    <li class="nomargin hiddable col-lg-12">
+                                        <label>
+                                            [`from`]
+                                        </label>
+                                        <input class="form-control" type="text" name="price_min" {if $wa->get('price_min')}value="{(int)$wa->get('price_min')}"{/if} placeholder="{floor($filter.min)}"> {$c.sign}
+                                    </li>
+                                    <li class="nomargin hiddable col-lg-12">
+                                        <label>
+                                            [`to`]
+                                        </label>
+                                        <input class="form-control" type="text" name="price_max" {if $wa->get('price_max')}value="{(int)$wa->get('price_max')}"{/if} placeholder="{ceil($filter.max)}"> {$c.sign}
+                                    </li>
+                                </ul>
+
+
+                            {else}
+                                <div class="layered_subtitle_heading">
+                                    <span class="layered_subtitle">{$filter.name|escape}</span>
+                                </div>
+                                {if $filter.type == 'boolean'}
+                                    <ul class="col-lg-12 layered_filter_ul">
+
+                                        <li class="nomargin hiddable col-lg-12">
+                                            <input type="radio" name="{$filter.code}"{if $wa->get($filter.code)} checked{/if} value="1"> 
+                                            <label>
+                                                [`Yes`]
+                                            </label>
+                                        </li>
+                                        <li class="nomargin hiddable col-lg-12">
+                                            <input type="radio" name="{$filter.code}"{if $wa->get($filter.code) === '0'} checked{/if} value="0"> 
+                                            <label>
+                                                [`No`]
+                                            </label>
+                                        </li>
+                                        <li class="nomargin hiddable col-lg-12">
+                                            <input type="radio" name="{$filter.code}"{if $wa->get($filter.code, '') === ''} checked{/if} value=""> 
+                                            <label>
+                                                [`Any`]
+                                            </label>
+                                        </li>
+
+                                    </ul>
+                                {elseif isset($filter.min)}
+                                    {$_v = $wa->get($filter.code)}
+                                    [`from`] <input type="text" name="{$filter.code}[min]" placeholder="{$filter.min}" {if !empty($_v.min)}value="{$_v.min}"{/if}>
+                                    [`to`] <input type="text" name="{$filter.code}[max]" placeholder="{$filter.max}" {if !empty($_v.max)}value="{$_v.max}"{/if}>
+                                    {if !empty($filter.unit)}
+                                        {$filter.unit.title}
+                                        {if $filter.unit.value != $filter.base_unit.value}<input type="hidden" name="{$filter.code}[unit]" value="{$filter.unit.value}">{/if}
+                                    {/if}
+                                {else}
+                                    <ul class="col-lg-12 layered_filter_ul">
+                                        {foreach $filter.values as $v_id => $v}
+                                            <li class="nomargin hiddable col-lg-12">
+                                                <input type="checkbox" name="{$filter.code}[]" {if in_array($v_id, (array)$wa->get($filter.code, array()))}checked{/if} value="{$v_id}"> 
+                                                <label>
+                                                    {$v}
+                                                </label>
+                                            </li>
+                                        {/foreach}
+                                    </ul>
+                                {/if}
+
+
+                            {/if}
+                        </div>
+
+                    {/foreach}
+                    {if $wa->get('sort')}<input type="hidden" name="sort" value="{$wa->get('sort')|escape}">{/if}
+                    {if $wa->get('order')}<input type="hidden" name="order" value="{$wa->get('order')|escape}">{/if}
+                    <p></p>
+                    <input class="btn button" type="submit" value="[`Filter products`]">
+                </form>
+            </div>
+        </div>
+        <div id="layered_ajax_loader" style="display: none;">
+            <p>
+                <img src="http://livedemo00.template-help.com/prestashop_50127/img/loader.gif" alt="" />
+                <br />Загрузка ...
+            </p>
+        </div>
+    </div>
+{/if} 
+{if !empty($category)}
+    {$category_id = $category.id}
+{else}
+    {$category_id = 0}
+{/if}
+
+{if $wa->shop->categories($category_id, null, true)}
+    <div id="categories_block_left" class="block">
+        <h2 class="title_block">
+            Подкатегории
+        </h2>
+        <div class="block_content">
+            {wa_print_tree tree=$wa->shop->categories($category_id, null, true) unfolded=true class="tree dhtml" elem ='<a href=":url" title=":name">:name</a>'}
+        </div>
+    </div>
+{/if}
+
+<!-- MODULE Block best sellers -->
+<div id="best-sellers_block_right" class="block products_block">
+    <h4 class="title_block">
+        Популярные товары
+    </h4>
+    <div class="block_content">
+        {$bestsellers = $wa->shop->productSet('bestsellers')}
+        {include file="sidebar-products.html" products=$bestsellers inline class='block_content products-block'}
+    </div>
+</div>
+
+{$shop_pages=$wa->shop->pages()}
+{if $shop_pages}
+    <section id="informations_block_left_1" class="block informations_block_left">
+        <h4 class="title_block">
+            Information	
+        </h4>
+        <div class="block_content list-block">
+            {wa_print_tree  unfolded=false tree=$shop_pages class="toggle-footer" elem ='<a href=":url" title=":title">:name</a>' selected=$wa->param('page_id')}
+        </div>
+    </section>
+{/if}
+
+{$viewed_products = waRequest::cookie('viewed_products')};
+{if !empty($viewed_products)}
+    {$viewed_products = explode(',', $viewed_products)}
+    <div id="viewed-products_block_left" class="block">
+        <p class="title_block">
+            <a href="{$wa->getUrl('/frontend/search')}?list=viewed_products">Просмотренные товары</a>
+        </p>
+        <div class="block_content products-block">
+            <ul>
+                {foreach $viewed_products as $viewed_product_id}
+                    {$product = $wa->shop->product($viewed_product_id)}
+
+                    <li class="clearfix first_item">
+                        <a class="products-block-image" href="{$wa->shop->productUrl($product)}" title="{$product.name}" >
+                            {$wa->shop->productImgHtml($product, '98', [ 'itemprop' => 'image', 'alt' => $product.name|escape|cat:' ':strip_tags($product.summary)|escape ])}
+                        </a>
+                        <div class="product-content">
+                            <h5>
+                                <a class="product-name"	href="{$wa->shop->productUrl($product)}" title="{$product.name}">
+                                    {$product.name}
+                                </a>
+                            </h5>
+                            <p class="product-description">{$product.summary}</p>
+                        </div>
+                    </li>
+                {if $viewed_product_id@iteration >= 3}{break}{/if}
+            {/foreach}
+        </ul>
+    </div>
+</div>
+
+{/if}
+
+{if $cloud = $wa->shop->tags()}
+    <div class="block">
+        <p class="title_block">
+            Теги
+        </p>
+        <div class="block_content blockstore">
+            {foreach $cloud as $tag}
+                <a href="{$wa_app_url}tag/{$tag.uri_name}/" style="font-size: {$tag.size}%; opacity: {$tag.opacity}">{$tag.name|escape}</a>
+            {/foreach}
+        </div>
+    </div>
+{/if}
+<!-- tag cloud -->
+

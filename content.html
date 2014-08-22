@@ -1,0 +1,51 @@
+<!-- plugin hook: 'frontend_header' -->
+{* @event frontend_header.%plugin_id% *}
+{foreach $frontend_header as $_}{$_}{/foreach}            
+
+
+
+<!-- current page core content -->
+{$content}
+
+
+
+
+
+<!-- plugin hook: 'frontend_footer' -->
+{* @event frontend_footer.%plugin_id% *}
+{foreach $frontend_footer as $_}{$_}{/foreach}
+
+
+<script type="text/javascript" src="{$wa_url}wa-content/js/jquery-plugins/jquery.tmpl.min.js"></script>
+{literal}
+    <script id="cart_block_list_item_tmpl" type="text/x-jquery-tmpl">
+        <dt data-id="${id}">
+        <a class="cart-images" href="${url}"  title="${name}">
+        <img src="${img}" alt="${name}" /> 
+        </a>
+        <div class="cart-info">
+        <div class="product-name">
+        <a class="cart_block_product_name" href="${url}"  title="${name}">${name}</a>
+        </div>
+        <span class="quantity-formated">
+        <span class="quantity">${quantity}</span>&nbsp;x&nbsp;
+        </span>
+        <span class="price">{{html price}}</span>
+        </div>
+        <span class="remove_link">
+        <a class="ajax_cart_block_remove_link" href="#"  rel="nofollow">&nbsp;</a>
+        </span>
+        </dt>
+    </script>
+{/literal}
+<div id="dialog" class="dialog">
+    <div class="dialog-background"></div>
+    <div class="dialog-window">
+        <!-- common part -->
+        <div class="cart">
+
+        </div>
+        <!-- /common part -->
+
+    </div>
+</div>

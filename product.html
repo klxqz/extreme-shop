@@ -1,0 +1,483 @@
+
+
+<link rel="stylesheet" href="{$wa_active_theme_url}product.css"  media="all" />
+<link rel="stylesheet" href="{$wa_active_theme_url}jquery.jqzoom.css" media="all" />
+<link rel="stylesheet" href="{$wa_active_theme_url}socialsharing.css" media="all" />
+<link rel="stylesheet" href="{$wa_active_theme_url}sendtoafriend.css" media="all" />
+<link rel="stylesheet" href="{$wa_active_theme_url}crossselling.css" media="all" />
+
+
+
+<!-- Breadcrumb -->
+<div class="breadcrumb clearfix">
+    <a class="home" href="{$wa_app_url}" title="{$wa->accountName()}">
+        <i class="icon-home"></i>
+    </a><span class="navigation-pipe" >&gt;</span>
+    {if isset($breadcrumbs) && $breadcrumbs}
+        {foreach $breadcrumbs as $breadcrumb}
+            <a title="{$breadcrumb.name|escape}" href="{$breadcrumb.url}">{$breadcrumb.name|escape}</a><span class="navigation-pipe" >&gt;</span>
+
+        {/foreach}
+    {/if}
+    <span class="navigation_page">{$product.name|escape}</span>
+
+</div>
+<!-- /Breadcrumb -->
+
+
+<div class="row">
+    <div id="center_column" class="center_column col-xs-12 col-sm-12">
+
+        <div class="primary_block row" itemscope itemtype="http://schema.org/Product">
+            <input type="hidden" id="is_product_page" value="{$product.id}" />
+
+            <div class="container">
+                <div class="top-hr"></div>
+
+                <!-- product page navigation -->
+                <ul class="menu-h">
+                    <li class="selected"><a href="{$wa->shop->productUrl($product)}">[`Overview`]</a></li>
+                    <li>
+                        <a href="{$wa->shop->productUrl($product, 'reviews')}">[`Reviews`]</a>
+                        <span class="hint">{$reviews_total_count}</span>
+                    </li>
+                    {foreach $product.pages as $page}
+                        <li>
+                            <a href="{$wa->shop->productUrl($product, 'page', ['page_url' => $page.url])}">{$page.name|escape}</a>
+                        </li>
+                    {/foreach}
+
+                    <!-- plugin hook: 'frontend_product.menu' -->
+                    {* @event frontend_product.%plugin_id%.menu *}
+                    {foreach $frontend_product as $_}
+                        {$_.menu}
+                    {/foreach}
+
+                </ul>
+            </div>
+
+
+            <!-- left infos-->  
+            <div class="pb-left-column col-xs-12  col-sm-4 col-md-5">
+                <!-- product img-->        
+                <div id="image-block" class="clearfix">
+                    <span class="new-box no-print">
+                        <span class="new-label">Новые</span>
+                    </span>
+                    <span class="sale-box no-print">
+                        <span class="sale-label">Sale!</span>
+                    </span>
+                    <span id="view_full_size">
+                        <a class="jqzoom" title="{$product.name|escape}" rel="gal1" href="{shopImage::getUrl(['id' => $product.image_id, 'product_id' => $product.id, 'ext' => $product.ext], '900', false)}" itemprop="url">
+                            {$wa->shop->productImgHtml($product, '458', [ 'itemprop' => 'image', 'id' => 'product-image', 'alt' => $product.name|escape|cat:' ':strip_tags($product.summary)|escape ])}
+                        </a>
+                    </span>
+                </div> <!-- end image-block -->
+
+                <!-- thumbnails -->
+                <div id="views_block" class="clearfix ">
+                    <span class="view_scroll_spacer">
+                        <a id="view_scroll_left" class="" title="Другие виды" href="javascript:{}">
+                            Previous
+                        </a>
+                    </span>
+                    <div id="thumbs_list">
+                        <ul id="thumbs_list_frame">
+                            {foreach $product.images as $image}
+                                <li id="thumbnail_{$image.id}">
+                                    <a 
+                                        href="javascript:void(0);"
+                                        rel="{
+                                        gallery: 'gal1', smallimage: '{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '458', false)}',
+                                        largeimage: '{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '900', false)}'
+                                        }"
+                                        title="{$product.name|escape}">
+                                        <img class="img-responsive" id="thumb_{$image.id}" 
+                                             src="{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '80x80', false)}" 
+                                             alt="{$product.name|escape}" title="{$product.name|escape}" itemprop="image" />
+                                    </a>
+                                </li>
+                            {/foreach}                                
+                        </ul>
+                    </div> <!-- end thumbs_list -->
+                    <a id="view_scroll_right" title="Другие виды" href="javascript:{}">
+                        Next
+                    </a>
+                </div> 
+                <!-- end views-block -->
+                <!-- end thumbnails -->
+            </div> 
+            <!-- end pb-left-column -->
+            <!-- end left infos--> 
+
+            <!-- center infos -->
+            <div class="pb-center-column col-xs-12  col-sm-4">
+                <h1 itemprop="name">{$product.name|escape}</h1>
+                <div id="short_description_block">
+                    <div id="short_description_content" class="rte align_justify" itemprop="description"><p>{$product.summary|truncate:255}</p></div>
+                    <!---->
+                </div> <!-- end short_description_block -->
+
+
+
+
+                <p class="socialsharing_product list-inline no-print">
+                    <button type="button" class="btn btn-default btn-twitter" onclick="socialsharing_twitter_click('Lynx 13 Rucksack http://livedemo00.template-help.com/prestashop_50127/index.php?id_product=1&controller=product&id_lang=3');">
+                        <i class="icon-twitter"></i> Tweet
+                        <!-- <img src="http://livedemo00.template-help.com/prestashop_50127/modules/socialsharing/img/twitter.gif" alt="Tweet" /> -->
+                    </button>
+                    <button type="button" class="btn btn-default btn-facebook" onclick="socialsharing_facebook_click();">
+                        <i class="icon-facebook"></i> Share
+                        <!-- <img src="http://livedemo00.template-help.com/prestashop_50127/modules/socialsharing/img/facebook.gif" alt="Facebook Like" /> -->
+                    </button>
+                    <button type="button" class="btn btn-default btn-google-plus" onclick="socialsharing_google_click();">
+                        <i class="icon-google-plus"></i> Google+
+                        <!-- <img src="http://livedemo00.template-help.com/prestashop_50127/modules/socialsharing/img/google.gif" alt="Google Plus" /> -->
+                    </button>
+                    <button type="button" class="btn btn-default btn-pinterest" onclick="socialsharing_pinterest_click();">
+                        <i class="icon-pinterest"></i> Pinterest
+                        <!-- <img src="http://livedemo00.template-help.com/prestashop_50127/modules/socialsharing/img/pinterest.gif" alt="Pinterest" /> -->
+                    </button>
+                </p>
+
+                {if !empty($product.rating) && $product.rating > 0}
+                    <div id="product_comments_block_extra" class="no-print" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                        <div class="comments_note clearfix">
+                            <span>Rating&nbsp;</span>
+                            <div class="star_content clearfix">
+                                {for $i=1 to 5}
+                                    <div class="star{if $product.rating >= $i} star_on{/if}"></div>
+                                {/for}                            
+                                <span class="hidden" itemprop="ratingValue">{$product.rating}</span>
+                                <span class="hidden" itemprop="reviewCount">{$reviews_total_count}</span>
+                            </div>
+                        </div> <!-- .comments_note -->
+
+                        <ul class="comments_advices">
+                            <li>
+                                <a href="#idTab5" class="reviews" title="Читайте отзывы ">
+                                    Читайте отзывы (<span itemprop="reviewCount">{$reviews_total_count}</span>)
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                {/if}
+
+
+                <!-- categories -->
+                {if $product.categories}
+                    <p id="product-categories">
+                        [`Categories`]:
+                        {foreach $product.categories as $c}
+                            {if $c.status}
+                                <span class="product-info"><a href="{$wa->getUrl('/frontend/category', ['category_url' => $c.full_url])}">{$c.name|escape}</a></span>
+                                {/if}
+                            {/foreach}
+                    </p>
+                {/if}
+
+                <!-- tags -->
+                {if $product.tags}
+                    <p class="tags" id="product-tags">
+                        [`Tags`]:
+                        <span class="product-info">
+                            {foreach $product.tags as $t}
+                                <a href="{$wa->getUrl('/frontend/tag', ['tag' => urlencode($t)])}">{$t}</a>
+                            {/foreach}
+                        </span>
+                    </p>
+                {/if}
+
+                <!-- plugin hook: 'frontend_product.block_aux' -->
+                {* @event frontend_product.%plugin_id%.block_aux *}
+                {foreach $frontend_product as $_}
+                    {$_.block_aux}
+                {/foreach}
+                <br/>
+
+
+                <!-- usefull links-->
+                <ul id="usefull_link_block" class="clearfix no-print">
+                    <li class="print">
+                        <a href="javascript:print();">
+                            Распечатать
+                        </a>
+                    </li>
+
+                    <li class="compare">
+                        <a {if $compare}style="display:none"{/if} class="compare-add inline-link" data-product="{$product.id}" href="#"><b><i>[`Add to comparison table`]</i></b></a>
+                        <a {if !$compare}style="display:none"{/if} class="compare-remove inline-link" data-product="{$product.id}" href="#"><b><i>[`Remove from comparison table`]</i></b></a>
+                        <a id="compare-link" {if count($compare) lt 2}style="display:none"{/if} rel="nofollow" href="{$wa->getUrl('/frontend/compare/', ['id' => implode(',', $compare) ])}" class="bold">[`Compare`] <span class="count">{count($compare)}</span></a>
+                    </li>
+                    <li class="favorite">
+                        <a href="#">Добавить в избранное</a>
+                    </li>
+
+                </ul>
+
+
+
+
+
+
+
+            </div>
+            <!-- end center infos-->
+
+            <!-- pb-right-column-->
+            <div class="pb-right-column col-xs-12  col-sm-4 col-md-3">
+                {include file="product.cart.html" inline}
+
+                <!-- plugin hook: 'frontend_product.cart' -->
+                {* @event frontend_product.%plugin_id%.cart *}
+                {foreach $frontend_product as $_}
+                    {$_.cart}
+                {/foreach}
+                <div class="clear"></div>
+            </div> 
+            <!-- end pb-right-column-->
+        </div> <!-- end primary_block -->
+
+        {if $product.description}          
+            <!-- More info -->
+            <section class="page-product-box">
+                <h3 class="page-product-heading">Подробнее</h3>									<!-- full description -->
+                <div  class="rte"><p itemprop="description">{$product.description}</p></div>
+            </section>
+            <!--end  More info -->
+        {/if}
+
+
+        {if $product.features}      
+
+            <section class="page-product-box">
+                <h3 class="page-product-heading">Характеристики</h3>								
+                <div  class="rte">
+                    <!-- product features -->
+
+                    <table class="features" id="product-features">
+                        {foreach $product.features as $f_code => $f_value}
+                            <tr{if $features[$f_code].type == 'divider'} class="divider"{/if}>
+                                <td class="name">
+                                    {$features[$f_code].name|escape}
+                                </td>
+                                <td class="value" itemprop="{$f_code|escape}">
+                                    {if is_array($f_value)}
+                                        {if $features[$f_code].type == 'color'}
+                                            {implode('<br /> ', $f_value)}
+                                        {else}
+                                            {implode(', ', $f_value)}
+                                        {/if}
+                                    {else}
+                                        {$f_value}
+                                    {/if}
+                                </td>
+                            </tr>
+                        {/foreach}
+                    </table>
+
+                </div>
+            </section>
+
+        {/if}
+
+
+
+        <!--HOOK_PRODUCT_TAB -->
+        <section class="page-product-box">
+            <h3 id="#idTab5" class="idTabHrefShort page-product-heading">{sprintf('[`%s reviews`]', $product.name|escape)}</h3> 
+            <div id="idTab5">
+                <div id="product_comments_block_tab">
+
+                    {foreach $reviews as $review}
+                        {include file="review.html" reply_allowed=false inline}
+                    {/foreach}
+
+                    {if !$reviews}
+                        <p>{sprintf('[`Be the first to <a href="%s">write a review</a> of this product!`]', 'reviews/')}</p>
+                    {else}
+                        {sprintf(_w(
+                            'Read <a href="%s">all %d review</a> on %s', 
+                            'Read <a href="%s">all %d reviews</a> on %s', 
+                            $reviews_total_count, false
+                        ), 'reviews/', $reviews_total_count, $product.name|escape)
+                        }
+                    {/if}
+
+                </div> <!-- #product_comments_block_tab -->
+            </div>
+
+        </section>
+        <!--end HOOK_PRODUCT_TAB -->
+
+
+        {$upselling = $product->upSelling()}
+        {$crossselling = $product->crossSelling()}
+
+
+
+        {if $upselling}
+            <section class="page-product-box">
+                <h3 class="page-product-heading">[`See also`]
+                    {$compare_ids = array_merge(array($product.id), array_keys($upselling))}
+                    <input type="button" onClick="javascript:window.location = '{$wa->getUrl('/frontend/compare', ['id' => implode(',', $compare_ids)])}';" value="[`Compare all`]" />
+                </h3>
+                <div class="block products_block accessories-block clearfix">
+                    <div class="block_content">
+                        {include file="list-slider.html" products=$upselling}
+                    </div>
+                </div>	
+            </section>
+        {/if}
+
+        {if $crossselling}
+            <section class="page-product-box">
+                <h3 class="page-product-heading">{sprintf('[`Customers who bought %s also bought`]', $product.name|escape)}</h3>
+                <div class="block products_block accessories-block clearfix">
+                    <div class="block_content">
+                        {include file="list-slider.html" products=$crossselling}
+                    </div>
+                </div>	
+            </section>
+        {/if}
+
+
+
+
+        <!-- description & features -->
+
+
+
+
+
+
+    </div><!-- #center_column -->
+</div><!-- .row -->
+
+
+{literal}
+    <script type="text/javascript">
+        var CUSTOMIZE_TEXTFIELD = 1;
+        var FancyboxI18nClose = 'Close';
+        var FancyboxI18nNext = 'Next';
+        var FancyboxI18nPrev = 'Previous';
+        var PS_CATALOG_MODE = false;
+        var added_to_wishlist = 'Added to your wishlist.';
+        var ajaxsearch = true;
+        var allowBuyWhenOutOfStock = false;
+        var attribute_anchor_separator = '-';
+        var attributesCombinations = [];
+        var availableLaterValue = '';
+        var availableNowValue = '';
+        var baseDir = 'http://livedemo00.template-help.com/prestashop_50127/';
+        var baseUri = 'http://livedemo00.template-help.com/prestashop_50127/index.php';
+        var blocksearch_type = 'top';
+        var confirm_report_message = 'Вы уверены, что хотите внести этот комментарий?';
+        var contentOnly = false;
+        var currencyBlank = 0;
+        var currencyFormat = 1;
+        var currencyRate = 1;
+        var currencySign = '$';
+        var currentDate = '2014-08-15 23:31:58';
+        var customizationFields = [{"id_customization_field": "1", "type": "0", "required": "0", "name": "", "id_lang": "3"}, {"id_customization_field": "51", "type": "1", "required": "0", "name": "", "id_lang": "3"}];
+        var customizationIdMessage = 'Модификация №';
+        var default_eco_tax = 0;
+        var delete_txt = 'Удалить';
+        var displayPrice = 1;
+        var doesntExist = 'Данная модификация отсутствует. Пожалуйста, выберите другую.';
+        var doesntExistNoMore = 'Этого товара нет в наличии';
+        var doesntExistNoMoreBut = 'с указанными характеристиками, выберите другие';
+        var ecotaxTax_rate = 0;
+        var fieldRequired = 'Пожалуйста заполните все требуемые поля, затем сохраните модификацию.';
+        var freeProductTranslation = 'Бесплатно!';
+        var freeShippingTranslation = 'Бесплатная доставка!';
+        var generated_date = 1408159918;
+        var group_reduction = 0;
+        var idDefaultImage = 1;
+        var id_lang = 3;
+        var id_product = 1;
+        var img_dir = 'http://livedemo00.template-help.com/prestashop_50127/themes/theme990/img/';
+        var img_prod_dir = 'http://livedemo00.template-help.com/prestashop_50127/img/p/';
+        var img_ps_dir = 'http://livedemo00.template-help.com/prestashop_50127/img/';
+        var instantsearch = true;
+        var isGuest = 0;
+        var isLogged = 0;
+        var jqZoomEnabled = true;
+        var loggin_required = 'You must be logged in to manage your wishlist.';
+        var maxQuantityToAllowDisplayOfLastQuantityMessage = 3;
+        var minimalQuantity = 1;
+        var moderation_active = true;
+        var mywishlist_url = 'http://livedemo00.template-help.com/prestashop_50127/index.php?fc=module&module=blockwishlist&controller=mywishlist&id_lang=3';
+        var noTaxForThisProduct = true;
+        var oosHookJsCodeFunctions = [];
+        var page_name = 'product';
+        var priceDisplayMethod = 1;
+        var priceDisplayPrecision = 2;
+        var productAvailableForOrder = true;
+        var productBasePriceTaxExcluded = 128.96;
+        var productColumns = '1';
+        var productHasAttributes = false;
+        var productPrice = 122.51;
+        var productPriceTaxExcluded = 128.96;
+        var productPriceWithoutReduction = 128.96;
+        var productReference = '';
+        var productShowPrice = true;
+        var productUnitPriceRatio = 0;
+        var product_specific_price = {"id_specific_price": "1", "id_specific_price_rule": "0", "id_cart": "0", "id_product": "1", "id_shop": "1", "id_shop_group": "0", "id_currency": "0", "id_country": "0", "id_group": "0", "id_customer": "0", "id_product_attribute": "0", "price": "-1.000000", "from_quantity": "1", "reduction": "0.050000", "reduction_type": "percentage", "from": "0000-00-00 00:00:00", "to": "0000-00-00 00:00:00", "score": "48"};
+        var productcomment_added = 'Ваш комментарий был добавлен!';
+        var productcomment_added_moderation = 'Ваш комментарий был добавлен и будет доступен после одобрения модератором.';
+        var productcomment_ok = 'ОК';
+        var productcomment_title = 'Новый комментарий';
+        var productcomments_controller_url = 'http://livedemo00.template-help.com/prestashop_50127/index.php?fc=module&module=productcomments&controller=default&id_lang=3';
+        var productcomments_url_rewrite = false;
+        var quantitiesDisplayAllowed = true;
+        var quantityAvailable = 99;
+        var quickView = true;
+        var reduction_percent = 5;
+        var reduction_price = 0;
+        var removingLinkText = 'удалить товар из корзины';
+        var roundMode = 2;
+        var search_url = 'http://livedemo00.template-help.com/prestashop_50127/index.php?controller=search';
+        var secure_key = '0335e054bfb20f9703e320e6de910ddb';
+        var specific_currency = false;
+        var specific_price = -1;
+        var static_token = 'da54bada35f37b2cd72377705db97a29';
+        var stf_msg_error = 'Ваше письмо не может быть отправлено. Пожалуйста, проверьте адрес и попробуйте еще раз.';
+        var stf_msg_required = 'Вы не заполнили все обязательные поля';
+        var stf_msg_success = 'Ваше письмо успешно отправлено';
+        var stf_msg_title = 'Send to a friend';
+        var stf_secure_key = 'eeaa800b8e9e6dbc0b91f8cf045ed3ff';
+        var stock_management = 1;
+        var taxRate = 0;
+        var token = 'da54bada35f37b2cd72377705db97a29';
+        var uploading_in_progress = 'Пожалуйста подождите...';
+        var usingSecureMode = false;
+        var wishlistProductsIds = false;
+    </script>
+{/literal}
+
+
+
+
+
+
+
+<script type="text/javascript" src="{$wa_theme_url}jquery.idTabs.js"></script>
+
+
+
+<script type="text/javascript" src="{$wa_theme_url}product_1.js"></script>
+<script type="text/javascript" src="{$wa_theme_url}jquery.jqzoom.js"></script>
+<script type="text/javascript" src="{$wa_theme_url}socialsharing.js"></script>
+
+
+
+
+<script type="text/javascript" src="{$wa_theme_url}jquery.rating.pack.js"></script>
+<script type="text/javascript" src="{$wa_theme_url}sendtoafriend.js"></script>
+<script type="text/javascript" src="{$wa_theme_url}crossselling.js"></script>
+
+
+
+<script type="text/javascript" src="{$wa_theme_url}jquery.textareaCounter.plugin.js"></script>
+{*<script type="text/javascript" src="{$wa_theme_url}productcomments.js"></script>*}
