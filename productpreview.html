@@ -16,23 +16,9 @@
 
         <meta name="apple-mobile-web-app-capable" content="yes" /> 
         <link rel="stylesheet" href="{$wa_parent_theme_url}global.css" media="all" />
-        <link rel="stylesheet" href="{$wa_parent_theme_url}highdpi.css" media="all" />
         <link rel="stylesheet" href="{$wa_parent_theme_url}responsive-tables.css" media="all" />
         <link rel="stylesheet" href="{$wa_parent_theme_url}uniform.default.css" media="all" />
-        <link rel="stylesheet" href="{$wa_parent_theme_url}jquery.fancybox.css" media="all" />
         <link rel="stylesheet" href="{$wa_active_theme_url}product.css" media="all" />
-
-        <link rel="stylesheet" href="{$wa_active_theme_url}jquery.jqzoom.css" media="all" />
-        <link rel="stylesheet" href="{$wa_active_theme_url}socialsharing.css" media="all" />
-
-        <link rel="stylesheet" href="{$wa_parent_theme_url}blockcategories.css" media="all" />
-        <link rel="stylesheet" href="{$wa_parent_theme_url}blockcurrencies.css" media="all" />
-        <link rel="stylesheet" href="{$wa_parent_theme_url}blocklanguages.css" media="all" />
-        <link rel="stylesheet" href="{$wa_parent_theme_url}blockcontact.css" media="all" />
-        <link rel="stylesheet" href="{$wa_parent_theme_url}blocknewsletter.css" media="all" />
-        <link rel="stylesheet" href="{$wa_parent_theme_url}product_list.css" media="all" />
-        <link rel="stylesheet" href="{$wa_parent_theme_url}blocktopmenu.css" media="all" />
-        <link rel="stylesheet" href="{$wa_parent_theme_url}superfish-modified.css" media="all" />
 
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,600" media="all" />
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
@@ -58,7 +44,7 @@
                         <span class="sale-label">Sale!</span>
                     </span>
                     <span id="view_full_size">
-                        {$wa->shop->productImgHtml($product, '458x458', [ 'itemprop' => 'image', 'id' => 'bigpic', 'alt' => $product.name|escape|cat:' ':strip_tags($product.summary)|escape ])}
+                        {$wa->shop->productImgHtml($product, '458', [ 'itemprop' => 'image', 'id' => 'bigpic', 'alt' => $product.name|escape|cat:' ':strip_tags($product.summary)|escape ])}
                     </span>
                 </div> <!-- end image-block -->
 
@@ -74,7 +60,7 @@
                             {foreach $product.images as $image}
                                 <li id="thumbnail_{$image.id}">
                                     <a 
-                                        href="{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '458x458', false)}"
+                                        href="{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '458', false)}"
                                         data-fancybox-group="other-views"
                                         class="fancybox shown"
                                         title="{$product.name|escape}">
@@ -109,24 +95,14 @@
                 </div> <!-- end short_description_block -->
 
 
-                <p class="socialsharing_product list-inline no-print">
-                    <button type="button" class="btn btn-default btn-twitter" onclick="socialsharing_twitter_click('Lynx 13 Rucksack http://livedemo00.template-help.com/prestashop_50127/index.php?id_product=1&controller=product&id_lang=3');">
-                        <i class="icon-twitter"></i> Tweet
-                        <!-- <img src="http://livedemo00.template-help.com/prestashop_50127/modules/socialsharing/img/twitter.gif" alt="Tweet" /> -->
-                    </button>
-                    <button type="button" class="btn btn-default btn-facebook" onclick="socialsharing_facebook_click();">
-                        <i class="icon-facebook"></i> Share
-                        <!-- <img src="http://livedemo00.template-help.com/prestashop_50127/modules/socialsharing/img/facebook.gif" alt="Facebook Like" /> -->
-                    </button>
-                    <button type="button" class="btn btn-default btn-google-plus" onclick="socialsharing_google_click();">
-                        <i class="icon-google-plus"></i> Google+
-                        <!-- <img src="http://livedemo00.template-help.com/prestashop_50127/modules/socialsharing/img/google.gif" alt="Google Plus" /> -->
-                    </button>
-                    <button type="button" class="btn btn-default btn-pinterest" onclick="socialsharing_pinterest_click();">
-                        <i class="icon-pinterest"></i> Pinterest
-                        <!-- <img src="http://livedemo00.template-help.com/prestashop_50127/modules/socialsharing/img/pinterest.gif" alt="Pinterest" /> -->
-                    </button>
-                </p>
+
+                <script type="text/javascript" src="//yandex.st/share/share.js"
+                charset="utf-8"></script>
+                <div class="yashare-auto-init" data-yashareL10n="ru"
+                     data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"></div> 
+
+
+
                 <!--  /Module ProductComments -->					
             </div>
             <!-- end center infos-->
@@ -134,14 +110,9 @@
             <!-- pb-right-column-->
             <div class="pb-right-column col-xs-12  col-sm-4 col-md-3">
                 <!-- add to cart form-->
-                <form id="buy_block" action="http://livedemo00.template-help.com/prestashop_50127/index.php?controller=cart" method="post">
+                <form id="buy_block" action="#" method="post">
                     <!-- hidden datas -->
-                    <p class="hidden">
-                        <input type="hidden" name="token" value="5e7ab9e6b79f3570afee89e23e10e6a5" />
-                        <input type="hidden" name="id_product" value="1" id="product_page_product_id" />
-                        <input type="hidden" name="add" value="1" />
-                        <input type="hidden" name="id_product_attribute" id="idCombination" value="" />
-                    </p>
+                   
                     <div class="box-info-product">
                         <div class="content_prices clearfix">
                             <!-- prices -->
@@ -204,8 +175,7 @@
 
                             <!-- /Productpaymentlogos module -->
                             <p class="buttons_bottom_block no-print">
-                                <a id="wishlist_button" href="#" onclick="WishlistCart('wishlist_block_list', 'add', '1', $('#idCombination').val(), document.getElementById('quantity_wanted').value);
-                                        return false;" rel="nofollow"  title="Добавить в список">
+                                <a id="wishlist_button" href="#"  rel="nofollow"  title="Добавить в список">
                                     Добавить в список
                                 </a>
                             </p>
@@ -225,21 +195,9 @@
 
 
         <script type="text/javascript" src="{$wa_url}wa-content/js/jquery/jquery-1.8.2.min.js"></script>
-        <script type="text/javascript" src="{$wa_parent_theme_url}jquery.easing.js"></script>
-        <script type="text/javascript" src="{$wa_parent_theme_url}tools.js"></script>
-        <script type="text/javascript" src="{$wa_parent_theme_url}global.js"></script>
-        <script type="text/javascript" src="{$wa_parent_theme_url}10-bootstrap.min.js"></script>
-        <script type="text/javascript" src="{$wa_parent_theme_url}15-jquery.total-storage.min.js"></script>
-        <script type="text/javascript" src="{$wa_parent_theme_url}15-jquery.uniform-modified.js"></script>
-        <script type="text/javascript" src="{$wa_parent_theme_url}jquery.scrollTo.js"></script>
-        <script type="text/javascript" src="{$wa_parent_theme_url}jquery.serialScroll.js"></script>
-        <script type="text/javascript" src="{$wa_parent_theme_url}jquery.bxslider.js"></script>
+
+        <script type="text/javascript" src="{$wa_active_theme_url}jquery.scrollTo.js"></script>
+        <script type="text/javascript" src="{$wa_active_theme_url}jquery.serialScroll.js"></script>
         <script type="text/javascript" src="{$wa_active_theme_url}product_1.js"></script>
-        <script type="text/javascript" src="{$wa_active_theme_url}jquery.jqzoom.js"></script>
-        <script type="text/javascript" src="{$wa_active_theme_url}crossselling.js"></script>
-        <script type="text/javascript" src="{$wa_parent_theme_url}hoverIntent.js"></script>
-        <script type="text/javascript" src="{$wa_parent_theme_url}superfish-modified.js"></script>
-        <script type="text/javascript" src="{$wa_parent_theme_url}blocktopmenu.js"></script>
-        <script type="text/javascript" src="{$wa_active_theme_url}jquery.textareaCounter.plugin.js"></script>
     </body>
 </html>

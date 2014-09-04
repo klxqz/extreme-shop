@@ -18,7 +18,7 @@
    background-color: white;
    padding: 8px;
    text-align:center;
-   background-image: url(zoomloader.gif)/*tpa=http://livedemo00.template-help.com/prestashop_50127/js/jquery/plugins/jqzoom/zoomloader.gif*/;
+   background-image: url(img/zoomloader.gif);
    background-repeat: no-repeat;
    background-position: 43px 30px;
    z-index:110;

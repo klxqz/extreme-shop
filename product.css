@@ -116,12 +116,12 @@ img {
   .pb-left-column #image-block a.jqzoom div div .zoomWrapper {
     border: none; }
   .pb-left-column #image-block .zoomPad {
-      width: 458px;
-      height: 458px;
+      max-width: 458px;
+      max-height: 458px;
     z-index: auto !important; }
   .pb-left-column #image-block .zoomPad .zoomWrapperImage{
-      width: 458px !important;
-      height: 458px !important;
+      max-width: 458px;
+      max-height: 458px;
     }
   .pb-left-column #image-block .new-box,
   .pb-left-column #image-block .sale-box {

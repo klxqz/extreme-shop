@@ -1,9 +1,9 @@
+<script type="text/javascript" src="{$wa_active_theme_url}jquery.scrollTo.js" ></script>
+<script type="text/javascript" src="{$wa_active_theme_url}jquery.serialScroll.js" ></script>
 
 
 <link rel="stylesheet" href="{$wa_active_theme_url}product.css"  media="all" />
-<link rel="stylesheet" href="{$wa_active_theme_url}jquery.jqzoom.css" media="all" />
-<link rel="stylesheet" href="{$wa_active_theme_url}socialsharing.css" media="all" />
-<link rel="stylesheet" href="{$wa_active_theme_url}sendtoafriend.css" media="all" />
+{*<link rel="stylesheet" href="{$wa_active_theme_url}jquery.jqzoom.css" media="all" />*}
 <link rel="stylesheet" href="{$wa_active_theme_url}crossselling.css" media="all" />
 
 
@@ -59,20 +59,13 @@
 
             <!-- left infos-->  
             <div class="pb-left-column col-xs-12  col-sm-4 col-md-5">
-                <!-- product img-->        
-                <div id="image-block" class="clearfix">
-                    <span class="new-box no-print">
-                        <span class="new-label">Новые</span>
-                    </span>
-                    <span class="sale-box no-print">
-                        <span class="sale-label">Sale!</span>
-                    </span>
-                    <span id="view_full_size">
-                        <a class="jqzoom" title="{$product.name|escape}" rel="gal1" href="{shopImage::getUrl(['id' => $product.image_id, 'product_id' => $product.id, 'ext' => $product.ext], '900', false)}" itemprop="url">
-                            {$wa->shop->productImgHtml($product, '458', [ 'itemprop' => 'image', 'id' => 'product-image', 'alt' => $product.name|escape|cat:' ':strip_tags($product.summary)|escape ])}
-                        </a>
-                    </span>
-                </div> <!-- end image-block -->
+
+
+                <!-- product img-->
+                <div id="image-block">
+                    <img id="product-image" src="{shopImage::getUrl(['id' => $product.image_id, 'product_id' => $product.id, 'ext' => $product.ext], '360', false)}"  
+                         data-zoom-image="{shopImage::getUrl(['id' => $product.image_id, 'product_id' => $product.id, 'ext' => $product.ext], '900', false)}"/>
+                </div>
 
                 <!-- thumbnails -->
                 <div id="views_block" class="clearfix ">
@@ -84,26 +77,22 @@
                     <div id="thumbs_list">
                         <ul id="thumbs_list_frame">
                             {foreach $product.images as $image}
-                                <li id="thumbnail_{$image.id}">
-                                    <a 
-                                        href="javascript:void(0);"
-                                        rel="{
-                                        gallery: 'gal1', smallimage: '{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '458', false)}',
-                                        largeimage: '{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '900', false)}'
-                                        }"
-                                        title="{$product.name|escape}">
-                                        <img class="img-responsive" id="thumb_{$image.id}" 
-                                             src="{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '80x80', false)}" 
-                                             alt="{$product.name|escape}" title="{$product.name|escape}" itemprop="image" />
+                                <li>
+                                    <a id="product-image-{$image.id}" 
+                                       href="#"
+                                       data-image="{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '360', false)}"
+                                       data-zoom-image="{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '900', false)}"
+                                       class="elevatezoom-gallery">
+                                        <img id="thumb_{$image.id}" src="{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '70x70', false)}"  />
                                     </a>
                                 </li>
-                            {/foreach}                                
+                            {/foreach}
                         </ul>
-                    </div> <!-- end thumbs_list -->
+                    </div>
                     <a id="view_scroll_right" title="Другие виды" href="javascript:{}">
                         Next
                     </a>
-                </div> 
+                </div>
                 <!-- end views-block -->
                 <!-- end thumbnails -->
             </div> 
@@ -119,26 +108,12 @@
                 </div> <!-- end short_description_block -->
 
 
+                <script type="text/javascript" src="//yandex.st/share/share.js"
+                charset="utf-8"></script>
+                <div class="yashare-auto-init" data-yashareL10n="ru"
+                     data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"></div> 
 
 
-                <p class="socialsharing_product list-inline no-print">
-                    <button type="button" class="btn btn-default btn-twitter" onclick="socialsharing_twitter_click('Lynx 13 Rucksack http://livedemo00.template-help.com/prestashop_50127/index.php?id_product=1&controller=product&id_lang=3');">
-                        <i class="icon-twitter"></i> Tweet
-                        <!-- <img src="http://livedemo00.template-help.com/prestashop_50127/modules/socialsharing/img/twitter.gif" alt="Tweet" /> -->
-                    </button>
-                    <button type="button" class="btn btn-default btn-facebook" onclick="socialsharing_facebook_click();">
-                        <i class="icon-facebook"></i> Share
-                        <!-- <img src="http://livedemo00.template-help.com/prestashop_50127/modules/socialsharing/img/facebook.gif" alt="Facebook Like" /> -->
-                    </button>
-                    <button type="button" class="btn btn-default btn-google-plus" onclick="socialsharing_google_click();">
-                        <i class="icon-google-plus"></i> Google+
-                        <!-- <img src="http://livedemo00.template-help.com/prestashop_50127/modules/socialsharing/img/google.gif" alt="Google Plus" /> -->
-                    </button>
-                    <button type="button" class="btn btn-default btn-pinterest" onclick="socialsharing_pinterest_click();">
-                        <i class="icon-pinterest"></i> Pinterest
-                        <!-- <img src="http://livedemo00.template-help.com/prestashop_50127/modules/socialsharing/img/pinterest.gif" alt="Pinterest" /> -->
-                    </button>
-                </p>
 
                 {if !empty($product.rating) && $product.rating > 0}
                     <div id="product_comments_block_extra" class="no-print" itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
@@ -214,13 +189,6 @@
                     </li>
 
                 </ul>
-
-
-
-
-
-
-
             </div>
             <!-- end center infos-->
 
@@ -346,138 +314,155 @@
 
         <!-- description & features -->
 
-
-
-
-
-
     </div><!-- #center_column -->
 </div><!-- .row -->
 
-
+{*
 {literal}
-    <script type="text/javascript">
-        var CUSTOMIZE_TEXTFIELD = 1;
-        var FancyboxI18nClose = 'Close';
-        var FancyboxI18nNext = 'Next';
-        var FancyboxI18nPrev = 'Previous';
-        var PS_CATALOG_MODE = false;
-        var added_to_wishlist = 'Added to your wishlist.';
-        var ajaxsearch = true;
-        var allowBuyWhenOutOfStock = false;
-        var attribute_anchor_separator = '-';
-        var attributesCombinations = [];
-        var availableLaterValue = '';
-        var availableNowValue = '';
-        var baseDir = 'http://livedemo00.template-help.com/prestashop_50127/';
-        var baseUri = 'http://livedemo00.template-help.com/prestashop_50127/index.php';
-        var blocksearch_type = 'top';
-        var confirm_report_message = 'Вы уверены, что хотите внести этот комментарий?';
-        var contentOnly = false;
-        var currencyBlank = 0;
-        var currencyFormat = 1;
-        var currencyRate = 1;
-        var currencySign = '$';
-        var currentDate = '2014-08-15 23:31:58';
-        var customizationFields = [{"id_customization_field": "1", "type": "0", "required": "0", "name": "", "id_lang": "3"}, {"id_customization_field": "51", "type": "1", "required": "0", "name": "", "id_lang": "3"}];
-        var customizationIdMessage = 'Модификация №';
-        var default_eco_tax = 0;
-        var delete_txt = 'Удалить';
-        var displayPrice = 1;
-        var doesntExist = 'Данная модификация отсутствует. Пожалуйста, выберите другую.';
-        var doesntExistNoMore = 'Этого товара нет в наличии';
-        var doesntExistNoMoreBut = 'с указанными характеристиками, выберите другие';
-        var ecotaxTax_rate = 0;
-        var fieldRequired = 'Пожалуйста заполните все требуемые поля, затем сохраните модификацию.';
-        var freeProductTranslation = 'Бесплатно!';
-        var freeShippingTranslation = 'Бесплатная доставка!';
-        var generated_date = 1408159918;
-        var group_reduction = 0;
-        var idDefaultImage = 1;
-        var id_lang = 3;
-        var id_product = 1;
-        var img_dir = 'http://livedemo00.template-help.com/prestashop_50127/themes/theme990/img/';
-        var img_prod_dir = 'http://livedemo00.template-help.com/prestashop_50127/img/p/';
-        var img_ps_dir = 'http://livedemo00.template-help.com/prestashop_50127/img/';
-        var instantsearch = true;
-        var isGuest = 0;
-        var isLogged = 0;
-        var jqZoomEnabled = true;
-        var loggin_required = 'You must be logged in to manage your wishlist.';
-        var maxQuantityToAllowDisplayOfLastQuantityMessage = 3;
-        var minimalQuantity = 1;
-        var moderation_active = true;
-        var mywishlist_url = 'http://livedemo00.template-help.com/prestashop_50127/index.php?fc=module&module=blockwishlist&controller=mywishlist&id_lang=3';
-        var noTaxForThisProduct = true;
-        var oosHookJsCodeFunctions = [];
-        var page_name = 'product';
-        var priceDisplayMethod = 1;
-        var priceDisplayPrecision = 2;
-        var productAvailableForOrder = true;
-        var productBasePriceTaxExcluded = 128.96;
-        var productColumns = '1';
-        var productHasAttributes = false;
-        var productPrice = 122.51;
-        var productPriceTaxExcluded = 128.96;
-        var productPriceWithoutReduction = 128.96;
-        var productReference = '';
-        var productShowPrice = true;
-        var productUnitPriceRatio = 0;
-        var product_specific_price = {"id_specific_price": "1", "id_specific_price_rule": "0", "id_cart": "0", "id_product": "1", "id_shop": "1", "id_shop_group": "0", "id_currency": "0", "id_country": "0", "id_group": "0", "id_customer": "0", "id_product_attribute": "0", "price": "-1.000000", "from_quantity": "1", "reduction": "0.050000", "reduction_type": "percentage", "from": "0000-00-00 00:00:00", "to": "0000-00-00 00:00:00", "score": "48"};
-        var productcomment_added = 'Ваш комментарий был добавлен!';
-        var productcomment_added_moderation = 'Ваш комментарий был добавлен и будет доступен после одобрения модератором.';
-        var productcomment_ok = 'ОК';
-        var productcomment_title = 'Новый комментарий';
-        var productcomments_controller_url = 'http://livedemo00.template-help.com/prestashop_50127/index.php?fc=module&module=productcomments&controller=default&id_lang=3';
-        var productcomments_url_rewrite = false;
-        var quantitiesDisplayAllowed = true;
-        var quantityAvailable = 99;
-        var quickView = true;
-        var reduction_percent = 5;
-        var reduction_price = 0;
-        var removingLinkText = 'удалить товар из корзины';
-        var roundMode = 2;
-        var search_url = 'http://livedemo00.template-help.com/prestashop_50127/index.php?controller=search';
-        var secure_key = '0335e054bfb20f9703e320e6de910ddb';
-        var specific_currency = false;
-        var specific_price = -1;
-        var static_token = 'da54bada35f37b2cd72377705db97a29';
-        var stf_msg_error = 'Ваше письмо не может быть отправлено. Пожалуйста, проверьте адрес и попробуйте еще раз.';
-        var stf_msg_required = 'Вы не заполнили все обязательные поля';
-        var stf_msg_success = 'Ваше письмо успешно отправлено';
-        var stf_msg_title = 'Send to a friend';
-        var stf_secure_key = 'eeaa800b8e9e6dbc0b91f8cf045ed3ff';
-        var stock_management = 1;
-        var taxRate = 0;
-        var token = 'da54bada35f37b2cd72377705db97a29';
-        var uploading_in_progress = 'Пожалуйста подождите...';
-        var usingSecureMode = false;
-        var wishlistProductsIds = false;
-    </script>
+<script type="text/javascript">
+var CUSTOMIZE_TEXTFIELD = 1;
+var FancyboxI18nClose = 'Close';
+var FancyboxI18nNext = 'Next';
+var FancyboxI18nPrev = 'Previous';
+var PS_CATALOG_MODE = false;
+var added_to_wishlist = 'Added to your wishlist.';
+var ajaxsearch = true;
+var allowBuyWhenOutOfStock = false;
+var attribute_anchor_separator = '-';
+var attributesCombinations = [];
+var availableLaterValue = '';
+var availableNowValue = '';
+var baseDir = 'http://livedemo00.template-help.com/prestashop_50127/';
+var baseUri = 'http://livedemo00.template-help.com/prestashop_50127/index.php';
+var blocksearch_type = 'top';
+var confirm_report_message = 'Вы уверены, что хотите внести этот комментарий?';
+var contentOnly = false;
+var currencyBlank = 0;
+var currencyFormat = 1;
+var currencyRate = 1;
+var currencySign = '$';
+var currentDate = '2014-08-15 23:31:58';
+var customizationFields = [{"id_customization_field": "1", "type": "0", "required": "0", "name": "", "id_lang": "3"}, {"id_customization_field": "51", "type": "1", "required": "0", "name": "", "id_lang": "3"}];
+var customizationIdMessage = 'Модификация №';
+var default_eco_tax = 0;
+var delete_txt = 'Удалить';
+var displayPrice = 1;
+var doesntExist = 'Данная модификация отсутствует. Пожалуйста, выберите другую.';
+var doesntExistNoMore = 'Этого товара нет в наличии';
+var doesntExistNoMoreBut = 'с указанными характеристиками, выберите другие';
+var ecotaxTax_rate = 0;
+var fieldRequired = 'Пожалуйста заполните все требуемые поля, затем сохраните модификацию.';
+var freeProductTranslation = 'Бесплатно!';
+var freeShippingTranslation = 'Бесплатная доставка!';
+var generated_date = 1408159918;
+var group_reduction = 0;
+var idDefaultImage = 1;
+var id_lang = 3;
+var id_product = 1;
+var img_dir = 'http://livedemo00.template-help.com/prestashop_50127/themes/theme990/img/';
+var img_prod_dir = 'http://livedemo00.template-help.com/prestashop_50127/img/p/';
+var img_ps_dir = 'http://livedemo00.template-help.com/prestashop_50127/img/';
+var instantsearch = true;
+var isGuest = 0;
+var isLogged = 0;
+var jqZoomEnabled = true;
+var loggin_required = 'You must be logged in to manage your wishlist.';
+var maxQuantityToAllowDisplayOfLastQuantityMessage = 3;
+var minimalQuantity = 1;
+var moderation_active = true;
+var mywishlist_url = 'http://livedemo00.template-help.com/prestashop_50127/index.php?fc=module&module=blockwishlist&controller=mywishlist&id_lang=3';
+var noTaxForThisProduct = true;
+var oosHookJsCodeFunctions = [];
+var page_name = 'product';
+var priceDisplayMethod = 1;
+var priceDisplayPrecision = 2;
+var productAvailableForOrder = true;
+var productBasePriceTaxExcluded = 128.96;
+var productColumns = '1';
+var productHasAttributes = false;
+var productPrice = 122.51;
+var productPriceTaxExcluded = 128.96;
+var productPriceWithoutReduction = 128.96;
+var productReference = '';
+var productShowPrice = true;
+var productUnitPriceRatio = 0;
+var product_specific_price = {"id_specific_price": "1", "id_specific_price_rule": "0", "id_cart": "0", "id_product": "1", "id_shop": "1", "id_shop_group": "0", "id_currency": "0", "id_country": "0", "id_group": "0", "id_customer": "0", "id_product_attribute": "0", "price": "-1.000000", "from_quantity": "1", "reduction": "0.050000", "reduction_type": "percentage", "from": "0000-00-00 00:00:00", "to": "0000-00-00 00:00:00", "score": "48"};
+var productcomment_added = 'Ваш комментарий был добавлен!';
+var productcomment_added_moderation = 'Ваш комментарий был добавлен и будет доступен после одобрения модератором.';
+var productcomment_ok = 'ОК';
+var productcomment_title = 'Новый комментарий';
+var productcomments_controller_url = 'http://livedemo00.template-help.com/prestashop_50127/index.php?fc=module&module=productcomments&controller=default&id_lang=3';
+var productcomments_url_rewrite = false;
+var quantitiesDisplayAllowed = true;
+var quantityAvailable = 99;
+var quickView = true;
+var reduction_percent = 5;
+var reduction_price = 0;
+var removingLinkText = 'удалить товар из корзины';
+var roundMode = 2;
+var search_url = 'http://livedemo00.template-help.com/prestashop_50127/index.php?controller=search';
+var secure_key = '0335e054bfb20f9703e320e6de910ddb';
+var specific_currency = false;
+var specific_price = -1;
+var static_token = 'da54bada35f37b2cd72377705db97a29';
+var stf_msg_error = 'Ваше письмо не может быть отправлено. Пожалуйста, проверьте адрес и попробуйте еще раз.';
+var stf_msg_required = 'Вы не заполнили все обязательные поля';
+var stf_msg_success = 'Ваше письмо успешно отправлено';
+var stf_msg_title = 'Send to a friend';
+var stf_secure_key = 'eeaa800b8e9e6dbc0b91f8cf045ed3ff';
+var stock_management = 1;
+var taxRate = 0;
+var token = 'da54bada35f37b2cd72377705db97a29';
+var uploading_in_progress = 'Пожалуйста подождите...';
+var usingSecureMode = false;
+var wishlistProductsIds = false;
+</script>
 {/literal}
+*}
+<script type="text/javascript">
+    var productColumns = '1';
+    var contentOnly = false;
+    var quantityAvailable = 99;
+    var jqZoomEnabled = true;
+</script>
 
 
 
 
-
-
-
+{*
 <script type="text/javascript" src="{$wa_theme_url}jquery.idTabs.js"></script>
+*}
 
-
-
-<script type="text/javascript" src="{$wa_theme_url}product_1.js"></script>
-<script type="text/javascript" src="{$wa_theme_url}jquery.jqzoom.js"></script>
-<script type="text/javascript" src="{$wa_theme_url}socialsharing.js"></script>
-
-
-
-
-<script type="text/javascript" src="{$wa_theme_url}jquery.rating.pack.js"></script>
-<script type="text/javascript" src="{$wa_theme_url}sendtoafriend.js"></script>
 <script type="text/javascript" src="{$wa_theme_url}crossselling.js"></script>
 
+<script type="text/javascript" src="{$wa_theme_url}product_1.js"></script>
+
+{*
+<script type="text/javascript" src="{$wa_theme_url}jquery.jqzoom-core-pack.js"></script>*}
 
 
-<script type="text/javascript" src="{$wa_theme_url}jquery.textareaCounter.plugin.js"></script>
-{*<script type="text/javascript" src="{$wa_theme_url}productcomments.js"></script>*}
+
+
+<script type="text/javascript" src="{$wa_active_theme_url}jquery.elevateZoom-3.0.8.min.js" ></script>
+
+<script type="text/javascript" >
+    $("#product-image").elevateZoom({
+        zoomType: "window",
+        cursor: "crosshair",
+        zoomWindowFadeIn: 500,
+        zoomWindowFadeOut: 750,
+        gallery: "thumbs_list_frame",
+        galleryActiveClass: "thumbActive",
+        zoomWindowWidth: 400,
+        borderSize: 1,
+        borderColour: '#e5e5e5',
+        lensOpacity: 0.7,
+        scrollZoom: true,
+        constrainType: 'width'
+    });
+    $("#product-image").bind("click", function(e) {
+        var ez = $('#product-image').data('elevateZoom');
+        $.fancybox(ez.getGalleryList());
+        return false;
+    });
+</script>

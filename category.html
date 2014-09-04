@@ -23,6 +23,9 @@
 {/function}
 <link href="{$wa_active_theme_url}blocklayered.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
 <link href="{$wa_active_theme_url}category.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="{$wa_active_theme_url}blockcategories.css"  media="all"/>
+
+
 {$compare = waRequest::cookie('shop_compare', array(), waRequest::TYPE_ARRAY_INT)}
 {$wishlist = waRequest::cookie('shop_wishlist', array(), waRequest::TYPE_ARRAY_INT)}
 
@@ -104,13 +107,13 @@
                     <li id="grid">
                         <a rel="nofollow" href="#" title="Grid">
                             <i class="icon-th-large"></i>
-                            Grid
+                            Таблица
                         </a>
                     </li>
                     <li id="list">
                         <a rel="nofollow" href="#" title="List">
                             <i class="icon-th-list"></i>
-                            List
+                            Список
                         </a>
                     </li>
                 </ul>

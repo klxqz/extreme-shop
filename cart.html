@@ -38,7 +38,7 @@
                                 <tr class="cart_item" data-id="{$item.id}">
                                     <td class="cart_product">
                                         <a title="{$item.product.name|escape}" href="{$wa->shop->productUrl($item.product)}">
-                                            {$wa->shop->productImgHtml($item.product, '98x98')}
+                                            {$wa->shop->productImgHtml($item.product, '98x98',['class' => 'replace-2x'])}
                                         </a>
                                     </td>
                                     <td class="cart_description">

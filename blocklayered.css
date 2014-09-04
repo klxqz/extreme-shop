@@ -43,10 +43,10 @@
   width: 13px;
   text-decoration: none;
   text-indent: -5000px;
-  background: url(less.gif)/*tpa=http://livedemo00.template-help.com/prestashop_50127/themes/theme990/css/modules/blocklayered/img/icon/less.gif*/ no-repeat 2px 2px; }
+  background: url(.img/less.gif) no-repeat 2px 2px; }
 
 #layered_block_left span.closed a {
-  background: url(more.gif)/*tpa=http://livedemo00.template-help.com/prestashop_50127/themes/theme990/css/modules/blocklayered/img/icon/more.gif*/ no-repeat 2px 2px; }
+  background: url(.img/more.gif) no-repeat 2px 2px; }
 
 #layered_block_left .layered_subtitle {
   display: inline-block;

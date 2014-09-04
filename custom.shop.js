@@ -6,9 +6,26 @@
             this.options = options;
             this.initCompare();
             this.initWishlist();
+            this.initQuickview();
+
         },
         initMain: function() {
 
+        },
+        initQuickview: function() {
+            $(document).on('click', '.quick-view:visible', function(e)
+            {
+                e.preventDefault();
+                var url = this.href;
+
+                $.fancybox({
+                    'padding': 0,
+                    'width': 1087,
+                    'height': 610,
+                    'type': 'iframe',
+                    'href': url + '?content_only=1'
+                });
+            });
         },
         initWishlist: function() {
 
@@ -126,8 +143,45 @@
     };
 })(jQuery);
 
+jQuery(function($) {
+    $(document).ready(function() {
+        $("#first-currencies a").click(function() {
+            var url = location.href;
+            if (url.indexOf('?') == -1) {
+                url += '?';
+            } else {
+                url += '&';
+            }
+            location.href = url + 'currency=' + $(this).data('code');
+            return false;
+        });
+
+    });
+});
+
+
+
+function blockHover(status)
+{
+    $(document).off('mouseenter').on('mouseenter', '.product_list.grid li.ajax_block_product .product-container', function(e) {
+
+        if ('ontouchstart' in document.documentElement)
+            return;
+        if ($('body').find('.container').width() == 1170)
+        {
+            $(this).parent().addClass('hovered');
+        }
+    });
+
+    $(document).off('mouseleave').on('mouseleave', '.product_list.grid li.ajax_block_product .product-container', function(e) {
+        if ($('body').find('.container').width() == 1170)
+            $(this).parent().removeClass('hovered').removeAttr('style');
+    });
+}
 
 $(document).ready(function() {
+    blockHover();
+    bindGrid();
 
 
     if ($('#is_product_page').length) {
@@ -164,18 +218,9 @@ $(document).ready(function() {
         location.reload();
     });
 
-    
 
-    $("#first-currencies a").click(function() {
-        var url = location.href;
-        if (url.indexOf('?') == -1) {
-            url += '?';
-        } else {
-            url += '&';
-        }
-        location.href = url + 'currency=' + $(this).data('code');
-        return false;
-    });
+
+
 
 
     $('.dialog').on('click', 'a.dialog-close', function() {
@@ -194,24 +239,7 @@ $(document).ready(function() {
         return false;
     });
 
-    $(".cart_block_list").on('click', '.products .ajax_cart_block_remove_link', function() {
-        var product_block = $(this).closest('dt');
-        var cart_total = $(".shopping_cart");
-        $.post(cart_url + 'delete/', {id: product_block.data('id')}, function(response) {
-            if (response.status == 'ok') {
-                product_block.remove();
-                cart_total.find('.ajax_block_cart_total').html(response.data.total);
-                cart_total.find('.ajax_cart_quantity').html(response.data.count);
-                cart_total.find('.ajax_cart_discount').html(response.data.discount);
-                if (!response.data.count) {
-                    cart_total.find('.ajax_cart_no_product').removeClass('unvisible');
-                    cart_total.find('.ajax_cart_product_txt_s').addClass('unvisible');
-                    cart_total.find('.ajax_cart_quantity').addClass('unvisible');
-                }
-            }
-        }, 'json');
-        return false;
-    });
+
 
 
     $("#center_column").on('submit', '.product_list .addtocart', function() {
@@ -297,10 +325,117 @@ $(document).ready(function() {
         $.get(url, function(html) {
             var tmp = $('<div></div>').html(html);
             $('.product_list').html(tmp.find('.product_list').html());
-            if (!!(history.pushState && history.state !== undefined)) {
-                window.history.pushState({}, '', url);
-            }
-            $(window).lazyLoad && $(window).lazyLoad('reload');
+            //if (!!(history.pushState && history.state !== undefined)) {
+            //    window.history.pushState({}, '', url);
+            //}
+            //$(window).lazyLoad && $(window).lazyLoad('reload');
         });
     });
 });
+
+
+
+function bindGrid()
+{
+    var view = $.totalStorage('display');
+    if (!view) {
+        view = 'list';
+    }
+    if (view && view != 'grid') {
+        display(view);
+    } else {
+        $('.display').find('li#grid').addClass('selected');
+    }
+    $(document).on('click', '#grid', function(e) {
+        e.preventDefault();
+        display('grid');
+    });
+
+    $(document).on('click', '#list', function(e) {
+        e.preventDefault();
+        display('list');
+    });
+}
+
+function display(view)
+{
+    var nbItemsPerLine = 3;
+    var nbItemsPerLineTablet = 2;
+    if (view == 'list')
+    {
+        $('ul.product_list').removeClass('grid').addClass('list row');
+        $('.product_list > li').removeClass('col-xs-12 col-sm-' + 12 / nbItemsPerLineTablet + ' col-md-' + 12 / nbItemsPerLine).addClass('col-xs-12');
+        $('.product_list > li').each(function(index, element) {
+            html = '';
+            html = '<div class="product-container"><div class="row">';
+            html += '<div class="left-block col-xs-4 col-xs-5 col-md-4">' + $(element).find('.left-block').html() + '</div>';
+            html += '<div class="center-block col-xs-4 col-xs-7 col-md-4">';
+            html += '<h5 itemprop="name">' + $(element).find('h5').html() + '</h5>';
+            var rating = $(element).find('.comments_note').html(); // check : rating
+            if (rating != null) {
+                html += '<div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="comments_note">' + rating + '</div>';
+            }
+            html += '<p class="product-desc">' + $(element).find('.product-desc').html() + '</p>';
+            var colorList = $(element).find('.color-list-container').html();
+            if (colorList != null) {
+                html += '<div class="color-list-container">' + colorList + '</div>';
+            }
+            var availability = $(element).find('.availability').html();	// check : catalog mode is enabled
+            if (availability != null) {
+                html += '<span class="availability">' + availability + '</span>';
+            }
+            html += '</div>';
+            html += '<div class="right-block col-xs-4 col-xs-12 col-md-4"><div class="right-block-content row">';
+            var price = $(element).find('.content_price').html();       // check : catalog mode is enabled
+            if (price != null) {
+                html += '<div class="content_price col-xs-5 col-md-12">' + price + '</div>';
+            }
+            html += '<div class="button-container col-xs-7 col-md-12">' + $(element).find('.button-container').html() + '</div>';
+            html += '<div class="functional-buttons clearfix col-sm-12">' + $(element).find('.functional-buttons').html() + '</div>';
+            html += '</div>';
+            html += '</div></div>';
+            $(element).html(html);
+        });
+        $('.display').find('li#list').addClass('selected');
+        $('.display').find('li#grid').removeAttr('class');
+        $.totalStorage('display', 'list');
+    }
+    else
+    {
+        $('ul.product_list').removeClass('list').addClass('grid row');
+        $('.product_list > li').removeClass('col-xs-12').addClass('col-xs-12 col-sm-' + 12 / nbItemsPerLineTablet + ' col-md-' + 12 / nbItemsPerLine);
+        $('.product_list > li').each(function(index, element) {
+            html = '';
+            html += '<div class="product-container">';
+            html += '<div class="left-block">' + $(element).find('.left-block').html() + '</div>';
+            html += '<div class="right-block">';
+            html += '<div class="product-flags">' + $(element).find('.product-flags').html() + '</div>';
+            html += '<h5 itemprop="name">' + $(element).find('h5').html() + '</h5>';
+            var rating = $(element).find('.comments_note').html(); // check : rating
+            if (rating != null) {
+                html += '<div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating" class="comments_note">' + rating + '</div>';
+            }
+            html += '<p itemprop="description" class="product-desc">' + $(element).find('.product-desc').html() + '</p>';
+            var price = $(element).find('.content_price').html(); // check : catalog mode is enabled
+            if (price != null) {
+                html += '<div class="content_price">' + price + '</div>';
+            }
+            html += '<div itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="button-container">' + $(element).find('.button-container').html() + '</div>';
+            var colorList = $(element).find('.color-list-container').html();
+            if (colorList != null) {
+                html += '<div class="color-list-container">' + colorList + '</div>';
+            }
+            var availability = $(element).find('.availability').html(); // check : catalog mode is enabled
+            if (availability != null) {
+                html += '<span class="availability">' + availability + '</span>';
+            }
+            html += '</div>';
+            html += '<div class="functional-buttons clearfix">' + $(element).find('.functional-buttons').html() + '</div>';
+            html += '</div>';
+            $(element).html(html);
+        });
+        $('.display').find('li#grid').addClass('selected');
+        $('.display').find('li#list').removeAttr('class');
+        $.totalStorage('display', 'grid');
+    }
+}

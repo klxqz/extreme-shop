@@ -1,83 +1,110 @@
+<script type="text/javascript" src="{$wa_active_theme_url}homeslider.js" ></script>
+<script type="text/javascript" src="{$wa_active_theme_url}bootstrap.min.js" ></script>
+
 {$compare = waRequest::cookie('shop_compare', array(), waRequest::TYPE_ARRAY_INT)}
 {$wishlist = waRequest::cookie('shop_wishlist', array(), waRequest::TYPE_ARRAY_INT)}
 <div class="row">
     <div id="top_column" class="center_column col-xs-12">  
-        <div id="homepage-slider">
-            <ul id="homeslider">
-                <li class="homeslider-container  number1">
-                    <a href="#"  title="sample-1">
-                        <img src="{$wa_theme_url}img/slide-1.jpg"  width="1170" height="405" alt="sample-1"/>
-                    </a>
-                    <div class="homeslider-description"><h2>new arrivals</h2> <h3>Snowboarding</h3> <h4>gear</h4> <b>Купить сейчас!</b></div>
-                </li>
-                <li class="homeslider-container  number2">
-                    <a href="#"  title="sample-2">
-                        <img src="{$wa_theme_url}img/slide-2.jpg"  width="1170" height="405" alt="sample-2"/>
-                    </a>
-                    <div class="homeslider-description"><h2>new arrivals</h2>
-                        <h3>Alpine Climbing</h3>
-                        <h4>gear</h4>
-                        <b>Купить сейчас!</b></div>
-                </li>
-                <li class="homeslider-container  number3">
-                    <a href="#"  title="sample-2">
-                        <img src="{$wa_theme_url}img/slide-3.jpg"  width="1170" height="405" alt="sample-2"/>
-                    </a>
-                    <div class="homeslider-description"><h2>Clearance sale</h2> <h3>Skiing </h3> <b>Купить сейчас!</b></div>
-                </li>
-            </ul>
-        </div>
+        {if $theme_settings.slider}
+            <div id="homepage-slider">
+                <ul id="homeslider">
+                    {if !empty($theme_settings.slide1)}
+                        <li class="homeslider-container  number1">
+                            <a href="{$theme_settings.slide1_url}">
+                                <img src="{$wa_theme_url}{$theme_settings.slide1}"  width="1170" height="405"/>
+                            </a>
+                            <div class="homeslider-description">{$theme_settings.slide1_description}</div>
+                        </li>
+                    {/if}
+                    {if !empty($theme_settings.slide2)}
+                        <li class="homeslider-container  number2">
+                            <a href="{$theme_settings.slide2_url}">
+                                <img src="{$wa_theme_url}{$theme_settings.slide2}"  width="1170" height="405"/>
+                            </a>
+                            <div class="homeslider-description">{$theme_settings.slide2_description}</div>
+                        </li>
+                    {/if}
+                    {if !empty($theme_settings.slide3)}
+                        <li class="homeslider-container  number3">
+                            <a href="{$theme_settings.slide3_url}">
+                                <img src="{$wa_theme_url}{$theme_settings.slide3}"  width="1170" height="405"/>
+                            </a>
+                            <div class="homeslider-description">{$theme_settings.slide3_description}</div>
+                        </li>
+                    {/if}
+                    {if !empty($theme_settings.slide4)}
+                        <li class="homeslider-container  number4">
+                            <a href="{$theme_settings.slide4_url}">
+                                <img src="{$wa_theme_url}{$theme_settings.slide4}"  width="1170" height="405"/>
+                            </a>
+                            <div class="homeslider-description">{$theme_settings.slide4_description}</div>
+                        </li>
+                    {/if}
+                    {if !empty($theme_settings.slide5)}
+                        <li class="homeslider-container  number5">
+                            <a href="{$theme_settings.slide5_url}">
+                                <img src="{$wa_theme_url}{$theme_settings.slide5}"  width="1170" height="405"/>
+                            </a>
+                            <div class="homeslider-description">{$theme_settings.slide5_description}</div>
+                        </li>
+                    {/if}
+                </ul>
+            </div>
+        {/if}
 
-        <div id="htmlcontent_top">
-            <ul class="htmlcontent-home clearfix row">
-                <li class="htmlcontent-item-1">
-                    <a href="#"  class="item-link" title="">
-                        <div>
-                            <img src="{$wa_theme_url}img/banner-img1.jpg"  class="item-img" title="" alt="" width="383" height="490"/>
-                            <div class="item-html">
-                                <div><h2>Winter <strong>Collection</strong></h2> <span>NEW ARRIVALS</span></div> <b>Shop now!</b>
+        {if !empty($theme_settings.banners)}
+            <div id="htmlcontent_top">
+                <ul class="htmlcontent-home clearfix row">
+                    <li class="htmlcontent-item-1">
+                        <a href="{$theme_settings.banner1_url}" class="item-link" title="">
+                            <div>
+                                <img src="{$wa_theme_url}{$theme_settings.banner1}"  class="item-img" title="" alt="" width="383" height="490"/>
+                                <div class="item-html">
+                                    {$theme_settings.banner1_description}
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="htmlcontent-item-2">
-                    <a href="#"  class="item-link" title="">
-                        <div>
-                            <img src="{$wa_theme_url}img/banner-img2.jpg"  class="item-img" title="" alt="" width="383" height="490"/>
-                            <div class="item-html">
-                                <div><h2>Surfing</h2> <span>Get up to 50% off</span></div> <b>Shop now!</b> <em>sale</em>
+                        </a>
+                    </li>
+                    
+                    <li class="htmlcontent-item-2">
+                        <a href="{$theme_settings.banner2_url}"  class="item-link" title="">
+                            <div>
+                                <img src="{$wa_theme_url}{$theme_settings.banner2}"  class="item-img" title="" alt="" width="383" height="490"/>
+                                <div class="item-html">
+                                    {$theme_settings.banner2_description}
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="htmlcontent-item-3">
-                    <a href="#"  class="item-link" title="">
-                        <div>
-                            <img src="{$wa_theme_url}img/banner-img3.jpg"  class="item-img" title="" alt="" width="383" height="240"/>
-                            <div class="item-html">
-                                <div><h2>Rock Climbing</h2> <span>NEW ARRIVALS</span> </div><b>Shop now!</b>
+                        </a>
+                    </li>
+                    <li class="htmlcontent-item-3">
+                        <a href="{$theme_settings.banner3_url}"  class="item-link" title="">
+                            <div>
+                                <img src="{$wa_theme_url}{$theme_settings.banner3}"  class="item-img" title="" alt="" width="383" height="240"/>
+                                <div class="item-html">
+                                    {$theme_settings.banner3_description}
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </li>
-                <li class="htmlcontent-item-4">
-                    <a href="#"  class="item-link" title="">
-                        <div>
-                            <img src="{$wa_theme_url}img/banner-img4.jpg"  class="item-img" title="" alt="" width="776" height="240"/>
-                            <div class="item-html">
-                                <div><h2>Trail Running</h2> <span>Get up to <i>50% off</i></span> <b>Shop now!</b></div> <em>sale</em>
+                        </a>
+                    </li>
+                    <li class="htmlcontent-item-4">
+                        <a href="{$theme_settings.banner4_url}"  class="item-link" title="">
+                            <div>
+                                <img src="{$wa_theme_url}{$theme_settings.banner4}"  class="item-img" title="" alt="" width="776" height="240"/>
+                                <div class="item-html">
+                                    {$theme_settings.banner4_description}
+                                </div>
                             </div>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        {/if}
+
     </div>
 </div>
 <div class="row">
     <div id="left_column" class="column col-xs-12 col-sm-3"> 
         {$bestsellers = $wa->shop->productSet('bestsellers')}
-        
         <div id="new-products_block_right" class="block products_block">
             <h4 class="title_block">
                 New products
@@ -93,20 +120,16 @@
                 <a data-toggle="tab" href="#blocknewproducts" class="blocknewproducts" title="New arrivals">New arrivals</a>
             </li>
             <li>
-                <a data-toggle="tab" href="#homefeatured" class="homefeatured" title="Popular">Popular</a>
+                <a data-toggle="tab" href="#homefeatured" class="homefeatured" title="Popular">Популярные</a>
             </li>
             <li>
                 <a data-toggle="tab" href="#blockbestsellers" class="blockbestsellers" title="Лидеры продаж">Лидеры продаж</a>
             </li>
         </ul>
         <div class="tab-content">
-            
             {include file='list-thumbs.html' products=$bestsellers id="blocknewproducts" class="product_list grid row blocknewproducts tab-pane active"}
-            
             {include file='list-thumbs.html' products=$wa->shop->productSet('promo') id="homefeatured" class="product_list grid row homefeatured tab-pane"}
-            
             {include file='list-thumbs.html' products=$bestsellers id="blockbestsellers" class="product_list grid row blockbestsellers tab-pane"}
-
         </div>
     </div> 
 </div> 
@@ -122,7 +145,6 @@
             </li>
             <li class="htmlcontent-item-2 col-xs-4 ">
                 <div>
-                    <img src="{$wa_theme_url}img/img-banner4.jpg"  class="item-img" title="" alt="" width="100%" height="100%"/>
                     <div class="item-html">
                         <div class="cont-2"><h4>Custom Block 2</h4> <p>Lorem ipsum dolor sit amet conse ctetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo</p>
                         </div>
