@@ -1,6 +1,6 @@
 {if !empty($filters)}
     <div id="layered_block_left" class="block">
-        <p class="title_block">Фильтр</p>
+        <p class="title_block">[`Filter`]</p>
         <div class="block_content">
 
             <div class="filters{if !empty($theme_settings.ajax_filters)} ajax{/if}">
@@ -88,60 +88,49 @@
                 </form>
             </div>
         </div>
-        <div id="layered_ajax_loader" style="display: none;">
-            <p>
-                <img src="http://livedemo00.template-help.com/prestashop_50127/img/loader.gif" alt="" />
-                <br />Загрузка ...
-            </p>
-        </div>
     </div>
 {/if} 
-{if !empty($category)}
-    {$category_id = $category.id}
-{else}
-    {$category_id = 0}
-{/if}
 
-{if $wa->shop->categories($category_id, null, true)}
+{if $theme_settings.qutput_subcategories && !empty($category) && $wa->shop->categories($category.id, null, true)}
     <div id="categories_block_left" class="block">
         <h2 class="title_block">
-            Подкатегории
+            [`Subcategories`]
         </h2>
         <div class="block_content">
-            {wa_print_tree tree=$wa->shop->categories($category_id, null, true) unfolded=true class="tree dhtml" elem ='<a href=":url" title=":name">:name</a>'}
+            {wa_print_tree tree=$wa->shop->categories($category.id, null, true) unfolded=true class="tree dhtml" elem ='<a href=":url" title=":name">:name</a>'}
         </div>
     </div>
 {/if}
 
-<!-- MODULE Block best sellers -->
-<div id="best-sellers_block_right" class="block products_block">
-    <h4 class="title_block">
-        Популярные товары
-    </h4>
-    <div class="block_content">
-        {$bestsellers = $wa->shop->productSet('bestsellers')}
-        {include file="sidebar-products.html" products=$bestsellers inline class='block_content products-block'}
+{if $theme_settings.category_popular_products && $wa->shop->productSet($theme_settings.category_popular_products_list)}
+    <div id="best-sellers_block_right" class="block products_block">
+        <h4 class="title_block">
+            [`Popular products`]
+        </h4>
+        <div class="block_content">
+            {include file="sidebar-products.html" products=$wa->shop->productSet($theme_settings.category_popular_products_list) inline class='block_content products-block'}
+        </div>
     </div>
-</div>
+{/if}
 
-{$shop_pages=$wa->shop->pages()}
-{if $shop_pages}
+
+{if $theme_settings.category_information_block && $wa->shop->pages()}
     <section id="informations_block_left_1" class="block informations_block_left">
         <h4 class="title_block">
-            Information	
+            [`Information`]	
         </h4>
         <div class="block_content list-block">
-            {wa_print_tree  unfolded=false tree=$shop_pages class="toggle-footer" elem ='<a href=":url" title=":title">:name</a>' selected=$wa->param('page_id')}
+            {wa_print_tree  unfolded=false tree=$wa->shop->pages() class="toggle-footer" elem ='<a href=":url" title=":title">:name</a>' selected=$wa->param('page_id')}
         </div>
     </section>
 {/if}
 
 {$viewed_products = waRequest::cookie('viewed_products')};
-{if !empty($viewed_products)}
+{if $theme_settings.category_viewed_products && !empty($viewed_products)}
     {$viewed_products = explode(',', $viewed_products)}
     <div id="viewed-products_block_left" class="block">
         <p class="title_block">
-            <a href="{$wa->getUrl('/frontend/search')}?list=viewed_products">Просмотренные товары</a>
+            <a href="{$wa->getUrl('/frontend/search')}?list=viewed_products">[`Viewed products`]</a>
         </p>
         <div class="block_content products-block">
             <ul>
@@ -161,7 +150,7 @@
                             <p class="product-description">{$product.summary}</p>
                         </div>
                     </li>
-                {if $viewed_product_id@iteration >= 3}{break}{/if}
+                {if $viewed_product_id@iteration >= $theme_settings.category_viewed_products_count}{break}{/if}
             {/foreach}
         </ul>
     </div>
@@ -169,13 +158,13 @@
 
 {/if}
 
-{if $cloud = $wa->shop->tags()}
+{if $theme_settings.category_tags && $wa->shop->tags()}
     <div class="block tags_block">
         <p class="title_block">
-            Теги
+            [`Tags`]
         </p>
         <div class="block_content blockstore">
-            {foreach $cloud as $tag}
+            {foreach $wa->shop->tags() as $tag}
                 <a href="{$wa_app_url}tag/{$tag.uri_name}/" style="font-size: {$tag.size}%; opacity: {$tag.opacity}">{$tag.name|escape}</a>
             {/foreach}
         </div>
@@ -183,3 +172,9 @@
 {/if}
 <!-- tag cloud -->
 
+
+<!-- plugin hook: 'frontend_nav' -->
+{* @event frontend_nav.%plugin_id% *}
+{foreach $frontend_nav as $_}
+    {$_}
+{/foreach}

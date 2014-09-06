@@ -8,7 +8,6 @@
 <script type="text/javascript" src="{$wa_active_theme_url}jquery.easing.js" ></script>
 <script type="text/javascript" src="{$wa_active_theme_url}bxslider/jquery.bxslider.min.js" ></script>
 <script type="text/javascript" src="{$wa_active_theme_url}fancybox/jquery.fancybox.pack.js" ></script>
-<script type="text/javascript" src="{$wa_active_theme_url}15-jquery.total-storage.min.js" ></script>
 
 
 <!-- shop app css -->
@@ -19,7 +18,7 @@
 <script type="text/javascript" src="{$wa_app_static_url}js/lazy.load.js?v{$wa->version()}"></script>
 
 
-<script type="text/javascript" src="{$wa_active_theme_url}custom.shop.js?v{$wa_theme_version}"></script>
+
 {if $wa->shop->config('enable_2x')}
     <script type="text/javascript" src="{$wa_url}wa-content/js/jquery-plugins/jquery.retina.js?v{$wa->version(true)}"></script>
     <script type="text/javascript">$(window).load(function() {
@@ -39,18 +38,18 @@
 <link href="{$wa_active_theme_url}poshytip/tip-darkgray/tip-darkgray.css" rel="stylesheet" type="text/css">
 <script type="text/javascript" src="{$wa_active_theme_url}poshytip/jquery.poshytip.min.js"></script>
 
+{$compare = waRequest::cookie('shop_compare', array(), waRequest::TYPE_ARRAY_INT)}
 <script type="text/javascript">
-    $(function() {
-        $.extremeShop.init({
-            add_to_compare: '[`Add to comparison table`]',
-            remove_from_compare: '[`Remove from comparison table`]',
-            add_to_wishlist: '[`Add to wishlist`]',
-            remove_from_wishlist: '[`Remove from wishlist`]',
-            wishlist_url: '{$wa->getUrl('/frontend/search')}?list=wishlist',
-        });
-    });
-
+    var add_to_compare = '[`Add to comparison table`]';
+    var remove_from_compare = '[`Remove from comparison table`]';
+    var compare_url = '{$wa->getUrl('/frontend/compare/', ['id' => implode(',', $compare) ])}';
+    var add_to_wishlist = '[`Add to wishlist`]';
+    var remove_from_wishlist = '[`Remove from wishlist`]';
+    var wishlist_url = '{$wa->getUrl('/frontend/search')}?list=wishlist';
+    var default_product_view = '{$theme_settings.default_product_view}';
+    var quick_view = '{$theme_settings.quick_view}';
 </script>
+<script type="text/javascript" src="{$wa_active_theme_url}custom.shop.js?v{$wa_theme_version}"></script>
 
 
 <!-- plugin hook: 'frontend_head' -->

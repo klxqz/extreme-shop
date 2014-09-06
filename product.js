@@ -77,45 +77,48 @@ function Product(form, options) {
         $.post(f.attr('action') + '?html=1', f.serialize(), function(response) {
             if (response.status == 'ok') {
                 var cart_total = $(".shopping_cart");
-                if (cart_total.find('dt[data-id=' + response.data.item_id + ']').length) {
-                    var item = cart_total.find('dt[data-id=' + response.data.item_id + ']');
-                    var quantity = parseInt(item.find('.quantity').text());
-                    item.find('.quantity').text(quantity + 1);
-                    cart_total.find('.ajax_block_cart_total').html(response.data.total);
-                    cart_total.find('.ajax_cart_quantity').text(response.data.count);
+
+                var cart_div = f;
+
+
+
+                var clone = $('<div class="cart"></div>').append(f.clone());
+                if (cart_div.closest('.dialog').length) {
+                    clone.insertAfter(cart_div.closest('.dialog'));
                 } else {
-                    var cart_div = f;
-
-
-
-                    var clone = $('<div class="cart"></div>').append(f.clone());
-                    if (cart_div.closest('.dialog').length) {
-                        clone.insertAfter(cart_div.closest('.dialog'));
+                    clone.insertAfter(cart_div);
+                }
+                clone.css({
+                    top: cart_div.offset().top - $(window).scrollTop(),
+                    left: cart_div.offset().left,
+                    width: cart_div.width() + 'px',
+                    height: cart_div.height() + 'px',
+                    position: 'fixed',
+                    overflow: 'hidden',
+                    'z-index': 9999
+                }).animate({
+                    top: cart_total.offset().top,
+                    left: cart_total.offset().left,
+                    width: 0,
+                    height: 0
+                }, 500, function() {
+                    $(this).remove();
+                    var quantity_wanted = parseInt($('#quantity_wanted').val());
+                    if (cart_total.find('dt[data-id=' + response.data.item_id + ']').length) {
+                        var item = cart_total.find('dt[data-id=' + response.data.item_id + ']');
+                        var quantity = parseInt(item.find('.quantity').text());
+                        item.find('.quantity').text(quantity + quantity_wanted);
+                        cart_total.find('.ajax_block_cart_total').html(response.data.total);
+                        cart_total.find('.ajax_cart_quantity').text(response.data.count);
                     } else {
-                        clone.insertAfter(cart_div);
-                    }
-                    clone.css({
-                        top: cart_div.offset().top - $(window).scrollTop(),
-                        left: cart_div.offset().left,
-                        width: cart_div.width() + 'px',
-                        height: cart_div.height() + 'px',
-                        position: 'fixed',
-                        overflow: 'hidden',
-                        'z-index': 9999
-                    }).animate({
-                        top: cart_total.offset().top,
-                        left: cart_total.offset().left,
-                        width: 0,
-                        height: 0
-                    }, 500, function() {
                         var info = cart_div.find('.ajax_product_info');
-                        $(this).remove();
+
                         var tpl_data = {
                             url: info.data('url'),
                             name: info.data('name'),
                             img: info.data('img'),
                             price: info.data('price'),
-                            quantity: 1,
+                            quantity: quantity_wanted,
                             id: response.data.item_id
                         };
 
@@ -128,12 +131,15 @@ function Product(form, options) {
                         cart_total.find('.ajax_cart_no_product').addClass('unvisible');
                         cart_total.find('.ajax_cart_product_txt_s').removeClass('unvisible');
                         cart_total.find('.ajax_cart_quantity').removeClass('unvisible');
-                    });
 
-                    if (cart_div.closest('.dialog').length) {
-                        cart_div.closest('.dialog').hide().find('.cart').empty();
                     }
+
+                });
+
+                if (cart_div.closest('.dialog').length) {
+                    cart_div.closest('.dialog').hide().find('.cart').empty();
                 }
+
                 if (response.data.error) {
                     alert(response.data.error);
                 }
@@ -263,17 +269,28 @@ Product.prototype.updatePrice = function(price, compare_price) {
 }
 
 $(function() {
-    // scroll-dependent animations: flying product info block
-    $(window).scroll(function() {
-        var flyer = $("#cart-flyer");
-        if (($(this).scrollTop() >= 253) && (($(this).height() - flyer.height()) >= (253 + 70))) {
-            flyer.addClass("fixed");
-            $(".aux").hide();
-        } else if (($(this).scrollTop() < 252) && (flyer.hasClass("fixed"))) {
-            flyer.removeClass("fixed");
-            $(".aux").show();
+
+    $(document).on('click', '.product_quantity_up', function(e) {
+        e.preventDefault();
+        fieldName = $(this).data('field-qty');
+        var currentVal = parseInt($('input[name=' + fieldName + ']').val());
+        if (!isNaN(currentVal)) {
+            $('input[name=' + fieldName + ']').val(currentVal + 1).trigger('keyup');
         }
     });
+
+    $(document).on('click', '.product_quantity_down', function(e) {
+        e.preventDefault();
+        fieldName = $(this).data('field-qty');
+        var currentVal = parseInt($('input[name=' + fieldName + ']').val());
+        if (!isNaN(currentVal) && currentVal > 1) {
+            $('input[name=' + fieldName + ']').val(currentVal - 1).trigger('keyup');
+        } else {
+            $('input[name=' + fieldName + ']').val(1);
+        }
+    });
+
+
     // product images
     $("#product-gallery a").click(function() {
         $("#product-image").parent().find("div.loading").remove();

@@ -163,26 +163,37 @@
     </files>
    
     <settings>
+        
+        
+        
+        
         <setting var="ajax_filters" control_type="checkbox">
             <value>1</value>
             <name locale="en_US">AJAX-enabled product by-feature filtering</name>
             <name locale="ru_RU">AJAX-фильтры товаров по характеристикам</name>
         </setting>
-       
-        <setting var="slider" control_type="checkbox">
-            <value>1</value>
+        
+        
+        <setting var="setting_slider_title" control_type="text">
+            <value></value>
             <name locale="en_US">
                 <![CDATA[
-                <hr style="position:absolute;width:100%;"/>		
+                <hr /><br/><br/>
+                <p class="p-title">Homepage. Slider</p>	
                 ]]>
-                Slider
             </name>
             <name locale="ru_RU">
                 <![CDATA[
-                <hr style="position:absolute;width:100%;"/>		
+                <hr /><br/><br/>
+                <p class="p-title">Главная страница. Слайдер</p>	
                 ]]>
-                Слайдер
             </name>
+        </setting>
+       
+        <setting var="slider" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">Slider</name>
+            <name locale="ru_RU">Слайдер</name>
         </setting>
         
         
@@ -274,22 +285,29 @@
             <name locale="en_US">slide 5 description</name>
             <name locale="ru_RU">слайд 5 Описание</name>
         </setting>
+        
+        
+        <setting var="setting_banners_title" control_type="text">
+            <value></value>
+            <name locale="en_US">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Homepage. Banners.</p>	
+                ]]>
+            </name>
+            <name locale="ru_RU">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Главная страница. Баннеры.</p>	
+                ]]>
+            </name>
+        </setting>
 
         
         <setting var="banners" control_type="checkbox">
             <value>1</value>
-            <name locale="en_US">
-                <![CDATA[
-                <hr style="position:absolute;width:100%;"/>		
-                ]]>
-                Slider
-            </name>
-            <name locale="ru_RU">
-                <![CDATA[
-                <hr style="position:absolute;width:100%;"/>		
-                ]]>
-                Баннеры
-            </name>
+            <name locale="en_US">Banners</name>
+            <name locale="ru_RU">Баннеры</name>
         </setting>
         
         <setting var="banner1" control_type="image">
@@ -361,6 +379,329 @@
             <name locale="en_US">banner 4 description</name>
             <name locale="ru_RU">баннер 4 Описание</name>
         </setting>
+
+        
+        <setting var="home_sidebar_title" control_type="text">
+            <value></value>
+            <name locale="en_US">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Homepage. Sidebar.</p>	
+                ]]>
+            </name>
+            <name locale="ru_RU">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Главная страница. Боковое меню.</p>	
+                ]]>
+            </name>
+        </setting>
+
+        <setting var="sidebar_home_list_name" control_type="text">
+            <value>Новинки</value>
+            <name locale="en_US">The name of the products list</name>
+            <name locale="ru_RU">Название списка товаров</name>
+        </setting>
+        <setting var="sidebar_home_list" control_type="text">
+            <value>bestsellers</value>
+            <name locale="en_US">Products list</name>
+            <name locale="ru_RU">Список товаров</name>
+        </setting>
+        
+        
+        
+        <setting var="setting_home_productlists_title" control_type="text">
+            <value></value>
+            <name locale="en_US">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Homepage. Products list</p>	
+                ]]>
+            </name>
+            <name locale="ru_RU">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Главная страница. Списки товаров.</p>	
+                ]]>
+            </name>
+        </setting>
+        
+        <setting var="productlist1" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">Products list 1</name>
+            <name locale="ru_RU">Список товаров 1</name>
+        </setting>
+        <setting var="productlist1_name" control_type="text">
+            <value>Новые поступления</value>
+            <name locale="en_US">The name of the products list</name>
+            <name locale="ru_RU">Название списка</name>
+        </setting>
+        <setting var="productlist1_list" control_type="text">
+            <value>bestsellers</value>
+            <name locale="en_US">Products list</name>
+            <name locale="ru_RU">Список товаров</name>
+        </setting>
+        
+        <setting var="productlist2" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">Products list 2</name>
+            <name locale="ru_RU">Список товаров 2</name>
+        </setting>
+        <setting var="productlist2_name" control_type="text">
+            <value>Популярные</value>
+            <name locale="en_US">The name of the products list</name>
+            <name locale="ru_RU">Название списка</name>
+        </setting>
+        <setting var="productlist2_list" control_type="text">
+            <value>promo</value>
+            <name locale="en_US">Products list</name>
+            <name locale="ru_RU">Список товаров</name>
+        </setting>
+        
+        
+        <setting var="productlist3" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">Products list 3</name>
+            <name locale="ru_RU">Список товаров 3</name>
+        </setting>
+        <setting var="productlist3_name" control_type="text">
+            <value>Лидеры продаж</value>
+            <name locale="en_US">The name of the products list</name>
+            <name locale="ru_RU">Название списка</name>
+        </setting>
+        <setting var="productlist3_list" control_type="text">
+            <value>bestsellers</value>
+            <name locale="en_US">Products list</name>
+            <name locale="ru_RU">Список товаров</name>
+        </setting>
+        
+        
+        
+        <setting var="setting_home_customs_blocks_title" control_type="text">
+            <value></value>
+            <name locale="en_US">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Homepage. Customs blocks</p>	
+                ]]>
+            </name>
+            <name locale="ru_RU">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Главная страница. Пользовательские блоки.</p>	
+                ]]>
+            </name>
+        </setting>
+        
+        <setting var="home_custom_blocks" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">Customs blocks</name>
+            <name locale="ru_RU">Пользовательские блоки</name>
+        </setting>
+        
+        <setting var="home_custom_block1" control_type="text">
+            <value>&lt;h4&gt;Пользовательский блок 1&lt;/h4&gt;&lt;p&gt;Скидки и подарки&lt;/p&gt;</value>
+            <name locale="en_US">Customs block 1</name>
+            <name locale="ru_RU">Пользовательский блок 1</name>
+        </setting>
+        <setting var="home_custom_block2" control_type="text">
+            <value>&lt;h4&gt;Пользовательский блок 2&lt;/h4&gt;&lt;p&gt;Акции и распродажи&lt;/p&gt;</value>
+            <name locale="en_US">Customs block 2</name>
+            <name locale="ru_RU">Пользовательский блок 2</name>
+        </setting>
+        <setting var="home_custom_block3" control_type="text">
+            <value>&lt;h4&gt;Пользовательский блок 3&lt;/h4&gt;&lt;p&gt;Широкий ассортимент&lt;/p&gt;</value>
+            <name locale="en_US">Customs block 3</name>
+            <name locale="ru_RU">Пользовательский блок 3</name>
+        </setting>
+        
+        
+        
+        <setting var="vk_widget_title" control_type="text">
+            <value></value>
+            <name locale="en_US">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Homepage. VK widget</p>	
+                ]]>
+            </name>
+            <name locale="ru_RU">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Главная страница. Виджет Вконтакте.</p>	
+                ]]>
+            </name>
+        </setting>
+        
+        <setting var="vk_widget" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">VK widget</name>
+            <name locale="ru_RU">Виджет ВКонтакте</name>
+        </setting>
+        <setting var="vk_id" control_type="text">
+            <value>62260728</value>
+            <name locale="en_US">VK group id</name>
+            <name locale="ru_RU">Идентификатор группы ВКонтакте</name>
+        </setting>
+        <setting var="vk_width" control_type="text">
+            <value>220</value>
+            <name locale="en_US">width</name>
+            <name locale="ru_RU">Ширина</name>
+        </setting>
+        <setting var="vk_height" control_type="text">
+            <value>280</value>
+            <name locale="en_US">height</name>
+            <name locale="ru_RU">Высота</name>
+        </setting>
+        
+        <setting var="vk_mode" control_type="select">
+            <value>0</value>
+            <name locale="en_US">view</name>
+            <name locale="ru_RU">Вид</name>
+            <options>
+                <option value="0">
+                    <name locale="en_US">participants</name>
+                    <name locale="ru_RU">Участники</name>
+                </option>
+                <option value="1">
+                    <name locale="en_US">title only</name>
+                    <name locale="ru_RU">Только название</name>
+                </option>
+                <option value="2">
+                    <name locale="en_US">News</name>
+                    <name locale="ru_RU">Новости</name>
+                </option>
+            </options>
+        </setting>
+        <setting var="vk_color1" control_type="color">
+            <value>#FFFFFF</value>
+            <name locale="en_US">background Color</name>
+            <name locale="ru_RU">Цвет фона</name>
+        </setting>
+        <setting var="vk_color2" control_type="color">
+            <value>#2B587A</value>
+            <name locale="en_US">text Color</name>
+            <name locale="ru_RU">Цвет текста</name>
+        </setting>
+        <setting var="vk_color3" control_type="color">
+            <value>#5B7FA6</value>
+            <name locale="en_US">color buttons</name>
+            <name locale="ru_RU">Цвет кнопок</name>
+        </setting>
+        
+        
+        
+        
+        <setting var="category_settings_title" control_type="text">
+            <value></value>
+            <name locale="en_US">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Settings category page.</p>	
+                ]]>
+            </name>
+            <name locale="ru_RU">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Настройки страницы категории.</p>	
+                ]]>
+            </name>
+        </setting>
+        
+        <setting var="use_logocategory_plugin" control_type="checkbox">
+            <value>0</value>
+            <name locale="en_US">use "logo category" plugin</name>
+            <name locale="ru_RU">
+                Использовать плагин "логотип категории" для вывода изображений.
+                <![CDATA[
+                <a href="http://www.webasyst.ru/store/plugin/shop/logocategory/">Купить и установить плагин "Логотип категории"</a>	
+                ]]>
+            </name>
+        </setting>
+        
+        <setting var="default_product_view" control_type="select">
+            <value>grid</value>
+            <name locale="en_US">Default products list view</name>
+            <name locale="ru_RU">Отображение списка товаров по умолчанию</name>
+            <options>
+                <option value="grid">
+                    <name locale="en_US">Grid</name>
+                    <name locale="ru_RU">Таблица</name>
+                </option>
+                <option value="list">
+                    <name locale="en_US">List</name>
+                    <name locale="ru_RU">Список</name>
+                </option>
+            </options>
+        </setting>
+        
+        
+        <setting var="quick_view" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">Quick view product</name>
+            <name locale="ru_RU">Быстрый просмотр товара</name>
+        </setting>
+        
+        
+        <setting var="category_settings_sidebar_title" control_type="text">
+            <value></value>
+            <name locale="en_US">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Settings category page. Sidebar.</p>	
+                ]]>
+            </name>
+            <name locale="ru_RU">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Настройки страницы категории. Боковое меню.</p>	
+                ]]>
+            </name>
+        </setting>
+        
+        
+        <setting var="qutput_subcategories" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">Qutput subcategories</name>
+            <name locale="ru_RU">Выводить подкатегории</name>
+        </setting>
+        
+        <setting var="category_popular_products" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">Popular Products</name>
+            <name locale="ru_RU">Популярные товары</name>
+        </setting>
+        
+        <setting var="category_popular_products_list" control_type="text">
+            <value>promo</value>
+            <name locale="en_US">Popular Products. Products list name</name>
+            <name locale="ru_RU">Популярные товары. Название списка товаров</name>
+        </setting>
+        
+        <setting var="category_information_block" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">Information block</name>
+            <name locale="ru_RU">Вывод информационного блока</name>
+        </setting>
+        
+        <setting var="category_viewed_products" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">viewed products</name>
+            <name locale="ru_RU">Просмотренные товары</name>
+        </setting>
+        <setting var="category_viewed_products_count" control_type="text">
+            <value>3</value>
+            <name locale="en_US">Viewed products. Count</name>
+            <name locale="ru_RU">Просмотренные товары. Максимальное количество в списке.</name>
+        </setting>
+        
+        <setting var="category_tags" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">Tags</name>
+            <name locale="ru_RU">Теги</name>
+        </setting>
+        
+        
         
         
     </settings>
@@ -369,6 +710,113 @@
             <msgid>Add to cart</msgid>
             <msgstr locale="ru_RU">Добавить в корзину</msgstr>
         </locale>
+        <locale>
+            <msgid>Free shipping</msgid>
+            <msgstr locale="ru_RU">Бесплатная доставка</msgstr>
+        </locale>
+        <locale>
+            <msgid>Call us</msgid>
+            <msgstr locale="ru_RU">Позвоните нам</msgstr>
+        </locale>
+        <locale>
+            <msgid>Gift cards</msgid>
+            <msgstr locale="ru_RU">Подарочные карты</msgstr>
+        </locale>
+        <locale>
+            <msgid>Subcategories</msgid>
+            <msgstr locale="ru_RU">Подкатегории</msgstr>
+        </locale>
+        <locale>
+            <msgid>View</msgid>
+            <msgstr locale="ru_RU">Вид</msgstr>
+        </locale>
+        <locale>
+            <msgid>Grid</msgid>
+            <msgstr locale="ru_RU">Таблица</msgstr>
+        </locale>
+        <locale>
+            <msgid>List</msgid>
+            <msgstr locale="ru_RU">Список</msgstr>
+        </locale>
+        <locale>
+            <msgid>Show</msgid>
+            <msgstr locale="ru_RU">Показать</msgstr>
+        </locale>
+        
+        <locale>
+            <msgid>Quick view</msgid>
+            <msgstr locale="ru_RU">Быстрый просмотр</msgstr>
+        </locale>
+        <locale>
+            <msgid>More</msgid>
+            <msgstr locale="ru_RU">Подробнее</msgstr>
+        </locale>
+        <locale>
+            <msgid>Novelty</msgid>
+            <msgstr locale="ru_RU">Новинка</msgstr>
+        </locale>
+        <locale>
+            <msgid>Sale</msgid>
+            <msgstr locale="ru_RU">Распродажа</msgstr>
+        </locale>
+        <locale>
+            <msgid>Hit</msgid>
+            <msgstr locale="ru_RU">Хит</msgstr>
+        </locale>
+        <locale>
+            <msgid>Favorite</msgid>
+            <msgstr locale="ru_RU">Избранное</msgstr>
+        </locale>
+        <locale>
+            <msgid>Compare</msgid>
+            <msgstr locale="ru_RU">Сравнить</msgstr>
+        </locale>
+        <locale>
+            <msgid>Filter</msgid>
+            <msgstr locale="ru_RU">Филтер</msgstr>
+        </locale>
+        <locale>
+            <msgid>Popular products</msgid>
+            <msgstr locale="ru_RU">Популярные товары</msgstr>
+        </locale>
+        <locale>
+            <msgid>Viewed products</msgid>
+            <msgstr locale="ru_RU">Просмотренные товары</msgstr>
+        </locale>
+        <locale>
+            <msgid>Tags</msgid>
+            <msgstr locale="ru_RU">Теги</msgstr>
+        </locale>
+        <locale>
+            <msgid>Add to wishlist</msgid>
+            <msgstr locale="ru_RU">Добавить в избранное</msgstr>
+        </locale>
+        <locale>
+            <msgid>Remove from wishlist</msgid>
+            <msgstr locale="ru_RU">Удалить из избранного</msgstr>
+        </locale>
+        <locale>
+            <msgid>Product</msgid>
+            <msgstr locale="ru_RU">Товар</msgstr>
+        </locale>
+        <locale>
+            <msgid>Description</msgid>
+            <msgstr locale="ru_RU">Описание</msgstr>
+        </locale>
+        <locale>
+            <msgid>Unit price</msgid>
+            <msgstr locale="ru_RU">Цена за единицу</msgstr>
+        </locale>
+        <locale>
+            <msgid>Qty</msgid>
+            <msgstr locale="ru_RU">Кол-во</msgstr>
+        </locale>
+        <locale>
+            <msgid>Total</msgid>
+            <msgstr locale="ru_RU">Итого</msgstr>
+        </locale>
+
+        
     </locales>
     
 </theme>

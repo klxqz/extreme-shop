@@ -1,4 +1,4 @@
-$(function () {
+$(function() {
 
     function updateCart(data)
     {
@@ -7,17 +7,17 @@ $(function () {
             $(".cart-discount").closest('tr').show();
         }
         $(".cart-discount").html('&minus; ' + data.discount);
-        
+
         if (data.add_affiliate_bonus) {
             $(".affiliate").show().html(data.add_affiliate_bonus);
         } else {
             $(".affiliate").hide();
         }
-        
+
     }
 
     // add to cart block: services
-    $(".services input:checkbox").click(function () {
+    $(".services input:checkbox").click(function() {
         var obj = $('select[name="service_variant[' + $(this).closest('tr').data('id') + '][' + $(this).val() + ']"]');
         if (obj.length) {
             if ($(this).is(':checked')) {
@@ -29,9 +29,9 @@ $(function () {
     });
 
 
-    $(".cart a.delete").click(function () {
+    $(".cart a.delete").click(function() {
         var tr = $(this).closest('tr');
-        $.post('delete/', {html: 1, id: tr.data('id')}, function (response) {
+        $.post('delete/', {html: 1, id: tr.data('id')}, function(response) {
             if (response.data.count == 0) {
                 location.reload();
             }
@@ -41,12 +41,12 @@ $(function () {
         return false;
     });
 
-    $(".cart input.qty").change(function () {
+    $(".cart input.qty").change(function() {
         var that = $(this);
         if (that.val() > 0) {
             var tr = that.closest('tr');
             if (that.val()) {
-                $.post('save/', {html: 1, id: tr.data('id'), quantity: that.val()}, function (response) {
+                $.post('save/', {html: 1, id: tr.data('id'), quantity: that.val()}, function(response) {
                     tr.find('.item-total').html(response.data.item_total);
                     if (response.data.q) {
                         that.val(response.data.q);
@@ -64,40 +64,57 @@ $(function () {
         }
     });
 
-    $(".cart .services input:checkbox").change(function () {
+    $(".cart .services input:checkbox").change(function() {
         var div = $(this).closest('div');
         var tr = $(this).closest('tr');
         if ($(this).is(':checked')) {
-           var parent_id = $(this).closest('tr').data('id')
-           var data = {html: 1, parent_id: parent_id, service_id: $(this).val()};
-           var variants = $('select[name="service_variant[' + parent_id + '][' + $(this).val() + ']"]');
-           if (variants.length) {
-               data['service_variant_id'] = variants.val();
-           }
-           $.post('add/', data, function(response) {
-               div.data('id', response.data.id);
-               tr.find('.item-total').html(response.data.item_total);
-               updateCart(response.data);
-           }, "json");
+            var parent_id = $(this).closest('tr').data('id')
+            var data = {html: 1, parent_id: parent_id, service_id: $(this).val()};
+            var variants = $('select[name="service_variant[' + parent_id + '][' + $(this).val() + ']"]');
+            if (variants.length) {
+                data['service_variant_id'] = variants.val();
+            }
+            $.post('add/', data, function(response) {
+                div.data('id', response.data.id);
+                tr.find('.item-total').html(response.data.item_total);
+                updateCart(response.data);
+            }, "json");
         } else {
-           $.post('delete/', {html: 1, id: div.data('id')}, function (response) {
-               div.data('id', null);
-               tr.find('.item-total').html(response.data.item_total);
-               updateCart(response.data);
-           }, "json");
+            $.post('delete/', {html: 1, id: div.data('id')}, function(response) {
+                div.data('id', null);
+                tr.find('.item-total').html(response.data.item_total);
+                updateCart(response.data);
+            }, "json");
         }
     });
 
-    $(".cart .services select").change(function () {
+    $(".cart .services select").change(function() {
         var tr = $(this).closest('tr');
-        $.post('save/', {html: 1, id: $(this).closest('div').data('id'), 'service_variant_id': $(this).val()}, function (response) {
+        $.post('save/', {html: 1, id: $(this).closest('div').data('id'), 'service_variant_id': $(this).val()}, function(response) {
             tr.find('.item-total').html(response.data.item_total);
             updateCart(response.data);
         }, "json");
     });
 
-    $("#cancel-affiliate").click(function () {
+    $("#cancel-affiliate").click(function() {
         $(this).closest('form').append('<input type="hidden" name="use_affiliate" value="0">').submit();
         return false;
     })
+    $('.cart_quantity_up').click(function() {
+        var input = $(this).closest('.cart_quantity').find('.cart_quantity_input');
+        var qty = parseInt(input.val());
+        input.val(qty + 1);
+        input.change();
+    });
+    $('.cart_quantity_down').click(function() {
+        var input = $(this).closest('.cart_quantity').find('.cart_quantity_input');
+        var qty = parseInt(input.val());
+        if (qty - 1 > 0) {
+            input.val(qty - 1);
+            input.change();
+        }
+
+    });
+
+
 });

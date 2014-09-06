@@ -163,17 +163,15 @@
         <div class="product_attributes clearfix">
             <!-- quantity wanted -->
             <p id="quantity_wanted_p">
-                <label>Quantity:</label>
-                <input type="text" name="qty" id="quantity_wanted" class="text" value="1" />
-                <a href="#" data-field-qty="qty" class="btn btn-default button-minus product_quantity_down">
+                <input type="text" name="quantity" id="quantity_wanted" class="text" value="1" />
+                <a href="#" data-field-qty="quantity" class="btn btn-default button-minus product_quantity_down">
                     <span><i class="icon-minus"></i></span>
                 </a>
-                <a href="#" data-field-qty="qty" class="btn btn-default button-plus product_quantity_up ">
+                <a href="#" data-field-qty="quantity" class="btn btn-default button-plus product_quantity_up ">
                     <span><i class="icon-plus"></i></span>
                 </a>
                 <span class="clearfix"></span>
             </p>
-
         </div>
 
 
@@ -181,14 +179,11 @@
             <div>
                 <p id="add_to_cart" class="buttons_bottom_block no-print">
                     <input type="hidden" name="product_id" value="{$product.id}">
-                    <button type="submit" name="Submit" class="exclusive btn button ajax_add_to_cart_button">
-                        <span>Добавить в корзину</span>
+                    <button type="submit" class="exclusive btn button ajax_add_to_cart_button">
+                        <span>[`Add to cart`]</span>
                     </button>
                 </p>
             </div>
-
-
-
         </div> <!-- end box-cart-bottom -->
 
 

@@ -88,7 +88,7 @@ table.table .badge span { display: block; width: 20px; overflow: hidden; padding
 
 
 .options { line-height: 1.8em; }
-.services { margin-bottom: 20px; }
+.services { margin-bottom: 20px; display: table; }
 
 
 .aux { padding: 15px; font-size: 0.9em; }
@@ -219,4 +219,9 @@ h1 .order-status { font-size: 0.75em; margin-left: 10px; }
 
 .product-price, .old-price, .price{
     white-space: nowrap;
+}
+
+.tip-darkgray table td, .tip-darkgray table th{
+    padding: 0px;
+    
 }
