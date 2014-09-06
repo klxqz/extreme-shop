@@ -1,6 +1,6 @@
 {if $wa->get('list') == 'viewed_products'}
-    {$title = 'Просмотренные товары'}
-    {$navigation = "Просмотренные товары"}
+    {$title = '[`Viewed products`]'}
+    {$navigation = '[`Viewed products`]'}
     {$pages_count = 1}
     {$viewed_products = waRequest::cookie('viewed_products')};
     {if !empty($viewed_products)}
@@ -9,8 +9,8 @@
         {$products = null}   
     {/if}
 {elseif $wa->get('list') == 'wishlist'}
-    {$title = 'Избранные товары'}
-    {$navigation = "Избранные товары"}
+    {$title = '[`Favorites`]'}
+    {$navigation = '[`Favorites`]'}
     {$pages_count = 1}
     {$wishlist = waRequest::cookie('shop_wishlist')};
     {if !empty($wishlist)}
@@ -20,15 +20,10 @@
     {/if}
 {else}
     {$is_products_pers = true}
-    {$title = "Поиск по запросу «`$wa->get('query')|escape`»"}
-    {$navigation = "Поиск"}
+    {$title = "[`Search by query`] «`$wa->get('query')|escape`»"}
+    {$navigation = '[`Search`]'}
 {/if}
 
-
-
-<link href="{$wa_active_theme_url}blocklayered.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
-<link href="{$wa_active_theme_url}category.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="{$wa_active_theme_url}blockcategories.css"  media="all"/>
 {$compare = waRequest::cookie('shop_compare', array(), waRequest::TYPE_ARRAY_INT)}
 {$wishlist = waRequest::cookie('shop_wishlist', array(), waRequest::TYPE_ARRAY_INT)}
 
@@ -63,17 +58,17 @@
         <div class="content_sortPagiBar clearfix">
             <div class="sortPagiBar clearfix">
                 <ul class="display hidden-xs">
-                    <li class="display-title">View:</li>
+                    <li class="display-title">[`View`]:</li>
                     <li id="grid">
-                        <a rel="nofollow" href="#" title="Grid">
+                        <a rel="nofollow" href="#" title="[`Grid`]">
                             <i class="icon-th-large"></i>
-                            Таблица
+                            [`Grid`]
                         </a>
                     </li>
                     <li id="list">
-                        <a rel="nofollow" href="#" title="List">
+                        <a rel="nofollow" href="#" title="[`List`]">
                             <i class="icon-th-list"></i>
-                            Список
+                            [`List`]
                         </a>
                     </li>
                 </ul>
@@ -84,7 +79,7 @@
                     <div  class="nbrItemPage">
                         <div class="clearfix selector1">
                             <label for="nb_item">
-                                Показать
+                                [`Show`]
                             </label>
                             <select name="n" id="nb_item" class="form-control">
                                 {if isset($smarty.cookies.products_per_page)}
@@ -100,10 +95,8 @@
                     </div>
                     <!-- /nbr product/page -->
                 {/if}
-
             </div>
             <div class="top-pagination-content clearfix">
-
             </div>
         </div>
 
@@ -113,30 +106,21 @@
             {include file='list-thumbs.html' id="wishlist_list" class="product_list grid row"}
         {/if}
 
-
-
         <div class="content_sortPagiBar">
             <div class="bottom-pagination-content clearfix">
                 <div class="compare-form">
                     <a href="{$wa->getUrl('/frontend/compare/', ['id' => implode(',', $compare) ])}" class="btn btn-default button button-medium bt_compare bt_compare_bottom" {if count($compare)<2}disabled="disabled"{/if}>
-                        <span>Сравнить 
-                            (
-                            <strong class="total-compare-val">{count($compare)}</strong>
-                            )
-                            <i class="icon-chevron-right right"></i>
+                        <span>
+                            [`Compare`] (<strong class="total-compare-val">{count($compare)}</strong>) <i class="icon-chevron-right right"></i>
                         </span>
                     </a>
                 </div>
-
-
 
                 <!-- Pagination -->
                 <div id="pagination_bottom" class="pagination clearfix">                    
                     {wa_pagination total=$pages_count attrs=['class' => "pagination"] next = '<i class="icon-chevron-right"></i>' prev = '<i class="icon-chevron-left"></i>'}
                 </div>
                 <!-- /Pagination -->
-
-
             </div>
         </div>
 

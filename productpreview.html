@@ -18,9 +18,23 @@
         <link rel="stylesheet" href="{$wa_parent_theme_url}global.css" media="all" />
         <link rel="stylesheet" href="{$wa_parent_theme_url}responsive-tables.css" media="all" />
         <link rel="stylesheet" href="{$wa_active_theme_url}product.css" media="all" />
+        <link href="{$wa_active_theme_url}poshytip/tip-darkgray/tip-darkgray.css" rel="stylesheet" type="text/css">
 
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,600" media="all" />
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
+
+        {$compare = waRequest::cookie('shop_compare', array(), waRequest::TYPE_ARRAY_INT)}
+        <script type="text/javascript">
+            var add_to_compare = '[`Add to comparison table`]';
+            var remove_from_compare = '[`Remove from comparison table`]';
+            var compare_url = '{$wa->getUrl('/frontend/compare/', ['id' => implode(',', $compare) ])}';
+            var add_to_wishlist = '[`Add to wishlist`]';
+            var remove_from_wishlist = '[`Remove from wishlist`]';
+            var wishlist_url = '{$wa->getUrl('/frontend/search')}?list=wishlist';
+        </script>
+        <script type="text/javascript" src="{$wa_url}wa-content/js/jquery/jquery-1.8.2.min.js"></script>
+        <script type="text/javascript" src="{$wa_url}wa-content/js/jquery-plugins/jquery.cookie.js"></script>
+        <script type="text/javascript" src="{$wa_active_theme_url}poshytip/jquery.poshytip.min.js"></script>
         <!--[if IE 8]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
@@ -36,12 +50,20 @@
             <div class="pb-left-column col-xs-12  col-sm-4 col-md-5">
                 <!-- product img-->        
                 <div id="image-block" class="clearfix">
-                    <span class="new-box no-print">
-                        <span class="new-label">Новые</span>
-                    </span>
-                    <span class="sale-box no-print">
-                        <span class="sale-label">Sale!</span>
-                    </span>
+                    {if $product.badge == 'new'}
+                        <span class="new-box">
+                            <span class="new-label">[`Novelty`]!</span>
+                        </span>
+                    {elseif $product.badge == 'lowprice'}
+                        <span class="sale-box">
+                            <span class="sale-label">[`Sale`]!</span>
+                        </span>
+                    {elseif $product.badge == 'bestseller'}
+                        <span class="sale-box">
+                            <span class="sale-label">[`Hit`]!</span>
+                        </span>
+                    {/if}
+
                     <span id="view_full_size">
                         {$wa->shop->productImgHtml($product, '458', [ 'itemprop' => 'image', 'id' => 'bigpic', 'alt' => $product.name|escape|cat:' ':strip_tags($product.summary)|escape ])}
                     </span>
@@ -50,9 +72,7 @@
                 <!-- thumbnails -->
                 <div id="views_block" class="clearfix ">
                     <span class="view_scroll_spacer">
-                        <a id="view_scroll_left" class="" title="Другие виды" href="javascript:{}">
-                            Previous
-                        </a>
+                        <a id="view_scroll_left" class="" href="javascript:{}"></a>
                     </span>
                     <div id="thumbs_list">
                         <ul id="thumbs_list_frame">
@@ -67,12 +87,9 @@
                                     </a>
                                 </li>
                             {/foreach}
-
                         </ul>
                     </div> <!-- end thumbs_list -->
-                    <a id="view_scroll_right" title="Другие виды" href="javascript:{}">
-                        Next
-                    </a>
+                    <a id="view_scroll_right"  href="javascript:{}"></a>
                 </div> 
                 <!-- end views-block -->
                 <!-- end thumbnails -->
@@ -82,16 +99,26 @@
 
             <!-- center infos -->
             <div class="pb-center-column col-xs-12  col-sm-4">
-
-
                 <h1 itemprop="name">{$product.name}</h1>
+                {if !empty($product.rating) && $product.rating > 0}
+                    <div itemprop="aggregateRating" itemscope itemtype="http://schema.org/AggregateRating">
+                        <div class="comments_note clearfix">
+                            <div class="star_content clearfix">
+                                {for $i=1 to 5}
+                                    <div class="star{if $product.rating >= $i} star_on{/if}"></div>
+                                {/for}                            
+                                <span class="hidden" itemprop="ratingValue">{$product.rating}</span>
+                                <span class="hidden" itemprop="reviewCount">{$reviews_total_count}</span>
+                            </div>
+                        </div>
+                    </div>
+                {/if}
 
                 <div id="short_description_block">
                     <div id="short_description_content" class="rte align_justify" itemprop="description">
                         <p>{$product.summary|truncate:255}</p>
                     </div>
-                    <!---->
-                </div> <!-- end short_description_block -->
+                </div>
 
 
 
@@ -99,101 +126,62 @@
                 charset="utf-8"></script>
                 <div class="yashare-auto-init" data-yashareL10n="ru"
                      data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"></div> 
+                <br/>
 
+                <!-- categories -->
+                {if $product.categories}
+                    <p id="product-categories">
+                        [`Categories`]:
+                        {foreach $product.categories as $c}
+                            {if $c.status}
+                                <span class="product-info">
+                                    <a href="{$wa->getUrl('/frontend/category', ['category_url' => $c.full_url])}">{$c.name|escape}</a>
+                                </span>
+                            {/if}
+                        {/foreach}
+                    </p>
+                {/if}
 
+                <!-- tags -->
+                {if $product.tags}
+                    <p class="tags" id="product-tags">
+                        [`Tags`]:
+                        <span class="product-info">
+                            {foreach $product.tags as $t}
+                                <a href="{$wa->getUrl('/frontend/tag', ['tag' => urlencode($t)])}">{$t}</a>
+                            {/foreach}
+                        </span>
+                    </p>
+                {/if}
 
-                <!--  /Module ProductComments -->					
+                {$wishlist = waRequest::cookie('shop_wishlist', array(), waRequest::TYPE_ARRAY_INT)}
+                <!-- usefull links-->
+                <ul id="usefull_link_block" class="clearfix no-print">
+                    <li class="compare">
+                        <a {if $compare}style="display:none"{/if} class="compare-add inline-link" data-product="{$product.id}" href="#"><b><i>[`Add to comparison table`]</i></b></a>
+                        <a {if !$compare}style="display:none"{/if} class="compare-remove inline-link" data-product="{$product.id}" href="#"><b><i>[`Remove from comparison table`]</i></b></a>
+                        <a id="compare-link" {if count($compare) lt 2}style="display:none"{/if} rel="nofollow" href="{$wa->getUrl('/frontend/compare/', ['id' => implode(',', $compare) ])}" class="bold">[`Compare`] <span class="count">{count($compare)}</span></a>
+                    </li>
+                    <li class="favorite">
+                        <a data-id="{$product.id}" href="#" {if in_array($product.id, $wishlist)}class="checked"{/if}>
+                            {if in_array($product.id, $wishlist)}
+                                [`Remove from wishlist`]
+                            {else}
+                                [`Add to wishlist`]
+                            {/if}
+                        </a>
+                    </li>
+                </ul>
+
             </div>
             <!-- end center infos-->
 
-            <!-- pb-right-column-->
             <div class="pb-right-column col-xs-12  col-sm-4 col-md-3">
-                <!-- add to cart form-->
-                <form id="buy_block" action="#" method="post">
-                    <!-- hidden datas -->
-                   
-                    <div class="box-info-product">
-                        <div class="content_prices clearfix">
-                            <!-- prices -->
-                            <div class="price">
-                                <p class="our_price_display" itemprop="offers" itemscope itemtype="http://schema.org/Offer">
-                                    <link itemprop="availability" href="http://schema.org/InStock"/>																			<span id="our_price_display" itemprop="price">$122.51</span>
-                                    <!---->
-                                    <meta itemprop="priceCurrency" content="USD" />
-                                </p>
-                                <p id="reduction_percent" >
-                                    <span id="reduction_percent_display">
-                                        -5%									</span>
-                                </p>
-                                <p id="old_price">
-                                    <span id="old_price_display">$128.96</span>
-                                    <!--  -->
-                                </p>
-                            </div> <!-- end prices -->
-                            <p id="reduction_amount"  style="display:none">
-                                <span id="reduction_amount_display">
-                                </span>
-                            </p>
-
-
-                            <div class="clear"></div>
-                        </div> <!-- end content_prices -->
-                        <div class="product_attributes clearfix">
-                            <!-- quantity wanted -->
-                            <p id="quantity_wanted_p">
-                                <label>Quantity:</label>
-                                <input type="text" name="qty" id="quantity_wanted" class="text" value="1" />
-                                <a href="#" data-field-qty="qty" class="btn btn-default button-minus product_quantity_down">
-                                    <span>
-                                        <i class="icon-minus"></i>
-                                    </span>
-                                </a>
-                                <a href="#" data-field-qty="qty" class="btn btn-default button-plus product_quantity_up ">
-                                    <span>
-                                        <i class="icon-plus"></i>
-                                    </span>
-                                </a>
-                                <span class="clearfix"></span>
-                            </p>
-                            <!-- minimal quantity wanted -->
-                            <p id="minimal_quantity_wanted_p" style="display: none;">
-                                Данный товар не продается по одной единице. Вы должны выбрать по крайней мере 
-                                <b id="minimal_quantity_label">1</b> 
-                                единиц данного товара.
-                            </p>
-                        </div> <!-- end product_attributes -->
-                        <div class="box-cart-bottom">
-                            <div>
-                                <p id="add_to_cart" class="buttons_bottom_block no-print">
-                                    <button type="submit" name="Submit" class="exclusive btn button ajax_add_to_cart_button">
-                                        <span>Добавить в корзину</span>
-                                    </button>
-                                </p>
-                            </div>
-                            <!-- Productpaymentlogos module -->
-
-                            <!-- /Productpaymentlogos module -->
-                            <p class="buttons_bottom_block no-print">
-                                <a id="wishlist_button" href="#"  rel="nofollow"  title="Добавить в список">
-                                    Добавить в список
-                                </a>
-                            </p>
-                            <strong></strong>
-                        </div> <!-- end box-cart-bottom -->
-                    </div> <!-- end box-info-product -->
-                </form>
+                {include file="`$wa_active_theme_path`/product.cart.html" inline}
             </div> 
-            <!-- end pb-right-column-->
+
         </div> <!-- end primary_block -->
 
-        <script type="text/javascript">
-            var contentOnly = true;
-            var productColumns = '1';
-            var quantityAvailable = 99;
-        </script>
-
-
-        <script type="text/javascript" src="{$wa_url}wa-content/js/jquery/jquery-1.8.2.min.js"></script>
 
         <script type="text/javascript" src="{$wa_active_theme_url}jquery.scrollTo.js"></script>
         <script type="text/javascript" src="{$wa_active_theme_url}jquery.serialScroll.js"></script>

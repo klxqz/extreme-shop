@@ -66,9 +66,7 @@
                 <!-- thumbnails -->
                 <div id="views_block" class="clearfix ">
                     <span class="view_scroll_spacer">
-                        <a id="view_scroll_left" class="" title="Другие виды" href="javascript:{}">
-                            Previous
-                        </a>
+                        <a id="view_scroll_left" class="" href="javascript:{}"></a>
                     </span>
                     <div id="thumbs_list">
                         <ul id="thumbs_list_frame">
@@ -85,9 +83,7 @@
                             {/foreach}
                         </ul>
                     </div>
-                    <a id="view_scroll_right" title="Другие виды" href="javascript:{}">
-                        Next
-                    </a>
+                    <a id="view_scroll_right" href="javascript:{}"></a>
                 </div>
                 <!-- end views-block -->
                 <!-- end thumbnails -->
@@ -122,7 +118,6 @@
                 charset="utf-8"></script>
                 <div class="yashare-auto-init" data-yashareL10n="ru"
                      data-yashareType="none" data-yashareQuickServices="vkontakte,facebook,twitter,odnoklassniki,moimir,gplus"></div> 
-
                 <br/>
 
                 <!-- categories -->
@@ -197,7 +192,7 @@
         {if $product.description}          
             <!-- More info -->
             <section class="page-product-box">
-                <h3 class="page-product-heading">Подробнее</h3>									<!-- full description -->
+                <h3 class="page-product-heading">[`Description`]</h3>									<!-- full description -->
                 <div  class="rte"><p itemprop="description">{$product.description}</p></div>
             </section>
             <!--end  More info -->
@@ -207,7 +202,7 @@
         {if $product.features}      
 
             <section class="page-product-box">
-                <h3 class="page-product-heading">Характеристики</h3>								
+                <h3 class="page-product-heading">[`Features`]</h3>								
                 <div  class="rte">
                     <!-- product features -->
 
@@ -305,13 +300,5 @@
     </div><!-- #center_column -->
 </div><!-- .row -->
 
-<script type="text/javascript">
-    var productColumns = '1';
-    var contentOnly = false;
-</script>
-
-
-
 <script type="text/javascript" src="{$wa_active_theme_url}jquery.elevateZoom-3.0.8.min.js" ></script>
 <script type="text/javascript" src="{$wa_active_theme_url}product_script.js"></script>
-

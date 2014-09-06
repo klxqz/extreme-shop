@@ -78,49 +78,47 @@ $(window).resize(refreshProductImages);
 $(document).ready(function(e) {
     productWishlist();
 
-    $("#product-image").elevateZoom({
-        zoomType: "window",
-        cursor: "crosshair",
-        zoomWindowFadeIn: 500,
-        zoomWindowFadeOut: 750,
-        gallery: "thumbs_list_frame",
-        galleryActiveClass: "thumbActive",
-        zoomWindowWidth: 400,
-        borderSize: 1,
-        borderColour: '#e5e5e5',
-        lensOpacity: 0.7,
-        scrollZoom: true,
-        constrainType: 'width'
-    });
-    $("#product-image").bind("click", function(e) {
-        var ez = $('#product-image').data('elevateZoom');
-        $.fancybox(ez.getGalleryList());
-        return false;
-    });
+    if ($("#product-image").length) {
+        $("#product-image").elevateZoom({
+            zoomType: "window",
+            cursor: "crosshair",
+            zoomWindowFadeIn: 500,
+            zoomWindowFadeOut: 750,
+            gallery: "thumbs_list_frame",
+            galleryActiveClass: "thumbActive",
+            zoomWindowWidth: 400,
+            borderSize: 1,
+            borderColour: '#e5e5e5',
+            lensOpacity: 0.7,
+            scrollZoom: true,
+            constrainType: 'width'
+        });
+        $("#product-image").bind("click", function(e) {
+            var ez = $('#product-image').data('elevateZoom');
+            $.fancybox(ez.getGalleryList());
+            return false;
+        });
+    }
 
 
-    $('.bxslider').bxSlider({
-        minSlides: 2,
-        maxSlides: 6,
-        slideWidth: 178,
-        slideMargin: 20,
-        pager: false,
-        nextText: '',
-        prevText: '',
-        moveSlides: 1,
-        infiniteLoop: false,
-        hideControlOnEnd: true
-    });
+    if ($('.bxslider').length) {
+        $('.bxslider').bxSlider({
+            minSlides: 2,
+            maxSlides: 6,
+            slideWidth: 178,
+            slideMargin: 20,
+            pager: false,
+            nextText: '',
+            prevText: '',
+            moveSlides: 1,
+            infiniteLoop: false,
+            hideControlOnEnd: true
+        });
+    }
 });
 
 
 function productWishlist() {
-
-    $('.product_list#wishlist_list').on('click', '.add_to_wishlist', function() {
-        if ($(this).hasClass('checked')) {
-            $(this).closest('li').remove();
-        }
-    });
 
     $('.favorite a').poshytip({
         followCursor: true,
@@ -131,9 +129,9 @@ function productWishlist() {
         offsetX: 0,
         offsetY: 5
     });
-    var self = this;
 
-    $('#center_column').on('click', '.favorite a', function() {
+
+    $('.favorite a').click(function() {
         var wishlist = $.cookie('shop_wishlist');
         if (!$(this).hasClass('checked')) {
             if (wishlist) {
@@ -141,10 +139,7 @@ function productWishlist() {
             } else {
                 wishlist = '' + $(this).data('id');
             }
-            $(this).poshytip('update', remove_from_wishlist);
-            if (wishlist.split(',').length > 1) {
-                $(this).poshytip('update', '<a style="color:#FFF; text-decoration:underline;" href="' + wishlist_url + '">Просмотреть ' + wishlist.split(',').length + '</a>', true);
-            }
+            $(this).poshytip('update', '<a style="color:#FFF; text-decoration:underline;" href="' + wishlist_url + '">Просмотреть ' + wishlist.split(',').length + '</a>', true);
             $.cookie('shop_wishlist', wishlist, {expires: 30, path: '/'});
             $(this).addClass('checked');
             $(this).text('Удалить из избранного');

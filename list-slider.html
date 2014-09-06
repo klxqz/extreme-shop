@@ -1,7 +1,13 @@
 
-<ul class="bxslider clearfix">
+<ul class="product_list bxslider clearfix">
     {foreach $products as $p name=products}
-        <li class="item product-box ajax_block_product first_item product_accessories_description">
+        <li class="item product-box ajax_block_product">
+            <div class="ajax_product_info" 
+                 data-price="{shop_currency_html($p.price)|escape}"
+                 data-name="{$p.name|escape}" 
+                 data-url="{$p.frontend_url}" 
+                 data-img="{shopImage::getUrl(['id' => $p.image_id, 'product_id' => $p.id, 'ext' => $p.ext, 'default' => "`$wa_theme_url`img/dummy200.png"], '80x80', false)}"
+                 ></div>
             <div class="product_desc">
                 <a href="{$p.frontend_url}" title="{$p.name|escape}{if $p.summary} &mdash; {strip_tags($p.summary|escape)}{/if}" class="product-image product_image">
                     {$wa->shop->productImgHtml($p, '190', ['class' => 'lazyOwl','itemprop' => 'image', 'alt' => $p.name, 'default' => "`$wa_theme_url`img/dummy200.png"])}
@@ -18,11 +24,12 @@
                 </span>
             </div>
             <div class="clearfix">
-                <div class="no-print">
-                    <a class="exclusive btn btn-default button ajax_add_to_cart_button" href="{$wa->getUrl('/frontendCart/add')}" data-id-product="{$p.id}" title="[`Add to cart`]">
+                <form class="addtocart" {if $p.sku_count > 1}data-url="{$p.frontend_url}{if strpos($p.frontend_url, '?')}&{else}?{/if}cart=1"{/if} method="post" action="{$wa->getUrl('/frontendCart/add')}">
+                    <input type="hidden" name="product_id" value="{$p.id}">
+                    <button class="button ajax_add_to_cart_button btn btn-default"  {if !($wa->shop->settings('ignore_stock_count') || $p.count === null || $p.count > 0)}disabled="disabled"{/if}>
                         <span>[`Add to cart`]</span>
-                    </a>
-                </div>
+                    </button>
+                </form>
             </div>
         </li>
     {/foreach}

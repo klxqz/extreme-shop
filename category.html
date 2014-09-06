@@ -21,10 +21,6 @@
     {/if}
     <option value="?{http_build_query($data)}" {if $active_sort == $sort}selected="selected"{/if}>{$name} {if $active_sort == $sort}{if $data['order'] == 'asc'}&uarr;{else}&darr;{/if}{/if}</option>
 {/function}
-<link href="{$wa_active_theme_url}blocklayered.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
-<link href="{$wa_active_theme_url}category.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
-<link rel="stylesheet" href="{$wa_active_theme_url}blockcategories.css"  media="all"/>
-
 
 {$compare = waRequest::cookie('shop_compare', array(), waRequest::TYPE_ARRAY_INT)}
 {$wishlist = waRequest::cookie('shop_wishlist', array(), waRequest::TYPE_ARRAY_INT)}

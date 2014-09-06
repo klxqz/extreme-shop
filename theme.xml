@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE theme PUBLIC "wa-app-theme" "http://www.webasyst.com/wa-content/xml/wa-app-theme.dtd">
-<theme id="extreme" system="0" vendor="webasyst" author="Webasyst" app="shop" parent_theme_id="site:extreme" version="1.1.2">
+<theme id="extreme" system="0" vendor="985310" author="wa-plugins.ru" app="shop" parent_theme_id="site:extreme" version="1.1.2">
     <name locale="en_US">Extreme</name>
-    <name locale="ru_RU">Extreme</name>
+    <name locale="ru_RU">Экстрим</name>
     <files>
         <file path="index.html" custom="0" parent="1">
         </file>
@@ -163,10 +163,7 @@
     </files>
    
     <settings>
-        
-        
-        
-        
+  
         <setting var="ajax_filters" control_type="checkbox">
             <value>1</value>
             <name locale="en_US">AJAX-enabled product by-feature filtering</name>
@@ -773,7 +770,7 @@
         </locale>
         <locale>
             <msgid>Filter</msgid>
-            <msgstr locale="ru_RU">Филтер</msgstr>
+            <msgstr locale="ru_RU">Фильтр</msgstr>
         </locale>
         <locale>
             <msgid>Popular products</msgid>
@@ -814,6 +811,18 @@
         <locale>
             <msgid>Total</msgid>
             <msgstr locale="ru_RU">Итого</msgstr>
+        </locale>
+        <locale>
+            <msgid>Features</msgid>
+            <msgstr locale="ru_RU">Характеристики</msgstr>
+        </locale>
+        <locale>
+            <msgid>Features</msgid>
+            <msgstr locale="ru_RU">Характеристики</msgstr>
+        </locale>
+        <locale>
+            <msgid>Search by query</msgid>
+            <msgstr locale="ru_RU">Поиск по запросу</msgstr>
         </locale>
 
         

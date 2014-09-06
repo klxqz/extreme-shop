@@ -175,6 +175,8 @@
 
 <!-- plugin hook: 'frontend_nav' -->
 {* @event frontend_nav.%plugin_id% *}
-{foreach $frontend_nav as $_}
-    {$_}
-{/foreach}
+{if !empty($frontend_nav)}
+    {foreach $frontend_nav as $_}
+        {$_}
+    {/foreach}
+{/if}
