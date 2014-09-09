@@ -36,23 +36,25 @@ function displayImage(domAAroundImgThumb, no_animation)
 
 
 // Change the current product images regarding the combination selected
-function refreshProductImages(id_product_attribute)
+function refreshProductImages()
 {
-    $('#thumbs_list_frame').scrollTo('li:eq(0)', 700, {axis: 'x'});
-
-    id_product_attribute = parseInt(id_product_attribute);
-
+    //$('#thumbs_list_frame').scrollTo('li:eq(0)', 700, {axis: 'x'});
 
     var thumb_width = $('#thumbs_list_frame >li').width() + parseInt($('#thumbs_list_frame >li').css('marginRight'));
     $('#thumbs_list_frame').width((parseInt((thumb_width) * $('#thumbs_list_frame >li').length)) + 'px');
-    $('#thumbs_list').trigger('goto', 0);
+    //$('#thumbs_list').trigger('goto', 0);
 
 }
 //To do after loading HTML
 function galeryReload() {
+    refreshProductImages();
+    console.log('dsds');
     //init the serialScroll for thumbs
+    
+
+    
     $('#thumbs_list').serialScroll({
-        items: 'li:visible',
+        items: 'li',
         prev: '#view_scroll_left',
         next: '#view_scroll_right',
         axis: 'x',
@@ -67,8 +69,8 @@ function galeryReload() {
         cycle: false
     });
 
-    $('#thumbs_list').trigger('goto', 1);// SerialScroll Bug on goto 0 ?
-    $('#thumbs_list').trigger('goto', 0);
+    //$('#thumbs_list').trigger('goto', 1);
+    //$('#thumbs_list').trigger('goto', 0);
 }
 $(document).ready(galeryReload);
 $(window).resize(refreshProductImages);

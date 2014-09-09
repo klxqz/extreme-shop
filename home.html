@@ -1,3 +1,4 @@
+<link rel="stylesheet" href="{$wa_active_theme_url}homeslider.css"  media="all"/>
 <script type="text/javascript" src="{$wa_active_theme_url}homeslider.js" ></script>
 <script type="text/javascript" src="{$wa_active_theme_url}bootstrap.min.js" ></script>
 
@@ -224,25 +225,25 @@
                 <li><em class="icon-truck" id="icon-truck"></em>
                     <div class="type-text">
                         <h3>[`Free shipping`]</h3>
-                        <p>Suspendisse ultricies est mi blandit, euismod vestibulum purus.</p>
+                        <p>[`Free shipping`]</p>
                     </div>
                 </li>
                 <li><em class="icon-phone" id="icon-phone"></em>
                     <div class="type-text">
                         <h3>{$wa->shop->settings('phone')}</h3>
-                        <p>Praesent ac risus orci. Pellentesque quis quam augue.</p>
+                        <p>{$wa->shop->settings('phone')}</p>
                     </div>
                 </li>
                 <li><em class="icon-credit-card" id="icon-credit-card"></em>
                     <div class="type-text">
                         <h3>[`Gift cards`]</h3>
-                        <p>Nunc et molestie metus. Duis cond vel lectus non tincidunt.</p>
+                        <p>[`Gift cards`]</p>
                     </div>
                 </li>
             </ul>
         </div>
         <div class="col-xs-6">
-            <h3>[`Information`]</h3>
+            <h3>[`News`]</h3>
             {$latest_posts = $wa->blog->posts()}
             <ul class="list-cms-info">
                 {foreach $latest_posts as $post}

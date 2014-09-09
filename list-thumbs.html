@@ -16,14 +16,15 @@
             {elseif ($smarty.foreach.products.index+5) % 6 == 0}
                 last-in-line last-item-of-tablet-line last-item-of-mobile-line
             {/if}">
-            <div class="ajax_product_info" 
-                 data-price="{shop_currency_html($p.price)|escape}"
-                 data-name="{$p.name|escape}" 
-                 data-url="{$p.frontend_url}" 
-                 data-img="{shopImage::getUrl(['id' => $p.image_id, 'product_id' => $p.id, 'ext' => $p.ext, 'default' => "`$wa_theme_url`img/dummy200.png"], '80x80', false)}"
-                 ></div>
+
             <div class="product-container" itemscope itemtype="http://schema.org/Product">
                 <div class="left-block">
+                    <div class="ajax_product_info" 
+                         data-price="{shop_currency_html($p.price)|escape}"
+                         data-name="{$p.name|escape}" 
+                         data-url="{$p.frontend_url}" 
+                         data-img="{shopImage::getUrl(['id' => $p.image_id, 'product_id' => $p.id, 'ext' => $p.ext, 'default' => "`$wa_theme_url`img/dummy200.png"], '80x80', false)}"
+                         ></div>
                     <div class="product-image-container">
                         <a class="product_img_link" href="{$p.frontend_url}" title="{$p.name|escape}{if $p.summary} &mdash; {strip_tags($p.summary|escape)}{/if}" itemprop="url">
                             {$wa->shop->productImgHtml($p, '190', ['class' => 'replace-2x img-responsive','itemprop' => 'image', 'alt' => $p.name, 'default' => "`$wa_theme_url`img/dummy200.png"])}

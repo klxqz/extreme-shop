@@ -6,9 +6,11 @@
     <files>
         <file path="index.html" custom="0" parent="1">
         </file>
-        <file path="custom.css" custom="0" parent="1">
+        <file path="extreme.css" custom="0" parent="1">
         </file>
-        <file path="custom.shop.css" custom="0">
+        <file path="extreme.js" custom="0" parent="1">
+        </file>
+        <file path="extreme.shop.css" custom="0">
             <description locale="en_US">Core storefront CSS</description>
             <description locale="ru_RU">Основной CSS интернет-магазина</description>
         </file>
@@ -148,7 +150,7 @@
             <description locale="en_US">404 and other errors</description>
             <description locale="ru_RU">404 и другие ошибки</description>
         </file>
-        <file path="custom.shop.js">
+        <file path="extreme.shop.js">
             <description locale="en_US">CUSTOM theme JS</description>
             <description locale="ru_RU">Скрипты темы CUSTOM</description>
         </file>
@@ -206,7 +208,7 @@
             <name locale="ru_RU">слайд 1 ссылка</name>
         </setting>
         <setting var="slide1_description" control_type="text">
-            <value>&lt;h2&gt;new arrivals&lt;/h2&gt; &lt;h3&gt;Snowboarding&lt;/h3&gt; &lt;h4&gt;gear&lt;/h4&gt; &lt;b&gt;Купить сейчас!&lt;/b&gt;</value>
+            <value>&lt;h2&gt;Новые поступления&lt;/h2&gt; &lt;h3&gt;Сноуборд&lt;/h3&gt; &lt;h4&gt;&lt;/h4&gt; &lt;b&gt;Купить сейчас!&lt;/b&gt;</value>
             <name locale="en_US">slide 1 description</name>
             <name locale="ru_RU">слайд 1 Описание</name>
         </setting>
@@ -224,7 +226,7 @@
             <name locale="ru_RU">слайд 2 ссылка</name>
         </setting>
         <setting var="slide2_description" control_type="text">
-            <value>&lt;h2&gt;new arrivals&lt;/h2&gt;&lt;h3&gt;Alpine Climbing&lt;/h3&gt;&lt;h4&gt;gear&lt;/h4&gt;&lt;b&gt;Купить сейчас!&lt;/b&gt;</value>
+            <value>&lt;h2&gt;Новые поступления&lt;/h2&gt;&lt;h3&gt;Альпинизм&lt;/h3&gt;&lt;h4&gt;&lt;/h4&gt;&lt;b&gt;Купить сейчас!&lt;/b&gt;</value>
             <name locale="en_US">slide 2 description</name>
             <name locale="ru_RU">слайд 2 Описание</name>
         </setting>
@@ -242,7 +244,7 @@
             <name locale="ru_RU">слайд 3 ссылка</name>
         </setting>
         <setting var="slide3_description" control_type="text">
-            <value>&lt;h2&gt;Clearance sale&lt;/h2&gt; &lt;h3&gt;Skiing &lt;/h3&gt; &lt;b&gt;Купить сейчас!&lt;/b&gt;</value>
+            <value>&lt;h2&gt;Распродажа&lt;/h2&gt; &lt;h3&gt;лыжи &lt;/h3&gt; &lt;b&gt;Купить сейчас!&lt;/b&gt;</value>
             <name locale="en_US">slide 3 description</name>
             <name locale="ru_RU">слайд 3 Описание</name>
         </setting>
@@ -319,7 +321,7 @@
             <name locale="ru_RU">баннер 1 ссылка</name>
         </setting>
         <setting var="banner1_description" control_type="text">
-            <value>&lt;div&gt;&lt;h2&gt;Зимняя &lt;strong&gt;Коллекция&lt;/strong&gt;&lt;/h2&gt; &lt;span&gt;NEW ARRIVALS&lt;/span&gt;&lt;/div&gt; &lt;b&gt;Купить сейчас!&lt;/b&gt;</value>
+            <value>&lt;div&gt;&lt;h2&gt;Зимняя &lt;strong&gt;Коллекция&lt;/strong&gt;&lt;/h2&gt; &lt;span&gt;НОВЫЕ ПОСТУПЛЕНИЯ&lt;/span&gt;&lt;/div&gt; &lt;b&gt;Купить сейчас!&lt;/b&gt;</value>
             <name locale="en_US">banner 1 description</name>
             <name locale="ru_RU">баннер 1 Описание</name>
         </setting>
@@ -336,7 +338,7 @@
             <name locale="ru_RU">баннер 2 ссылка</name>
         </setting>
         <setting var="banner2_description" control_type="text">
-            <value>&lt;div&gt;&lt;h2&gt;Серфинг&lt;/h2&gt; &lt;span&gt;Get up to 50% off&lt;/span&gt;&lt;/div&gt; &lt;b&gt;Купить сейчас!&lt;/b&gt; &lt;em&gt;sale&lt;/em&gt;</value>
+            <value>&lt;div&gt;&lt;h2&gt;Серфинг&lt;/h2&gt; &lt;span&gt;Скидка до 50%&lt;/span&gt;&lt;/div&gt; &lt;b&gt;Купить сейчас!&lt;/b&gt; &lt;em&gt;sale&lt;/em&gt;</value>
             <name locale="en_US">banner 2 description</name>
             <name locale="ru_RU">баннер 2 Описание</name>
         </setting>
@@ -354,7 +356,7 @@
             <name locale="ru_RU">баннер 3 ссылка</name>
         </setting>
         <setting var="banner3_description" control_type="text">
-            <value>&lt;div&gt;&lt;h2&gt;Rock Climbing&lt;/h2&gt; &lt;span&gt;NEW ARRIVALS&lt;/span&gt; &lt;/div&gt;&lt;b&gt;Купить сейчас!&lt;/b&gt;</value>
+            <value>&lt;div&gt;&lt;h2&gt;Скалолазание&lt;/h2&gt; &lt;span&gt;НОВЫЕ ПОСТУПЛЕНИЯ&lt;/span&gt; &lt;/div&gt;&lt;b&gt;Купить сейчас!&lt;/b&gt;</value>
             <name locale="en_US">banner 3 description</name>
             <name locale="ru_RU">баннер 3 Описание</name>
         </setting>
@@ -372,7 +374,7 @@
             <name locale="ru_RU">баннер 4 ссылка</name>
         </setting>
         <setting var="banner4_description" control_type="text">
-            <value>&lt;div&gt;&lt;h2&gt;Trail Running&lt;/h2&gt; &lt;span&gt;Get up to &lt;i&gt;50% off&lt;/i&gt;&lt;/span&gt; &lt;b&gt;Купить сейчас!&lt;/b&gt;&lt;/div&gt; &lt;em&gt;sale&lt;/em&gt;</value>
+            <value>&lt;div&gt;&lt;h2&gt;Бег&lt;/h2&gt; &lt;span&gt;Скидка до &lt;i&gt;50%&lt;/i&gt;&lt;/span&gt; &lt;b&gt;Купить сейчас!&lt;/b&gt;&lt;/div&gt; &lt;em&gt;sale&lt;/em&gt;</value>
             <name locale="en_US">banner 4 description</name>
             <name locale="ru_RU">баннер 4 Описание</name>
         </setting>
@@ -823,6 +825,10 @@
         <locale>
             <msgid>Search by query</msgid>
             <msgstr locale="ru_RU">Поиск по запросу</msgstr>
+        </locale>
+        <locale>
+            <msgid>News</msgid>
+            <msgstr locale="ru_RU">Новости</msgstr>
         </locale>
 
         

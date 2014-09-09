@@ -15,13 +15,21 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,900' rel='stylesheet' type='text/css'>
 
         <meta name="apple-mobile-web-app-capable" content="yes" /> 
-        <link rel="stylesheet" href="{$wa_parent_theme_url}global.css" media="all" />
+        <link rel="stylesheet" href="{$wa_parent_theme_url}extreme.css?v{$wa_theme_version}" media="all" />
         <link rel="stylesheet" href="{$wa_parent_theme_url}responsive-tables.css" media="all" />
         <link rel="stylesheet" href="{$wa_active_theme_url}product.css" media="all" />
         <link href="{$wa_active_theme_url}poshytip/tip-darkgray/tip-darkgray.css" rel="stylesheet" type="text/css">
 
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,600" media="all" />
         <link href='http://fonts.googleapis.com/css?family=Roboto+Condensed:400,700,300' rel='stylesheet' type='text/css'>
+
+        {if $theme_settings.color_scheme}
+            <link rel="stylesheet" href="{$wa_theme_url}{$theme_settings.color_scheme}.css"  media="all"/>
+        {/if}
+
+        <link href="{$wa_active_theme_url}custom.shop.css?v{$wa_theme_version}" rel="stylesheet" type="text/css">
+        
+        {$wa->css()} {* links active plugins CSS *}
 
         {$compare = waRequest::cookie('shop_compare', array(), waRequest::TYPE_ARRAY_INT)}
         <script type="text/javascript">
@@ -39,13 +47,12 @@
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
         <![endif]-->
+
+        {$wa->js()} {* links active plugins JS *}
     </head>
 
     <body id="product" class="product content_only">
-
         <div class="primary_block row" itemscope itemtype="http://schema.org/Product">
-
-
             <!-- left infos-->  
             <div class="pb-left-column col-xs-12  col-sm-4 col-md-5">
                 <!-- product img-->        
@@ -183,8 +190,30 @@
         </div> <!-- end primary_block -->
 
 
-        <script type="text/javascript" src="{$wa_active_theme_url}jquery.scrollTo.js"></script>
-        <script type="text/javascript" src="{$wa_active_theme_url}jquery.serialScroll.js"></script>
+        <script type="text/javascript" src="{$wa_active_theme_url}jquery.scrollTo.min.js"></script>
+        <script type="text/javascript" src="{$wa_active_theme_url}jquery.serialScroll.min.js"></script>
         <script type="text/javascript" src="{$wa_active_theme_url}product_script.js"></script>
+        <script type="text/javascript" src="{$wa_url}wa-content/js/jquery-plugins/jquery.tmpl.min.js"></script>
+        {literal}
+            <script id="cart_block_list_item_tmpl" type="text/x-jquery-tmpl">
+                <dt data-id="${id}">
+                <a class="cart-images" href="${url}"  title="${name}">
+                <img src="${img}" alt="${name}" /> 
+                </a>
+                <div class="cart-info">
+                <div class="product-name">
+                <a class="cart_block_product_name" href="${url}"  title="${name}">${name}</a>
+                </div>
+                <span class="quantity-formated">
+                <span class="quantity">${quantity}</span>&nbsp;x&nbsp;
+                </span>
+                <span class="price">{{html price}}</span>
+                </div>
+                <span class="remove_link">
+                <a class="ajax_cart_block_remove_link" href="#"  rel="nofollow">&nbsp;</a>
+                </span>
+                </dt>
+            </script>
+        {/literal}
     </body>
 </html>

@@ -76,8 +76,12 @@ function Product(form, options) {
         var f = $(this);
         $.post(f.attr('action') + '?html=1', f.serialize(), function(response) {
             if (response.status == 'ok') {
-                var cart_total = $(".shopping_cart");
-
+                if($('#product').hasClass('content_only')) {
+                    var cart_total = window.parent.$(".shopping_cart");
+                } else {
+                    var cart_total = $(".shopping_cart");
+                }
+                
                 var cart_div = f;
 
 
@@ -122,7 +126,7 @@ function Product(form, options) {
                             id: response.data.item_id
                         };
 
-                        $('#cart_block_list_item_tmpl').tmpl(tpl_data).appendTo('.cart_block_list .products');
+                        $('#cart_block_list_item_tmpl').tmpl(tpl_data).appendTo(cart_total.find('.cart_block_list .products'));
                         cart_total.find('.ajax_block_cart_total').html(response.data.total);
                         cart_total.find('.ajax_cart_quantity').html(response.data.count);
                         cart_total.find('.ajax_cart_discount').html(response.data.discount);
