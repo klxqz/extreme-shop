@@ -1,4 +1,4 @@
-
+{$wa->title('[`Compare products`]')}
 <link href="{$wa_active_theme_url}comparator.css?v{$wa_theme_version}" rel="stylesheet" type="text/css" />
 <script>
     $(function() {
@@ -14,7 +14,7 @@
             $(this).parent().addClass('selected');
             return false;
         });
-        $(".compare-remove").on('click', function() {
+        $(".cmp_remove").on('click', function() {
             var compare = $.cookie('shop_compare');
             if (compare) {
                 compare = compare.split(',');
@@ -39,11 +39,11 @@
 <!-- Breadcrumb -->
 
 <div class="breadcrumb clearfix">
-    <a title="Return to Home" href="" class="home">
+    <a class="home" href="{$wa_app_url}" title="{$wa->accountName()}">
         <i class="icon-home"></i>
     </a>
     <span class="navigation-pipe">&gt;</span>
-    <span class="navigation_page">Сравнение товаров</span>
+    <span class="navigation_page">[`Compare products`]</span>
 </div>
 
 <!-- /Breadcrumb -->
@@ -54,43 +54,69 @@
     <div class="center_column col-xs-12 col-sm-12" id="center_column">
 
 
-        <h1 class="page-heading">Сравнение товаров</h1>
+        <h1 class="page-heading">[`Compare products`]</h1>
 
         {$td_width = round((100-25)/count($products))}
 
         <div class="products_block">
-            <table class="table table-bordered" id="product_comparison">
+            <table class="table table-bordered product_list" id="product_comparison">
                 <tbody><tr>
                         <td class="td_empty compare_extra_information">
                         </td>
                         {foreach $products as $p}
-                            <td class="ajax_block_product comparison_infos product-block product-3">
-                                <div class="remove">
-                                    <a data-id-product="3" title="Remove" href="" class="cmp_remove">
-                                        <i class="icon-trash"></i>
-                                    </a>
-                                </div>
+                            <td class="ajax_block_product comparison_infos product-block">
+                                <div class="ajax_product_info" 
+                                     data-price="{shop_currency_html($p.price)|escape}"
+                                     data-name="{$p.name|escape}" 
+                                     data-url="{$p.frontend_url}" 
+                                     data-img="{shopImage::getUrl(['id' => $p.image_id, 'product_id' => $p.id, 'ext' => $p.ext, 'default' => "`$wa_theme_url`img/dummy200.png"], '80x80', false)}"
+                                     ></div>
+                                {if count($products) > 2}
+                                    <div class="remove">
+                                        <a data-product="{$p.id}" href="{$p.delete_url}" title="[`Remove from comparison list`]" class="cmp_remove">
+                                            <i class="icon-trash"></i>
+                                        </a>
+                                    </div>
+                                {/if}
                                 <div class="product-image-block">
-                                    <a title="{$p.name|escape}" href="" class="product_image">
+                                    <a title="{$p.name|escape}" href="{$wa->getUrl('/frontend/product/', ['product_url' => $p.url])}" class="product_image">
                                         {$wa->shop->productImgHtml($p, '250', ['itemprop' => 'image', 'class' => 'img-responsive', 'default' => "`$wa_theme_url`img/dummy96.png", 'title' => $p.name|cat:' ':strip_tags($p.summary)|escape])}
                                     </a>
-                                    <div class="sale-box">
-                                        <span class="sale-label">Sale!</span>
-                                    </div>
+                                    {if $p.badge == 'new'}
+                                        <span class="new-box">
+                                            <span class="new-label">[`Novelty`]!</span>
+                                        </span>
+                                    {elseif $p.badge == 'lowprice'}
+                                        <span class="sale-box">
+                                            <span class="sale-label">[`Sale`]!</span>
+                                        </span>
+                                    {elseif $p.badge == 'bestseller'}
+                                        <span class="sale-box">
+                                            <span class="sale-label">[`Hit`]!</span>
+                                        </span>
+                                    {/if}
                                 </div> <!-- end product-image-block -->
                                 <h5>
-                                    <a title="{$p.name|escape}" href="" class="product-name">
+                                    <a title="{$p.name|escape}" href="{$p.frontend_url}" class="product-name">
                                         {$p.name|escape}
                                     </a>
                                 </h5>
                                 <div class="prices-container">
-                                    <span class="price product-price">$394.64</span>
-                                    <span class="old-price product-price">
-                                        $426.21
-                                    </span>
-                                    <span class="price-percent-reduction">
-                                        -8%
-                                    </span>
+                                    {if $p.compare_price > 0}
+                                        <span itemprop="price" class="price product-price product-price-new">
+                                            {shop_currency_html($p.price)}                                
+                                        </span>
+                                        <span class="old-price product-price">
+                                            {shop_currency_html($p.compare_price)}
+                                        </span>
+
+                                        {$percent = floor(($p.compare_price - $p.price) / $p.compare_price * 100)}
+                                        <span class="price-percent-reduction">-{$percent}%</span>
+                                    {else}
+                                        <span class="price product-price" itemprop="price">
+                                            {shop_currency_html($p.price)}                               
+                                        </span>
+                                    {/if}
                                 </div> <!-- end prices-container -->
 
                                 <div class="product_desc">
@@ -102,11 +128,14 @@
                                     </p>
                                     <div class="clearfix">
                                         <div class="button-container">
-                                            <a title="Add to cart"  href="" data-id-product="3" class="button ajax_add_to_cart_button btn btn-default">
-                                                <span>Add to cart</span>
-                                            </a>
-                                            <a title="View" href="" class="button lnk_view btn btn-default">
-                                                <span>View</span>
+                                            <form class="addtocart" {if $p.sku_count > 1}data-url="{$p.frontend_url}{if strpos($p.frontend_url, '?')}&{else}?{/if}cart=1"{/if} method="post" action="{$wa->getUrl('/frontendCart/add')}">
+                                                <input type="hidden" name="product_id" value="{$p.id}">
+                                                <button class="button ajax_add_to_cart_button btn btn-default" {if !($wa->shop->settings('ignore_stock_count') || $p.count === null || $p.count > 0)}disabled="disabled"{/if}>
+                                                    <span>[`Add to cart`]</span>
+                                                </button>
+                                            </form>
+                                            <a title="[`More`]" href="{$wa->getUrl('/frontend/product/', ['product_url' => $p.url])}" class="button lnk_view btn btn-default">
+                                                <span>[`More`]</span>
                                             </a>
                                         </div>
                                     </div>
@@ -148,10 +177,10 @@
 
         <ul class="footer_link">
             <li>
-                <a title="Continue Shopping" href="" class="button lnk_view btn btn-default">
+                <a title="[`Back to the store`]" href="{$wa_app_url}" class="button lnk_view btn btn-default">
                     <span>
                         <i class="icon-chevron-left left"></i>
-                        Continue Shopping
+                        [`Back to the store`]
                     </span>
                 </a>
             </li>

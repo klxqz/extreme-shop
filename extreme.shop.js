@@ -250,10 +250,10 @@ $(document).ready(function() {
             if (response.status == 'ok') {
                 var cart_total = $(".shopping_cart");
 
-                var origin = f.closest('li');
+                var origin = f.closest('.ajax_block_product');
                 var block = $('<div></div>').append(origin.clone().removeClass('col-md-4 col-sm-6'));
-                var insertAfter = f.closest('li');
-                if (origin.hasClass('product-box')) {
+                var insertAfter = f.closest('.ajax_block_product');
+                if (origin.hasClass('product-box') || $('#product_comparison').length) {
                     insertAfter = $('#columns');
                 }
 

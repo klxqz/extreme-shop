@@ -35,45 +35,23 @@ function displayImage(domAAroundImgThumb, no_animation)
 
 
 
-// Change the current product images regarding the combination selected
-function refreshProductImages()
-{
-    //$('#thumbs_list_frame').scrollTo('li:eq(0)', 700, {axis: 'x'});
 
-    var thumb_width = $('#thumbs_list_frame >li').width() + parseInt($('#thumbs_list_frame >li').css('marginRight'));
-    $('#thumbs_list_frame').width((parseInt((thumb_width) * $('#thumbs_list_frame >li').length)) + 'px');
-    //$('#thumbs_list').trigger('goto', 0);
-
-}
-//To do after loading HTML
 function galeryReload() {
-    refreshProductImages();
-    console.log('dsds');
-    //init the serialScroll for thumbs
-    
 
-    
-    $('#thumbs_list').serialScroll({
-        items: 'li',
-        prev: '#view_scroll_left',
-        next: '#view_scroll_right',
-        axis: 'x',
-        offset: 0,
-        start: 0,
-        stop: true,
-        duration: 700,
-        step: 1,
-        lazy: true,
-        lock: false,
-        force: false,
-        cycle: false
+    $('#thumbs_list_frame').bxSlider({
+        slideMargin: 10,
+        slideWidth: 80,
+        moveSlides: 1,
+        prevText: '<i class="icon-chevron-sign-left"></i>',
+        nextText: '<i class="icon-chevron-sign-right"></i>',
+        pager: false,
+        maxSlides: 4,
+        infiniteLoop: false
     });
 
-    //$('#thumbs_list').trigger('goto', 1);
-    //$('#thumbs_list').trigger('goto', 0);
 }
 $(document).ready(galeryReload);
-$(window).resize(refreshProductImages);
+
 
 
 

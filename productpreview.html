@@ -27,7 +27,7 @@
             <link rel="stylesheet" href="{$wa_theme_url}{$theme_settings.color_scheme}.css"  media="all"/>
         {/if}
 
-        <link href="{$wa_active_theme_url}custom.shop.css?v{$wa_theme_version}" rel="stylesheet" type="text/css">
+        <link href="{$wa_active_theme_url}extreme.shop.css?v{$wa_theme_version}" rel="stylesheet" type="text/css">
         
         {$wa->css()} {* links active plugins CSS *}
 
@@ -43,6 +43,7 @@
         <script type="text/javascript" src="{$wa_url}wa-content/js/jquery/jquery-1.8.2.min.js"></script>
         <script type="text/javascript" src="{$wa_url}wa-content/js/jquery-plugins/jquery.cookie.js"></script>
         <script type="text/javascript" src="{$wa_active_theme_url}poshytip/jquery.poshytip.min.js"></script>
+        <script type="text/javascript" src="{$wa_active_theme_url}bxslider/jquery.bxslider.min.js" ></script>
         <!--[if IE 8]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
@@ -78,9 +79,6 @@
 
                 <!-- thumbnails -->
                 <div id="views_block" class="clearfix ">
-                    <span class="view_scroll_spacer">
-                        <a id="view_scroll_left" class="" href="javascript:{}"></a>
-                    </span>
                     <div id="thumbs_list">
                         <ul id="thumbs_list_frame">
                             {foreach $product.images as $image}
@@ -96,7 +94,6 @@
                             {/foreach}
                         </ul>
                     </div> <!-- end thumbs_list -->
-                    <a id="view_scroll_right"  href="javascript:{}"></a>
                 </div> 
                 <!-- end views-block -->
                 <!-- end thumbnails -->
@@ -189,9 +186,6 @@
 
         </div> <!-- end primary_block -->
 
-
-        <script type="text/javascript" src="{$wa_active_theme_url}jquery.scrollTo.min.js"></script>
-        <script type="text/javascript" src="{$wa_active_theme_url}jquery.serialScroll.min.js"></script>
         <script type="text/javascript" src="{$wa_active_theme_url}product_script.js"></script>
         <script type="text/javascript" src="{$wa_url}wa-content/js/jquery-plugins/jquery.tmpl.min.js"></script>
         {literal}

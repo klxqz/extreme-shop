@@ -143,7 +143,7 @@
             <!-- prices -->
             <div class="add2cart">
                 <p class="our_price_display">							
-                    <span id="our_price_display" class="price">{shop_currency_html($product.price)}</span>
+                    <span id="our_price_display" class="price" data-price="{shop_currency($product.price, null, null, 0)}">{shop_currency_html($product.price)}</span>
                 </p>
                 {if $product.compare_price > 0}
                     {$percent = floor(($product.compare_price - $product.price) / $product.compare_price * 100)}
