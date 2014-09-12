@@ -146,6 +146,10 @@
             <description locale="en_US">404 and other errors</description>
             <description locale="ru_RU">404 и другие ошибки</description>
         </file>
+        <file path="vk.widget.html">
+            <description locale="en_US">vk widget</description>
+            <description locale="ru_RU">Виджет ВКонтакте</description>
+        </file>
         <file path="extreme.shop.js">
             <description locale="en_US">CUSTOM theme JS</description>
             <description locale="ru_RU">Скрипты темы CUSTOM</description>
@@ -158,6 +162,36 @@
             <description locale="en_US">Reviews JS</description>
             <description locale="ru_RU">Скрипты отзывов</description>
         </file>
+        <file path="product_script.js">
+            <description locale="en_US">JS</description>
+            <description locale="ru_RU">JS</description>
+        </file>
+        <file path="homeslider.js">
+            <description locale="en_US">JS</description>
+            <description locale="ru_RU">JS</description>
+        </file>
+        
+        <file path="product_list.css">
+            <description locale="en_US">CSS</description>
+            <description locale="ru_RU">CSS</description>
+        </file>
+        <file path="product_list.css">
+            <description locale="en_US">CSS</description>
+            <description locale="ru_RU">CSS</description>
+        </file>
+        <file path="productcomments.css">
+            <description locale="en_US">CSS</description>
+            <description locale="ru_RU">CSS</description>
+        </file>
+        <file path="comparator.css">
+            <description locale="en_US">CSS</description>
+            <description locale="ru_RU">CSS</description>
+        </file>
+        <file path="homeslider.css">
+            <description locale="en_US">CSS</description>
+            <description locale="ru_RU">CSS</description>
+        </file>
+        
     </files>
    
     <settings>

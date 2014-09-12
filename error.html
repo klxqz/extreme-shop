@@ -4,7 +4,7 @@
 
         <div class="pagenotfound">
             <div class="img-404">
-                <img alt="{if $error_message}{$error_message}{else}[`Error`]{/if}" src="{$wa_parent_theme_url}img/img-404.jpg">
+                <img alt="{if $error_message}{$error_message}{else}[`Error`]{/if}" src="{$wa_parent_theme_url}img/img-404.png">
             </div>
             <h1>
                 {$error_message|default:"[`Error`]"}
@@ -12,14 +12,13 @@
             <p>
                 {if $error_code}<strong>{$error_code}.</strong> {/if}[`The requested resource is not available.`]
             </p>
-            <h3>To find a product, please type its name in the field below.</h3>
 
-            <form class="std" method="post" action="http://livedemo00.template-help.com/prestashop_50127/index.php?controller=search">
+            <form class="std" method="get" action="{$wa->getUrl('/frontend/search')}">
                 <fieldset>
                     <div>
-                        <label for="search_query">Поиск в каталоге:</label>
-                        <input type="text" class="form-control grey" name="search_query" id="search_query">
-                        <button class="btn btn-default button button-small" value="OK" name="Submit" type="submit"><span>Ok</span></button>
+                        <label for="search_query">[`Search`]:</label>
+                        <input class="form-control grey" type="search" id="search_query" name="query" placeholder="[`Search`]" {if !empty($query)}value="{$query}"{/if} />
+                        <button class="btn btn-default button button-small"type="submit"><span>[`Search`]</span></button>
                     </div>
                 </fieldset>
             </form>
@@ -27,7 +26,7 @@
                 <a title="Home" href="{$wa_app_url}" class="btn btn-default button button-medium">
                     <span>
                         <i class="icon-chevron-left left"></i>
-                        Home page
+                        [`To home`]
                     </span>
                 </a>
             </div>

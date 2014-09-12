@@ -60,10 +60,7 @@
     var default_product_view = '{$theme_settings.default_product_view}';
     var quick_view = '{$theme_settings.quick_view}';
     var tagcanvas = '{$theme_settings.tagcanvas}';
-
-    {if !empty($filters) && !empty($theme_settings.filter_slider)}
-    var filter_slider = '{$theme_settings.filter_slider}';
-    {/if}
+    var filter_slider = {if !empty($filters) && !empty($theme_settings.filter_slider)}1{else}0{/if};;
 </script>
 <script type="text/javascript" src="{$wa_active_theme_url}extreme.shop.js?v{$wa_theme_version}"></script>
 
