@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE theme PUBLIC "wa-app-theme" "http://www.webasyst.com/wa-content/xml/wa-app-theme.dtd">
-<theme id="extreme" system="0" vendor="985310" author="wa-plugins.ru" app="shop" parent_theme_id="site:extreme" version="1.1.2">
+<theme id="extreme" system="0" vendor="985310" author="wa-plugins.ru" app="shop" parent_theme_id="site:extreme" version="1.0.0">
     <name locale="en_US">Extreme</name>
     <name locale="ru_RU">Экстрим</name>
     <files>
@@ -29,10 +29,6 @@
         <file path="list-thumbs.html" custom="0">
             <description locale="en_US">Product list thumbnail view</description>
             <description locale="ru_RU">Список товаров эскизами</description>
-        </file>
-        <file path="list-table.html" custom="0">
-            <description locale="en_US">Product list table view</description>
-            <description locale="ru_RU">Список товаров таблицей</description>
         </file>
         <file path="product.html" custom="0">
             <description locale="en_US">Dedicated product page</description>
