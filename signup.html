@@ -1,12 +1,30 @@
-<div class="content">
-    <div id="page" role="main">
+<!-- Breadcrumb -->
+<div class="breadcrumb clearfix">
+    <a href="{$wa_app_url}" title="{$wa->accountName()}" class="home">
+        <i class="icon-home"></i>
+    </a>
+    <span class="navigation-pipe">&gt;</span>
+    {if !empty($contact)}
+        <span class="navigation_page">[`Thank you!`]</span>
+    {else}
+        <span class="navigation_page">[`Sign up`]</span>
+    {/if}
+
+</div>
+<!-- /Breadcrumb -->
+<div class="row">
+    <div class="column col-xs-12 col-sm-3" id="left_column"><!-- Block layered navigation module -->
+        {include file="sidebar.html"}
+    </div>
+    <div class="center_column col-xs-12 col-sm-9" id="center_column">
         {if !empty($contact)}
+            <h1 class="page-heading bottom-indent">[`Thank you!`]</h1>
             <h1>[`Thank you!`]</h1>
             <p>[`You have successfully signed up.`]</p>
         {else}
-            <h1>[`Sign up`]</h1>
+            <h1 class="page-heading bottom-indent">[`Sign up`]</h1>
             {$wa->authAdapters()}
             {$wa->signupForm($errors)}
         {/if}
-    </div>
-</div>
+    </div><!-- #center_column -->
+</div><!-- .row -->

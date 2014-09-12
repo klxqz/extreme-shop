@@ -215,7 +215,7 @@
 
     {if $theme_settings.vk_widget}
         <div id="facebook_block" class="col-xs-4">
-            <h4>Мы вконтакте</h4>
+            <h4>[`We VKontakte`]</h4>
             {include file="vk.widget.html"}
         </div>
     {/if}
@@ -244,33 +244,36 @@
         </div>
         <div class="col-xs-6">
             <h3>[`News`]</h3>
-            {$latest_posts = $wa->blog->posts()}
-            <ul class="list-cms-info">
-                {foreach $latest_posts as $post}
-                    <li class="post">
-                        <h3>
-                            <a href="{$post.link}">{$post.title}</a>
-                            {* @event prepare_posts_frontend.%plugin_id%.post_title *}
-                            {if !empty($post.plugins.post_title)}
-                                {foreach $post.plugins.post_title as $plugin => $output}
-                                    {$output}
-                                {/foreach}
-                            {/if}
-                        </h3>
-                        <div class="credentials">
-                            {if $post.user.posts_link}
-                                <a href="{$post.user.posts_link}" class="username">{$post.user.name}</a>
-                            {else}
-                                <span class="username">{$post.user.name}</span>
-                            {/if}
-                            {$post.datetime|wa_datetime:"humandate"}
-                        </div>
-                        <p>
-                            {$post.text|strip_tags|truncate:100}
-                        </p>
-                    </li>
-                {/foreach}
-            </ul>
+            
+            {if $wa->blog && $wa->blog->posts()}
+                {$latest_posts = $wa->blog->posts()}
+                <ul class="list-cms-info">
+                    {foreach $latest_posts as $post}
+                        <li class="post">
+                            <h3>
+                                <a href="{$post.link}">{$post.title}</a>
+                                {* @event prepare_posts_frontend.%plugin_id%.post_title *}
+                                {if !empty($post.plugins.post_title)}
+                                    {foreach $post.plugins.post_title as $plugin => $output}
+                                        {$output}
+                                    {/foreach}
+                                {/if}
+                            </h3>
+                            <div class="credentials">
+                                {if $post.user.posts_link}
+                                    <a href="{$post.user.posts_link}" class="username">{$post.user.name}</a>
+                                {else}
+                                    <span class="username">{$post.user.name}</span>
+                                {/if}
+                                {$post.datetime|wa_datetime:"humandate"}
+                            </div>
+                            <p>
+                                {$post.text|strip_tags|truncate:100}
+                            </p>
+                        </li>
+                    {/foreach}
+                </ul>
+            {/if}
         </div>
     </div>
 

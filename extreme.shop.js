@@ -2,12 +2,71 @@ jQuery(function($) {
     $(document).ready(function() {
         initCompare();
         initWishlist();
+        if (tagcanvas) {
+            initTagcanvas();
+        }
+        if (filter_slider) {
+            initFilterSlider();
+        }
 
         if (quick_view) {
             initQuickview();
         }
     });
 });
+
+function initFilterSlider() {
+    $('#filter-slider').slider({
+        range: true,
+        min: filter_slider_min_value,
+        max: filter_slider_max_value,
+        values: [filter_slider_min_price, filter_slider_max_price],
+        slide: function(event, ui) {
+            var v = ui.values[0];
+            if (v == $(this).slider('option', 'min')) {
+                v = '';
+            }
+            $('.filters input[name="price_min"]').val(v);
+            v = ui.values[1];
+            if (v == $(this).slider('option', 'max')) {
+                v = '';
+            }
+            $('.filters input[name="price_max"]').val(v);
+        },
+        stop: function(event, ui) {
+            $('input[name="price_min"]').change();
+        }
+    });
+    $(".filters input[name=price_min], .filters input[name=price_max]").change(function() {
+        var min = parseFloat($(".filters input[name=price_min]").val());
+        if (!min) {
+            min = $("#filter-slider").slider('option', 'min');
+        }
+        var max = parseFloat($(".filters input[name=price_max]").val());
+        if (!max) {
+            max = $("#filter-slider").slider('option', 'max');
+        }
+        if (max >= min) {
+            $("#filter-slider").slider('option', 'values', [min, max]);
+        }
+    });
+}
+
+function initTagcanvas() {
+    if ($('#tag-cloud-canvas #canvas').tagcanvas({
+        textColour: $('#tag-cloud a').css('color'),
+        outlineColour: '#000',
+        outlineMethod: "colour",
+        outlineThickness: 1,
+        reverse: true,
+        hideTags: true,
+        depth: 0.8,
+        maxSpeed: 0.05
+    }, 'tag-cloud')) {
+        $('#tag-cloud-canvas').show();
+        $('#tag-cloud').hide();
+    }
+}
 
 function initQuickview() {
     $(document).on('click', '.quick-view:visible', function(e)

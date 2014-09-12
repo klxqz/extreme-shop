@@ -171,6 +171,18 @@
             <name locale="en_US">AJAX-enabled product by-feature filtering</name>
             <name locale="ru_RU">AJAX-фильтры товаров по характеристикам</name>
         </setting>
+        <setting var="tagcanvas" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">3D tags</name>
+            <name locale="ru_RU">3D облако тегов</name>
+        </setting>
+        <setting var="filter_slider" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">AJAX-enabled product by-feature filtering</name>
+            <name locale="ru_RU">Слайдер для цены в фильтре</name>
+        </setting>
+        
+        
         
         
         <setting var="setting_slider_title" control_type="text">
@@ -699,6 +711,11 @@
             <name locale="en_US">Tags</name>
             <name locale="ru_RU">Теги</name>
         </setting>
+        <setting var="category_blog" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">Blog. News.</name>
+            <name locale="ru_RU">Блог. Новости.</name>
+        </setting>
         
         
         
@@ -830,6 +847,11 @@
             <msgid>News</msgid>
             <msgstr locale="ru_RU">Новости</msgstr>
         </locale>
+        <locale>
+            <msgid>We VKontakte</msgid>
+            <msgstr locale="ru_RU">Мы вконтакте</msgstr>
+        </locale>
+        
 
         
     </locales>
