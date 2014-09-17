@@ -73,8 +73,10 @@
                                     </ul>
                                 {elseif isset($filter.min)}
                                     {$_v = $wa->get($filter.code)}
-                                    [`from`] <input type="text" name="{$filter.code}[min]" placeholder="{$filter.min}" {if !empty($_v.min)}value="{$_v.min}"{/if}>
-                                    [`to`] <input type="text" name="{$filter.code}[max]" placeholder="{$filter.max}" {if !empty($_v.max)}value="{$_v.max}"{/if}>
+                                    <ul class="col-lg-12 layered_filter_ul">
+                                        <li class="nomargin hiddable col-lg-12">[`from`] <input type="text" name="{$filter.code}[min]" placeholder="{$filter.min}" {if !empty($_v.min)}value="{$_v.min}"{/if}></li>
+                                        <li class="nomargin hiddable col-lg-12">[`to`] <input type="text" name="{$filter.code}[max]" placeholder="{$filter.max}" {if !empty($_v.max)}value="{$_v.max}"{/if}></li>
+                                    </ul>
                                     {if !empty($filter.unit)}
                                         {$filter.unit.title}
                                         {if $filter.unit.value != $filter.base_unit.value}<input type="hidden" name="{$filter.code}[unit]" value="{$filter.unit.value}">{/if}
