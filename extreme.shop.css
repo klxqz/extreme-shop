@@ -44,7 +44,7 @@ table.table tr.service td { padding-top: 5px; padding-bottom: 5px; padding-left:
 .related h3 input { font-size: 14px; }
 
 .options { line-height: 1.8em; }
-.services { margin-bottom: 20px; display: table; }
+.services { margin-bottom: 20px; }
 
 
 .aux { padding: 15px; font-size: 0.9em; }
