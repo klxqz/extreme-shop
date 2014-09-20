@@ -866,3 +866,9 @@ h1 .order-status { font-size: 0.75em; margin-left: 10px; }
     color: #fff; }
 #htmlcontent_home li.htmlcontent-item-3 p {
     color: #abaaaa; }
+.vk_block #vk_groups{
+    width: 100% !important;    
+}
+.vk_block #vk_groups iframe{
+    width: 100% !important;    
+}

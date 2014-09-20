@@ -747,6 +747,43 @@
             <name locale="ru_RU">Блог. Новости.</name>
         </setting>
         
+        <setting var="category_vk_widget" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">VK widget.</name>
+            <name locale="ru_RU">Виджет ВКонтакте.</name>
+        </setting>
+        
+        <setting var="product_settings_title" control_type="text">
+            <value></value>
+            <name locale="en_US">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Settings product page.</p>	
+                ]]>
+            </name>
+            <name locale="ru_RU">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Настройки страницы товара.</p>	
+                ]]>
+            </name>
+        </setting>
+        
+        <setting var="product_display_mode" control_type="select">
+            <value>tabs</value>
+            <name locale="en_US">Display mode information sections</name>
+            <name locale="ru_RU">Режим отображения информационных разделов</name>
+            <options>
+                <option value="blocks">
+                    <name locale="en_US">Blocks</name>
+                    <name locale="ru_RU">Блоки</name>
+                </option>
+                <option value="tabs">
+                    <name locale="en_US">Tabs</name>
+                    <name locale="ru_RU">Вкладки</name>
+                </option>
+            </options>
+        </setting>
         
         
         

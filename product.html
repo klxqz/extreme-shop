@@ -180,23 +180,26 @@
             <!-- end pb-right-column-->
         </div> <!-- end primary_block -->
 
-        {if $product.description}          
-            <!-- More info -->
-            <section class="page-product-box">
-                <h3 class="page-product-heading">[`Description`]</h3>									<!-- full description -->
-                <div  class="rte"><p itemprop="description">{$product.description}</p></div>
-            </section>
-            <!--end  More info -->
-        {/if}
 
+        {if $theme_settings.product_display_mode == 'tabs'}
+            <script type="text/javascript" src="{$wa_active_theme_url}bootstrap.min.js" ></script>
+            <ul id="product-tabs" class="nav nav-tabs clearfix">
+                <li>
+                    <a data-toggle="tab" href="#description">[`Description`]</a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#features">[`Features`]</a>
+                </li>
+                <li>
+                    <a data-toggle="tab" href="#reviews">[`Reviews`]</a>
+                </li>
 
-        {if $product.features}      
-
-            <section class="page-product-box">
-                <h3 class="page-product-heading">[`Features`]</h3>								
-                <div  class="rte">
-                    <!-- product features -->
-
+            </ul>
+            <div class="tab-content">
+                <div id="description" class="tab-pane">
+                    {$product.description}
+                </div>
+                <div id="features" class="tab-pane">
                     <table class="features table table-bordered" id="product-features">
                         {foreach $product.features as $f_code => $f_value}
                             <tr{if $features[$f_code].type == 'divider'} class="divider"{/if}>
@@ -217,41 +220,110 @@
                             </tr>
                         {/foreach}
                     </table>
-
                 </div>
-            </section>
 
-        {/if}
+                <div id="reviews" class="tab-pane">
+                    <div id="product_comments_block_tab">
 
+                        {foreach $reviews as $review}
+                            {include file="review.html" reply_allowed=false inline}
+                        {/foreach}
 
-
-        <!--HOOK_PRODUCT_TAB -->
-        <section class="page-product-box">
-            <h3 class="idTabHrefShort page-product-heading">{sprintf('[`%s reviews`]', $product.name|escape)}</h3> 
-            <div id="idTab5">
-                <div id="product_comments_block_tab">
-
-                    {foreach $reviews as $review}
-                        {include file="review.html" reply_allowed=false inline}
-                    {/foreach}
-
-                    {if !$reviews}
-                        <p>{sprintf('[`Be the first to <a href="%s">write a review</a> of this product!`]', 'reviews/')}</p>
-                    {else}
-                        {sprintf(_w(
+                        {if !$reviews}
+                            <p>{sprintf('[`Be the first to <a href="%s">write a review</a> of this product!`]', 'reviews/')}</p>
+                        {else}
+                            {sprintf(_w(
                             'Read <a href="%s">all %d review</a> on %s', 
                             'Read <a href="%s">all %d reviews</a> on %s', 
                             $reviews_total_count, false
                         ), 'reviews/', $reviews_total_count, $product.name|escape)
-                        }
-                    {/if}
+                            }
+                        {/if}
 
-                </div> <!-- #product_comments_block_tab -->
+                    </div>
+                </div>
+
             </div>
+            <script type="text/javascript">
+                $(function() {
+                    $('#product-tabs li:first').addClass('active');
+                    $('.tab-content .tab-pane:first').addClass('active');
+                });
+            </script>
+        {else}
 
-        </section>
-        <!--end HOOK_PRODUCT_TAB -->
+            {if $product.description}          
+                <!-- More info -->
+                <section class="page-product-box">
+                    <h3 class="page-product-heading">[`Description`]</h3>									<!-- full description -->
+                    <div  class="rte"><p itemprop="description">{$product.description}</p></div>
+                </section>
+                <!--end  More info -->
+            {/if}
 
+
+            {if $product.features}      
+
+                <section class="page-product-box">
+                    <h3 class="page-product-heading">[`Features`]</h3>								
+                    <div  class="rte">
+                        <!-- product features -->
+
+                        <table class="features table table-bordered" id="product-features">
+                            {foreach $product.features as $f_code => $f_value}
+                                <tr{if $features[$f_code].type == 'divider'} class="divider"{/if}>
+                                    <td class="name">
+                                        {$features[$f_code].name|escape}
+                                    </td>
+                                    <td class="value" itemprop="{$f_code|escape}">
+                                        {if is_array($f_value)}
+                                            {if $features[$f_code].type == 'color'}
+                                                {implode('<br /> ', $f_value)}
+                                            {else}
+                                                {implode(', ', $f_value)}
+                                            {/if}
+                                        {else}
+                                            {$f_value}
+                                        {/if}
+                                    </td>
+                                </tr>
+                            {/foreach}
+                        </table>
+
+                    </div>
+                </section>
+
+            {/if}
+
+
+
+            <!--HOOK_PRODUCT_TAB -->
+            <section class="page-product-box">
+                <h3 class="idTabHrefShort page-product-heading">{sprintf('[`%s reviews`]', $product.name|escape)}</h3> 
+                <div id="idTab5">
+                    <div id="product_comments_block_tab">
+
+                        {foreach $reviews as $review}
+                            {include file="review.html" reply_allowed=false inline}
+                        {/foreach}
+
+                        {if !$reviews}
+                            <p>{sprintf('[`Be the first to <a href="%s">write a review</a> of this product!`]', 'reviews/')}</p>
+                        {else}
+                            {sprintf(_w(
+                            'Read <a href="%s">all %d review</a> on %s', 
+                            'Read <a href="%s">all %d reviews</a> on %s', 
+                            $reviews_total_count, false
+                        ), 'reviews/', $reviews_total_count, $product.name|escape)
+                            }
+                        {/if}
+
+                    </div> <!-- #product_comments_block_tab -->
+                </div>
+
+            </section>
+            <!--end HOOK_PRODUCT_TAB -->
+        {/if}
 
         {$upselling = $product->upSelling()}
         {$crossselling = $product->crossSelling()}
