@@ -918,9 +918,19 @@
             <msgid>We VKontakte</msgid>
             <msgstr locale="ru_RU">Мы вконтакте</msgstr>
         </locale>
-        
-
-        
     </locales>
+    
+    <about locale="en_US">
+        <![CDATA[
+        <p><b>Extreme</b> — is a family of responsive themes premium for applications: Site, Shop (Shop-Script 5), Blog, Photo. Theme "Extreme" created by a team of professional developers with current technology and innovations of web design. It is perfectly suited for the rapid deployment of the site and its promotion in search engines.</p>
+
+        ]]>
+    </about>
+    <about locale="ru_RU">
+        <![CDATA[
+        <p><b>Экстрим</b> — это семейство адаптивных тем оформления премиум класса для приложений: Сайт, Магазин (Shop-Script 5), Блог, Фото. Тема "Экстрим" создана командой профессиональных разработчиков с учетов современных технологий и новшеств веб-дизайна. Она прекрасна подходит для быстрого развертывания сайта и его продвижения в Поисковых Системах.</p>
+        <p>Тема отлично подойдет для интернет-магазинов связанных со спортом, экстримом, автомобилями и автотюнингом, но не только. Использование дополнительных цветовых схем подойдет для любых других направлений деятельности Вашего сайта.</p>
+        ]]>
+    </about>
     
 </theme>
