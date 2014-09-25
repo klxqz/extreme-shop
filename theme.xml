@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE theme PUBLIC "wa-app-theme" "http://www.webasyst.com/wa-content/xml/wa-app-theme.dtd">
-<theme id="extreme" system="0" vendor="985310" author="wa-plugins.ru" app="shop" parent_theme_id="site:extreme" version="1.0.1">
+<theme id="extreme" system="0" vendor="985310" author="wa-plugins.ru" app="shop" parent_theme_id="site:extreme" version="1.2.0">
     <name locale="en_US">Extreme</name>
     <name locale="ru_RU">Экстрим</name>
     <files>
@@ -146,9 +146,13 @@
             <description locale="en_US">404 and other errors</description>
             <description locale="ru_RU">404 и другие ошибки</description>
         </file>
-        <file path="vk.widget.html">
+        <file path="widget.vk.html">
             <description locale="en_US">vk widget</description>
             <description locale="ru_RU">Виджет ВКонтакте</description>
+        </file>
+        <file path="widget.facebook.html">
+            <description locale="en_US">facebook widget</description>
+            <description locale="ru_RU">Виджет Facebook</description>
         </file>
         <file path="extreme.shop.js">
             <description locale="en_US">CUSTOM theme JS</description>
@@ -191,11 +195,20 @@
             <description locale="en_US">CSS</description>
             <description locale="ru_RU">CSS</description>
         </file>
-        
     </files>
+    <about locale="en_US">
+<![CDATA[
+<p><b>Extreme</b> — is a family of responsive themes premium for applications: Site, Shop (Shop-Script 5), Blog, Photo. Theme "Extreme" created by a team of professional developers with current technology and innovations of web design. It is perfectly suited for the rapid deployment of the site and its promotion in search engines.</p>
+]]>
+    </about>
+    <about locale="ru_RU">
+<![CDATA[
+<p><b>Экстрим</b> — это семейство адаптивных тем оформления премиум класса для приложений: Сайт, Магазин (Shop-Script 5), Блог, Фото. Тема "Экстрим" создана командой профессиональных разработчиков с учетов современных технологий и новшеств веб-дизайна. Она прекрасна подходит для быстрого развертывания сайта и его продвижения в Поисковых Системах.</p>
+<p>Тема отлично подойдет для интернет-магазинов связанных со спортом, экстримом, автомобилями и автотюнингом, но не только. Использование дополнительных цветовых схем подойдет для любых других направлений деятельности Вашего сайта.</p>
+]]>
+    </about>
    
     <settings>
-  
         <setting var="ajax_filters" control_type="checkbox">
             <value>1</value>
             <name locale="en_US">AJAX-enabled product by-feature filtering</name>
@@ -240,7 +253,7 @@
         
         <setting var="slide1" control_type="image">
             <value>img/slider/slide-1.jpg</value>
-            <filename>img/slider/*</filename>
+            <filename>img/slider/slider1.*</filename>
             <name locale="en_US">slide 1</name>
             <name locale="ru_RU">слайд 1</name>
         </setting>
@@ -258,7 +271,7 @@
         
         <setting var="slide2" control_type="image">
             <value>img/slider/slide-2.jpg</value>
-            <filename>img/slider/*</filename>
+            <filename>img/slider/slider2.*</filename>
             <name locale="en_US">slide 2</name>
             <name locale="ru_RU">слайд 2</name>
         </setting>
@@ -276,7 +289,7 @@
         
         <setting var="slide3" control_type="image">
             <value>img/slider/slide-3.jpg</value>
-            <filename>img/slider/*</filename>
+            <filename>img/slider/slider3.*</filename>
             <name locale="en_US">slide 3</name>
             <name locale="ru_RU">слайд 3</name>
         </setting>
@@ -294,7 +307,7 @@
         
         <setting var="slide4" control_type="image">
             <value></value>
-            <filename>img/slider/*</filename>
+            <filename>img/slider/slider4.*</filename>
             <name locale="en_US">slide 4</name>
             <name locale="ru_RU">слайд 4</name>
         </setting>
@@ -312,7 +325,7 @@
         
         <setting var="slide5" control_type="image">
             <value></value>
-            <filename>img/slider/*</filename>
+            <filename>img/slider/slider5.*</filename>
             <name locale="en_US">slide 5</name>
             <name locale="ru_RU">слайд 5</name>
         </setting>
@@ -353,7 +366,7 @@
         
         <setting var="banner1" control_type="image">
             <value>img/banners/banner-img1.jpg</value>
-            <filename>img/banners/*</filename>
+            <filename>img/banners/banner-img1.*</filename>
             <name locale="en_US">banner 1</name>
             <name locale="ru_RU">баннер 1</name>
         </setting>
@@ -370,7 +383,7 @@
         
         <setting var="banner2" control_type="image">
             <value>img/banners/banner-img2.jpg</value>
-            <filename>img/banners/*</filename>
+            <filename>img/banners/banner-img2.*</filename>
             <name locale="en_US">banner 2</name>
             <name locale="ru_RU">баннер 2</name>
         </setting>
@@ -388,7 +401,7 @@
         
         <setting var="banner3" control_type="image">
             <value>img/banners/banner-img3.jpg</value>
-            <filename>img/banners/*</filename>
+            <filename>img/banners/banner-img3.*</filename>
             <name locale="en_US">banner 3</name>
             <name locale="ru_RU">баннер 3</name>
         </setting>
@@ -406,7 +419,7 @@
         
         <setting var="banner4" control_type="image">
             <value>img/banners/banner-img4.jpg</value>
-            <filename>img/banners/*</filename>
+            <filename>img/banners/banner-img4.*</filename>
             <name locale="en_US">banner 4</name>
             <name locale="ru_RU">баннер 4</name>
         </setting>
@@ -575,7 +588,7 @@
         </setting>
         
         <setting var="vk_widget" control_type="checkbox">
-            <value>1</value>
+            <value>0</value>
             <name locale="en_US">VK widget</name>
             <name locale="ru_RU">Виджет ВКонтакте</name>
         </setting>
@@ -632,7 +645,79 @@
         
         
         
+        <setting var="facebook_widget_title" control_type="text">
+            <value></value>
+            <name locale="en_US">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Homepage. Facebook widget</p>	
+                ]]>
+            </name>
+            <name locale="ru_RU">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Главная страница. Виджет Facebook.</p>	
+                ]]>
+            </name>
+        </setting>
         
+        <setting var="facebook_widget" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">Facebook widget</name>
+            <name locale="ru_RU">Виджет Facebook</name>
+        </setting>
+        <setting var="facebook_href" control_type="text">
+            <value>https://www.facebook.com/FacebookDevelopers</value>
+            <name locale="ru_RU">URL страницы/группы Facebook(абсолютный)</name>
+            <name locale="en_US">URL of the page/ Facebook  group (absolute)</name>
+        </setting>
+        
+        <setting var="facebook_width" control_type="text">
+            <value></value>
+            <name locale="ru_RU">Ширина блока в пикселах</name>
+            <name locale="en_US">Block width in pixels</name>
+        </setting>
+        <setting var="facebook_height" control_type="text">
+            <value></value>
+            <name locale="ru_RU">Высота блока в пикселах</name>
+            <name locale="en_US">Block height in pixels</name>
+        </setting>
+        <setting var="facebook_colorscheme" control_type="select">
+            <value>light</value>
+            <name locale="en_US">The color scheme</name>
+            <name locale="ru_RU">Цветовая схема</name>
+            <options>
+                <option value="light">
+                    <name locale="en_US">light</name>
+                    <name locale="ru_RU">light</name>
+                </option>
+                <option value="dark">
+                    <name locale="en_US">dark</name>
+                    <name locale="ru_RU">dark</name>
+                </option>
+            </options>
+        </setting>
+        <setting var="facebook_show_faces" control_type="checkbox">
+            <value>1</value>
+            <name locale="ru_RU">Показать список участников</name>
+            <name locale="en_US">Show the list of participants</name>
+        </setting>
+        <setting var="facebook_stream" control_type="checkbox">
+            <value></value>
+            <name locale="ru_RU">Показать новости группы</name>
+            <name locale="en_US">Show the news of the group</name>
+        </setting>
+        <setting var="facebook_header" control_type="checkbox">
+            <value>1</value>
+            <name locale="ru_RU">Показать надпись "Найдите нас на Facebook"</name>
+            <name locale="en_US">Show the inscription "Find us on Facebook"</name>
+        </setting>		
+        <setting var="facebook_show_border" control_type="checkbox">
+            <value>1</value>
+            <name locale="ru_RU">Объвести рамкой блок "группа Facebook"</name>
+            <name locale="en_US">Add a border to block "Facebook group"</name>
+        </setting>
+       
         <setting var="category_settings_title" control_type="text">
             <value></value>
             <name locale="en_US">
@@ -751,6 +836,11 @@
             <value>1</value>
             <name locale="en_US">VK widget.</name>
             <name locale="ru_RU">Виджет ВКонтакте.</name>
+        </setting>
+        <setting var="category_facebook_widget" control_type="checkbox">
+            <value>0</value>
+            <name locale="en_US">Facebook widget.</name>
+            <name locale="ru_RU">Виджет Facebook</name>
         </setting>
         
         <setting var="product_settings_title" control_type="text">
@@ -918,19 +1008,9 @@
             <msgid>We VKontakte</msgid>
             <msgstr locale="ru_RU">Мы вконтакте</msgstr>
         </locale>
+        <locale>
+            <msgid>Follow us on facebook</msgid>
+            <msgstr locale="ru_RU">Мы в Facebook</msgstr>
+        </locale>
     </locales>
-    
-    <about locale="en_US">
-        <![CDATA[
-        <p><b>Extreme</b> — is a family of responsive themes premium for applications: Site, Shop (Shop-Script 5), Blog, Photo. Theme "Extreme" created by a team of professional developers with current technology and innovations of web design. It is perfectly suited for the rapid deployment of the site and its promotion in search engines.</p>
-
-        ]]>
-    </about>
-    <about locale="ru_RU">
-        <![CDATA[
-        <p><b>Экстрим</b> — это семейство адаптивных тем оформления премиум класса для приложений: Сайт, Магазин (Shop-Script 5), Блог, Фото. Тема "Экстрим" создана командой профессиональных разработчиков с учетов современных технологий и новшеств веб-дизайна. Она прекрасна подходит для быстрого развертывания сайта и его продвижения в Поисковых Системах.</p>
-        <p>Тема отлично подойдет для интернет-магазинов связанных со спортом, экстримом, автомобилями и автотюнингом, но не только. Использование дополнительных цветовых схем подойдет для любых других направлений деятельности Вашего сайта.</p>
-        ]]>
-    </about>
-    
 </theme>
