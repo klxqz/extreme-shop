@@ -184,7 +184,18 @@
             [`We VKontakte`]
         </p>
         <div class="block_content blockstore">
-            {include file="vk.widget.html"}
+            {include file="widget.vk.html"}
+        </div>
+    </div>
+{/if}
+
+{if $theme_settings.category_facebook_widget}
+    <div class="block vk_block">
+        <p class="title_block">
+            [`Follow us on facebook`]
+        </p>
+        <div class="block_content blockstore">
+            {include file="widget.facebook.html"}
         </div>
     </div>
 {/if}

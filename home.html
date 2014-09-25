@@ -216,7 +216,13 @@
     {if $theme_settings.vk_widget}
         <div id="facebook_block" class="col-xs-4">
             <h4>[`We VKontakte`]</h4>
-            {include file="vk.widget.html"}
+            {include file="widget.vk.html"}
+        </div>
+    {/if}
+    {if $theme_settings.facebook_widget}
+        <div id="facebook_block" class="col-xs-4">
+            <h4>[`Follow us on facebook`]</h4>
+            {include file="widget.facebook.html"}
         </div>
     {/if}
 
@@ -245,7 +251,7 @@
         </div>
         <div class="col-xs-6">
             <h3>[`News`]</h3>
-            
+
             {if $wa->blog && $wa->blog->posts()}
                 {$latest_posts = $wa->blog->posts()}
                 <ul class="list-cms-info">
