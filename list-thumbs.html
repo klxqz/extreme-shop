@@ -105,15 +105,15 @@
                     </div>
 
                     <span itemprop="offers" itemscope itemtype="http://schema.org/Offer" class="availability">
-                        {if $wa->shop->settings('ignore_stock_count') || $p.count === null || $p.count > 0}
+                        {if !($p.count === null || $p.count > 0)}
+                            <span class="out-of-stock">
+                                <link itemprop="availability" href="http://schema.org/OutOfStock" />
+                                {if $wa->shop->settings('ignore_stock_count')}[`Pre-order only`]{else}[`Out of stock`]{/if}
+                            </span>
+                        {else}
                             <span class="available-now">
                                 <link itemprop="availability" href="http://schema.org/InStock" />
                                 [`In stock`]
-                            </span>
-                        {else}
-                            <span class="out-of-stock">
-                                <link itemprop="availability" href="http://schema.org/OutOfStock" />
-                                [`Out of stock`]
                             </span>
                         {/if}
                     </span>
