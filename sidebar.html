@@ -1,115 +1,7 @@
-{if !empty($filters)}
-    <div id="layered_block_left" class="block">
-        <p class="title_block">[`Filter`]</p>
-        <div class="block_content">
+{*filter-begin*}
+{include file="`$wa_active_theme_path`/sidebar.filter.html"}
+{*filter-end*}
 
-            <div class="filters{if !empty($theme_settings.ajax_filters)} ajax{/if}">
-                <form id="layered_form" method="get" action="{$wa->currentUrl(0,1)}">
-                    {foreach $filters as $fid => $filter}
-                        <div class="layered_filter">
-                            {if $fid == 'price'}
-                                {$c = $wa->shop->currency(true)}
-                                <div class="layered_subtitle_heading">
-                                    <span class="layered_subtitle">[`Price`]</span>
-                                </div>
-                                <ul class="col-lg-12 layered_filter_ul">
-                                    <li class="nomargin hiddable col-lg-12">
-                                        <label>
-                                            [`from`]
-                                        </label>
-                                        <input class="form-control" type="text" name="price_min" {if $wa->get('price_min')}value="{(int)$wa->get('price_min')}"{/if} placeholder="{floor($filter.min)}"> {$c.sign}
-                                    </li>
-                                    <li class="nomargin hiddable col-lg-12">
-                                        <label>
-                                            [`to`]
-                                        </label>
-                                        <input class="form-control" type="text" name="price_max" {if $wa->get('price_max')}value="{(int)$wa->get('price_max')}"{/if} placeholder="{ceil($filter.max)}"> {$c.sign}
-                                    </li>
-
-                                    {if !empty($theme_settings.filter_slider)}
-                                        <li>
-                                            <div id="filter-slider"></div>
-                                        </li>
-                                    {/if}
-                                </ul>
-                                {if !empty($theme_settings.filter_slider)}
-                                    <script type="text/javascript">
-                                        var filter_slider_min_value = {floor($filter.min)};
-                                        var filter_slider_max_value = {ceil($filter.max)};
-                                        var filter_slider_min_price = {if $wa->get('price_min')}{(int)$wa->get('price_min')}{else}{floor($filter.min)}{/if};
-                                        var filter_slider_max_price = {if $wa->get('price_max')}{(int)$wa->get('price_max')}{else}{ceil($filter.max)}{/if};
-                                    </script>
-                                {/if}
-
-
-
-
-                            {else}
-                                <div class="layered_subtitle_heading">
-                                    <span class="layered_subtitle">{$filter.name|escape}</span>
-                                </div>
-                                {if $filter.type == 'boolean'}
-                                    <ul class="col-lg-12 layered_filter_ul">
-
-                                        <li class="nomargin hiddable col-lg-12">
-                                            <input type="radio" name="{$filter.code}"{if $wa->get($filter.code)} checked{/if} value="1"> 
-                                            <label>
-                                                [`Yes`]
-                                            </label>
-                                        </li>
-                                        <li class="nomargin hiddable col-lg-12">
-                                            <input type="radio" name="{$filter.code}"{if $wa->get($filter.code) === '0'} checked{/if} value="0"> 
-                                            <label>
-                                                [`No`]
-                                            </label>
-                                        </li>
-                                        <li class="nomargin hiddable col-lg-12">
-                                            <input type="radio" name="{$filter.code}"{if $wa->get($filter.code, '') === ''} checked{/if} value=""> 
-                                            <label>
-                                                [`Any`]
-                                            </label>
-                                        </li>
-
-                                    </ul>
-                                {elseif isset($filter.min)}
-                                    {$_v = $wa->get($filter.code)}
-                                    <ul class="col-lg-12 layered_filter_ul">
-                                        <li class="nomargin hiddable col-lg-12">[`from`] <input type="text" name="{$filter.code}[min]" placeholder="{$filter.min}" {if !empty($_v.min)}value="{$_v.min}"{/if}></li>
-                                        <li class="nomargin hiddable col-lg-12">
-                                            [`to`] <input type="text" name="{$filter.code}[max]" placeholder="{$filter.max}" {if !empty($_v.max)}value="{$_v.max}"{/if}>
-                                            {if !empty($filter.unit)}
-                                                {$filter.unit.title}
-                                                {if $filter.unit.value != $filter.base_unit.value}<input type="hidden" name="{$filter.code}[unit]" value="{$filter.unit.value}">{/if}
-                                            {/if}
-                                        </li>
-                                    </ul>
-                                {else}
-                                    <ul class="col-lg-12 layered_filter_ul">
-                                        {foreach $filter.values as $v_id => $v}
-                                            <li class="nomargin hiddable col-lg-12">
-                                                <input type="checkbox" name="{$filter.code}[]" {if in_array($v_id, (array)$wa->get($filter.code, array()))}checked{/if} value="{$v_id}"> 
-                                                <label>
-                                                    {$v}
-                                                </label>
-                                            </li>
-                                        {/foreach}
-                                    </ul>
-                                {/if}
-
-
-                            {/if}
-                        </div>
-
-                    {/foreach}
-                    {if $wa->get('sort')}<input type="hidden" name="sort" value="{$wa->get('sort')|escape}">{/if}
-                    {if $wa->get('order')}<input type="hidden" name="order" value="{$wa->get('order')|escape}">{/if}
-                    <p></p>
-                    <input class="btn button" type="submit" value="[`Filter products`]">
-                </form>
-            </div>
-        </div>
-    </div>
-{/if} 
 
 {if $theme_settings.qutput_subcategories && !empty($category) && $wa->shop->categories($category.id, null, true)}
     <div id="categories_block_left" class="block">
@@ -123,7 +15,7 @@
 {/if}
 
 {if $theme_settings.category_popular_products && $wa->shop->productSet($theme_settings.category_popular_products_list)}
-    <div id="best-sellers_block_right" class="block products_block">
+    <div id="best-sellers_block_right" class="block products_block  hidden-xs">
         <h4 class="title_block">
             [`Popular products`]
         </h4>
@@ -145,10 +37,10 @@
     </section>
 {/if}
 
-{$viewed_products = waRequest::cookie('viewed_products')};
+{$viewed_products = waRequest::cookie('viewed_products')}
 {if $theme_settings.category_viewed_products && !empty($viewed_products)}
     {$viewed_products = explode(',', $viewed_products)}
-    <div id="viewed-products_block_left" class="block">
+    <div id="viewed-products_block_left" class="block  hidden-xs">
         <p class="title_block">
             <a href="{$wa->getUrl('/frontend/search')}?list=viewed_products">[`Viewed products`]</a>
         </p>
@@ -159,7 +51,9 @@
 
                     <li class="clearfix first_item">
                         <a class="products-block-image" href="{$wa->shop->productUrl($product)}" title="{$product.name}" >
-                            {$wa->shop->productImgHtml($product, '98', [ 'itemprop' => 'image', 'alt' => $product.name|escape|cat:' ':strip_tags($product.summary)|escape ])}
+                            <div>
+                                {$wa->shop->productImgHtml($product, '98', [ 'itemprop' => 'image', 'alt' => $product.name|escape|cat:' ':strip_tags($product.summary)|escape ])}
+                            </div>
                         </a>
                         <div class="product-content">
                             <h5>
@@ -167,7 +61,7 @@
                                     {$product.name}
                                 </a>
                             </h5>
-                            <p class="product-description">{$product.summary}</p>
+                            <p class="product-description">{$product.summary|truncate:120}</p>
                         </div>
                     </li>
                 {if $viewed_product_id@iteration >= $theme_settings.category_viewed_products_count}{break}{/if}
@@ -177,31 +71,32 @@
 </div>
 {/if}
 
-
-{if $theme_settings.category_vk_widget}
-    <div class="block vk_block">
-        <p class="title_block">
-            [`We VKontakte`]
-        </p>
-        <div class="block_content blockstore">
-            {include file="widget.vk.html"}
+{if !waRequest::isXMLHttpRequest()}
+    {if $theme_settings.category_vk_widget}
+        <div class="block vk_block  hidden-xs">
+            <p class="title_block">
+                [`We VKontakte`]
+            </p>
+            <div class="block_content blockstore">
+                {$theme_settings.category_vk_widget_code}
+            </div>
         </div>
-    </div>
-{/if}
+    {/if}
 
-{if $theme_settings.category_facebook_widget}
-    <div class="block vk_block">
-        <p class="title_block">
-            [`Follow us on facebook`]
-        </p>
-        <div class="block_content blockstore">
-            {include file="widget.facebook.html"}
+    {if $theme_settings.category_facebook_widget}
+        <div class="block vk_block  hidden-xs">
+            <p class="title_block">
+                [`Follow us on facebook`]
+            </p>
+            <div class="block_content blockstore">
+                {$theme_settings.category_facebook_widget_code}
+            </div>
         </div>
-    </div>
+    {/if}
 {/if}
 
 {if $theme_settings.category_tags && $wa->shop->tags()}
-    <div class="block tags_block">
+    <div class="block tags_block  hidden-xs">
         <p class="title_block">
             [`Tags`]
         </p>
@@ -227,7 +122,7 @@
 
 {if $theme_settings.category_blog && $wa->blog && $wa->blog->posts()}
     {$latest_posts = $wa->blog->posts()}
-    <div class="block">
+    <div class="block  hidden-xs">
         <p class="title_block">
             <a href="{$wa->blog->url()}">[`News`]</a>
         </p>
@@ -266,11 +161,31 @@
 
 <!-- tag cloud -->
 
-
 <!-- plugin hook: 'frontend_nav' -->
 {* @event frontend_nav.%plugin_id% *}
 {if !empty($frontend_nav)}
-    {foreach $frontend_nav as $_}
-        {$_}
+    {foreach $frontend_nav as $plugin_id=>$_}
+        {if $plugin_id != 'brands-plugin' && $plugin_id != 'productbrands-plugin'}
+            {$_}
+        {else}
+            {if ($theme_settings.sidebar_brands_plugin == 'brands' && $plugin_id == 'brands-plugin') || ($theme_settings.sidebar_brands_plugin == 'productbrands' && $plugin_id == 'productbrands-plugin')}
+                {if $theme_settings.sidebar_brands_plugin_count}
+                    <style>
+                        .block.{$theme_settings.sidebar_brands_plugin} li:nth-child(n+{$theme_settings.sidebar_brands_plugin_count+1}) {
+                            display:none;
+                        }
+                    </style>
+                {/if}
+                <div id="categories_block_left" class="block {$theme_settings.sidebar_brands_plugin}  hidden-xs" data-count="{$theme_settings.sidebar_brands_plugin_count}">
+                    <h2 class="title_block">
+                        Бренды
+                    </h2>
+                    <div class="block_content">
+                        {$_}
+                    </div>
+                </div>
+            {/if}
+        {/if}
     {/foreach}
 {/if}
+

@@ -285,6 +285,7 @@ span.view_scroll_spacer {
     position: absolute;
     top: -2px;
     left: 0;
+    padding-left: 1px;
     font-weight: normal; }
 #usefull_link_block li a:hover {
     color: #000; }

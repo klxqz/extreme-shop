@@ -1,9 +1,11 @@
+
 <link rel="stylesheet" href="{$wa_active_theme_url}product_list.css"  media="all"/>
 <link rel="stylesheet" href="{$wa_active_theme_url}productcomments.css"  media="all"/>
 <link rel="stylesheet" href="{$wa_active_theme_url}fancybox/jquery.fancybox.css"  media="all"/>
 
 
 <script type="text/javascript" src="{$wa_active_theme_url}jquery.easing.js" ></script>
+
 <script type="text/javascript" src="{$wa_active_theme_url}bxslider/jquery.bxslider.min.js" ></script>
 <script type="text/javascript" src="{$wa_active_theme_url}fancybox/jquery.fancybox.pack.js" ></script>
 
@@ -32,15 +34,7 @@
 
 <script type="text/javascript" src="{$wa_url}wa-content/js/jquery-plugins/jquery.cookie.js"></script>
 
-{if !empty($filters) && !empty($theme_settings.filter_slider)}
 
-    <link href="{$wa_url}wa-content/css/jquery-ui/base/jquery.ui.theme.css?v{$wa_theme_version}" rel="stylesheet" type="text/css">
-    <link href="{$wa_url}wa-content/css/jquery-ui/base/jquery.ui.slider.css?v{$wa_theme_version}" rel="stylesheet" type="text/css">
-    <script type="text/javascript" src="{$wa_url}wa-content/js/jquery-ui/jquery.ui.core.min.js?v{$wa_theme_version}"></script>
-    <script type="text/javascript" src="{$wa_url}wa-content/js/jquery-ui/jquery.ui.widget.min.js?v{$wa_theme_version}"></script>
-    <script type="text/javascript" src="{$wa_url}wa-content/js/jquery-ui/jquery.ui.mouse.min.js?v{$wa_theme_version}"></script>
-    <script type="text/javascript" src="{$wa_url}wa-content/js/jquery-ui/jquery.ui.slider.min.js?v{$wa_theme_version}"></script>
-{/if}
 
 
 
@@ -60,9 +54,8 @@
     var default_product_view = '{$theme_settings.default_product_view}';
     var quick_view = '{$theme_settings.quick_view}';
     var tagcanvas = '{$theme_settings.tagcanvas}';
-    var filter_slider = {if !empty($filters) && !empty($theme_settings.filter_slider)}1{else}0{/if};;
 </script>
-<script type="text/javascript" src="{$wa_active_theme_url}extreme.shop.js?v{$wa_theme_version}"></script>
+<script type="text/javascript" src="{$wa_active_theme_url}extreme.shop.min.js?v{$wa_theme_version}"></script>
 
 
 <!-- plugin hook: 'frontend_head' -->

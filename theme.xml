@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE theme PUBLIC "wa-app-theme" "http://www.webasyst.com/wa-content/xml/wa-app-theme.dtd">
-<theme id="extreme" system="0" vendor="985310" author="wa-plugins.ru" app="shop" parent_theme_id="site:extreme" version="1.2.0">
+<theme id="extreme" system="0" vendor="985310" author="wa-plugins.ru" app="shop" parent_theme_id="site:extreme" version="1.4.0">
     <name locale="en_US">Extreme</name>
     <name locale="ru_RU">Экстрим</name>
     <files>
@@ -8,7 +8,19 @@
         </file>
         <file path="extreme.css" custom="0" parent="1">
         </file>
+        <file path="extreme.min.css" custom="0" parent="1">
+        </file>
         <file path="extreme.js" custom="0" parent="1">
+        </file>
+        <file path="extreme.min.js" custom="0" parent="1">
+        </file>
+        <file path="css/order.css">
+        </file>
+        <file path="js/order.js">
+        </file>
+        <file path="order.html">
+            <description locale="en_US">Single page ordering</description>
+            <description locale="ru_RU">Одностраничное оформление заказа</description>
         </file>
         <file path="extreme.shop.css" custom="0">
             <description locale="en_US">Core storefront CSS</description>
@@ -33,6 +45,10 @@
         <file path="product.html" custom="0">
             <description locale="en_US">Dedicated product page</description>
             <description locale="ru_RU">Шаблон основной страницы товара</description>
+        </file>
+        <file path="productpreview.html" custom="0">
+            <description locale="en_US">Dedicated Зreview</description>
+            <description locale="ru_RU">Шаблон предпросмотра</description>
         </file>
         <file path="product.cart.html" custom="0">
             <description locale="en_US">Product add to cart block</description>
@@ -63,6 +79,10 @@
             <description locale="ru_RU">Страница с товарами корзины</description>
         </file>
         <file path="cart.js" custom="0">
+            <description locale="en_US">Cart JS</description>
+            <description locale="ru_RU">JS-скрипты корзины</description>
+        </file>
+        <file path="cart.min.js" custom="0">
             <description locale="en_US">Cart JS</description>
             <description locale="ru_RU">JS-скрипты корзины</description>
         </file>
@@ -134,6 +154,14 @@
             <description locale="en_US">Login page</description>
             <description locale="ru_RU">Страница входа для пользователей</description>
         </file>
+        <file path="list-slider.html">
+            <description locale="en_US">Slider products</description>
+            <description locale="ru_RU">Слайдер товаров</description>
+        </file>
+        <file path="sidebar.filter.html">
+            <description locale="en_US">Sidebar. filter</description>
+            <description locale="ru_RU">Сайдбар фильтр</description>
+        </file>
         <file path="signup.html">
             <description locale="en_US">Sign up page</description>
             <description locale="ru_RU">Страница регистрации пользователей</description>
@@ -146,15 +174,11 @@
             <description locale="en_US">404 and other errors</description>
             <description locale="ru_RU">404 и другие ошибки</description>
         </file>
-        <file path="widget.vk.html">
-            <description locale="en_US">vk widget</description>
-            <description locale="ru_RU">Виджет ВКонтакте</description>
-        </file>
-        <file path="widget.facebook.html">
-            <description locale="en_US">facebook widget</description>
-            <description locale="ru_RU">Виджет Facebook</description>
-        </file>
         <file path="extreme.shop.js">
+            <description locale="en_US">CUSTOM theme JS</description>
+            <description locale="ru_RU">Скрипты темы CUSTOM</description>
+        </file>
+        <file path="extreme.shop.min.js">
             <description locale="en_US">CUSTOM theme JS</description>
             <description locale="ru_RU">Скрипты темы CUSTOM</description>
         </file>
@@ -174,10 +198,25 @@
             <description locale="en_US">JS</description>
             <description locale="ru_RU">JS</description>
         </file>
-        
-        <file path="product_list.css">
+        <file path="homeslider.min.js">
+            <description locale="en_US">JS</description>
+            <description locale="ru_RU">JS</description>
+        </file>
+        <file path="product.css">
             <description locale="en_US">CSS</description>
             <description locale="ru_RU">CSS</description>
+        </file>
+        <file path="product.min.css">
+            <description locale="en_US">CSS</description>
+            <description locale="ru_RU">CSS</description>
+        </file>
+        <file path="product.js">
+            <description locale="en_US">JS</description>
+            <description locale="ru_RU">JS</description>
+        </file>
+        <file path="product.min.js">
+            <description locale="en_US">JS</description>
+            <description locale="ru_RU">JS</description>
         </file>
         <file path="product_list.css">
             <description locale="en_US">CSS</description>
@@ -192,6 +231,10 @@
             <description locale="ru_RU">CSS</description>
         </file>
         <file path="homeslider.css">
+            <description locale="en_US">CSS</description>
+            <description locale="ru_RU">CSS</description>
+        </file>
+        <file path="homeslider.min.css">
             <description locale="en_US">CSS</description>
             <description locale="ru_RU">CSS</description>
         </file>
@@ -263,7 +306,7 @@
             <name locale="ru_RU">слайд 1 ссылка</name>
         </setting>
         <setting var="slide1_description" control_type="text">
-            <value>&lt;h2&gt;Новые поступления&lt;/h2&gt; &lt;h3&gt;Сноуборд&lt;/h3&gt; &lt;h4&gt;&lt;/h4&gt; &lt;b&gt;Купить сейчас!&lt;/b&gt;</value>
+            <value>&lt;h2&gt;Готовое решение&lt;/h2&gt; &lt;h3&gt;Стильно&lt;/h3&gt; &lt;h4&gt;&lt;/h4&gt; &lt;b&gt;Купить сейчас!&lt;/b&gt;</value>
             <name locale="en_US">slide 1 description</name>
             <name locale="ru_RU">слайд 1 Описание</name>
         </setting>
@@ -281,7 +324,7 @@
             <name locale="ru_RU">слайд 2 ссылка</name>
         </setting>
         <setting var="slide2_description" control_type="text">
-            <value>&lt;h2&gt;Новые поступления&lt;/h2&gt;&lt;h3&gt;Альпинизм&lt;/h3&gt;&lt;h4&gt;&lt;/h4&gt;&lt;b&gt;Купить сейчас!&lt;/b&gt;</value>
+            <value>&lt;h2&gt;5 цветовых схем&lt;/h2&gt;&lt;h3&gt;Выбери свою&lt;/h3&gt;&lt;h4&gt;&lt;/h4&gt;&lt;b&gt;Купить сейчас!&lt;/b&gt;</value>
             <name locale="en_US">slide 2 description</name>
             <name locale="ru_RU">слайд 2 Описание</name>
         </setting>
@@ -299,7 +342,7 @@
             <name locale="ru_RU">слайд 3 ссылка</name>
         </setting>
         <setting var="slide3_description" control_type="text">
-            <value>&lt;h2&gt;Распродажа&lt;/h2&gt; &lt;h3&gt;лыжи &lt;/h3&gt; &lt;b&gt;Купить сейчас!&lt;/b&gt;</value>
+            <value>&lt;h2&gt;Карточка товара&lt;/h2&gt; &lt;h3&gt;Здесь&lt;/h3&gt; &lt;b&gt;Купить сейчас!&lt;/b&gt;</value>
             <name locale="en_US">slide 3 description</name>
             <name locale="ru_RU">слайд 3 Описание</name>
         </setting>
@@ -554,17 +597,17 @@
         </setting>
         
         <setting var="home_custom_block1" control_type="text">
-            <value>&lt;h4&gt;Пользовательский блок 1&lt;/h4&gt;&lt;p&gt;Скидки и подарки&lt;/p&gt;</value>
+            <value>&lt;h4&gt;БЕСПЛАТНАЯ ДОСТАВКА ПО РОССИИ&lt;/h4&gt;&lt;p&gt;Мы доставим Ваш заказ в любой город России совершенно бесплатно при заказе от 10 000 рублей&lt;/p&gt;</value>
             <name locale="en_US">Customs block 1</name>
             <name locale="ru_RU">Пользовательский блок 1</name>
         </setting>
         <setting var="home_custom_block2" control_type="text">
-            <value>&lt;h4&gt;Пользовательский блок 2&lt;/h4&gt;&lt;p&gt;Акции и распродажи&lt;/p&gt;</value>
+            <value>&lt;h4&gt;ВАША ИНФОРМАЦИЯ&lt;/h4&gt;&lt;p&gt;Разместите здесь любую информацию, которая может заинтересовать Ваших покупателей&lt;/p&gt;</value>
             <name locale="en_US">Customs block 2</name>
             <name locale="ru_RU">Пользовательский блок 2</name>
         </setting>
         <setting var="home_custom_block3" control_type="text">
-            <value>&lt;h4&gt;Пользовательский блок 3&lt;/h4&gt;&lt;p&gt;Широкий ассортимент&lt;/p&gt;</value>
+            <value>&lt;h4&gt;РАЗМЕСТИТЬ ИНФОРМАЦИЮ ПРОСТО&lt;/h4&gt;&lt;p&gt;Изменить информацию в данном блоке можно в разделе "Пользовательские блоки" настройках темы&lt;/p&gt;</value>
             <name locale="en_US">Customs block 3</name>
             <name locale="ru_RU">Пользовательский блок 3</name>
         </setting>
@@ -592,57 +635,19 @@
             <name locale="en_US">VK widget</name>
             <name locale="ru_RU">Виджет ВКонтакте</name>
         </setting>
-        <setting var="vk_id" control_type="text">
-            <value>62260728</value>
-            <name locale="en_US">VK group id</name>
-            <name locale="ru_RU">Идентификатор группы ВКонтакте</name>
+        <setting var="vk_widget_code" control_type="text">
+            <value><![CDATA[
+<script type="text/javascript" src="//vk.com/js/api/openapi.js?121"></script>
+<!-- VK Widget -->
+<div id="vk_groups" style="margin: 0 auto;"></div>
+<script type="text/javascript">
+VK.Widgets.Group("vk_groups", {mode: 0, width: "220", height: "280", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6'}, 62260728);
+</script>]]></value>
+            <name locale="en_US">VK widget</name>
+            <name locale="ru_RU">Виджет ВКонтакте</name>
+            <description locale="en_US">Place the widget code in this field. The code can be found here <![CDATA[<a target="_blank" href="https://vk.com/dev/Community">VK widget</a>]]></description>
+            <description locale="ru_RU">Поместите код виджета в это поле. Код пожно получить по ссылке <![CDATA[<a target="_blank" href="https://vk.com/dev/Community">Виджет ВКонтакте</a>]]></description>
         </setting>
-        <setting var="vk_width" control_type="text">
-            <value>220</value>
-            <name locale="en_US">width</name>
-            <name locale="ru_RU">Ширина</name>
-        </setting>
-        <setting var="vk_height" control_type="text">
-            <value>280</value>
-            <name locale="en_US">height</name>
-            <name locale="ru_RU">Высота</name>
-        </setting>
-        
-        <setting var="vk_mode" control_type="select">
-            <value>0</value>
-            <name locale="en_US">view</name>
-            <name locale="ru_RU">Вид</name>
-            <options>
-                <option value="0">
-                    <name locale="en_US">participants</name>
-                    <name locale="ru_RU">Участники</name>
-                </option>
-                <option value="1">
-                    <name locale="en_US">title only</name>
-                    <name locale="ru_RU">Только название</name>
-                </option>
-                <option value="2">
-                    <name locale="en_US">News</name>
-                    <name locale="ru_RU">Новости</name>
-                </option>
-            </options>
-        </setting>
-        <setting var="vk_color1" control_type="color">
-            <value>#FFFFFF</value>
-            <name locale="en_US">background Color</name>
-            <name locale="ru_RU">Цвет фона</name>
-        </setting>
-        <setting var="vk_color2" control_type="color">
-            <value>#2B587A</value>
-            <name locale="en_US">text Color</name>
-            <name locale="ru_RU">Цвет текста</name>
-        </setting>
-        <setting var="vk_color3" control_type="color">
-            <value>#5B7FA6</value>
-            <name locale="en_US">color buttons</name>
-            <name locale="ru_RU">Цвет кнопок</name>
-        </setting>
-        
         
         
         <setting var="facebook_widget_title" control_type="text">
@@ -666,56 +671,110 @@
             <name locale="en_US">Facebook widget</name>
             <name locale="ru_RU">Виджет Facebook</name>
         </setting>
-        <setting var="facebook_href" control_type="text">
-            <value>https://www.facebook.com/FacebookDevelopers</value>
-            <name locale="ru_RU">URL страницы/группы Facebook(абсолютный)</name>
-            <name locale="en_US">URL of the page/ Facebook  group (absolute)</name>
+        <setting var="facebook_widget_code" control_type="text">
+            <value><![CDATA[
+<div id="fb-root"></div>
+<div class="fb-like-box" 
+     data-href="https://www.facebook.com/FacebookDevelopers" 
+     data-colorscheme="light" 
+     data-width="330"
+     data-height="500"
+     data-show-faces="true" 
+     data-header="true" 
+     data-stream="false" 
+     data-show-border="true"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id))
+            return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.0";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>]]></value>
+            <name locale="en_US">facebook widget</name>
+            <name locale="ru_RU">Виджет facebook</name>
+            <description locale="en_US">Place the widget code in this field. The code can be found here <![CDATA[<a target="_blank" href="https://facebook.com/dev/Community">facebook widget</a>]]></description>
+            <description locale="ru_RU">Поместите код виджета в это поле. Код пожно получить по ссылке <![CDATA[<a target="_blank" href="https://facebook.com/dev/Community">Виджет facebook</a>]]></description>
+        </setting>
+
+        
+        <setting var="data_block_title" control_type="text">
+            <value></value>
+            <name locale="en_US">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Homepage. Data down page</p>	
+                ]]>
+            </name>
+            <name locale="ru_RU">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Главная страница. Информационый блок</p>	
+                ]]>
+            </name>
+        </setting>
+        <setting var="data_down" control_type="checkbox">
+            <value>1</value>
+            <name locale="en_US">info_block</name>
+            <name locale="ru_RU">Информационый блок</name>
+        </setting>
+        <setting var="data_down_code" control_type="text">
+            <value><![CDATA[
+<ul>
+    <li><em class="icon-truck" id="icon-truck"></em>
+        <div class="type-text">
+            <h3>Бесплатная доставка</h3>
+            <p>Бесплатная доставка</p>
+        </div>
+    </li>
+    <li><em class="icon-phone" id="icon-phone"></em>
+        <div class="type-text">
+            <h3>+7 (343) 344-85-17</h3>
+            <p>+7 (343) 344-85-17</p>
+        </div>
+    </li>
+    <li><em class="icon-credit-card" id="icon-credit-card"></em>
+        <div class="type-text">
+            <h3>Подарочные карты</h3>
+            <p>Подарочные карты</p>
+        </div>
+    </li>
+</ul>
+]]></value>
+            <name locale="en_US">HTML code data</name>
+            <name locale="ru_RU">HTML код</name>
+            <description locale="en_US">Place the widget code in this field.</description>
+            <description locale="ru_RU">Поместите код в это поле.</description>
+        </setting>
+             
+        
+        <setting var="news_block_title" control_type="text">
+            <value></value>
+            <name locale="en_US">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Homepage. count news</p>	
+                ]]>
+            </name>
+            <name locale="ru_RU">
+                <![CDATA[
+                <hr /><br/><br/>
+                <p class="p-title">Главная страница. Новости.</p>	
+                ]]>
+            </name>
         </setting>
         
-        <setting var="facebook_width" control_type="text">
-            <value></value>
-            <name locale="ru_RU">Ширина блока в пикселах</name>
-            <name locale="en_US">Block width in pixels</name>
-        </setting>
-        <setting var="facebook_height" control_type="text">
-            <value></value>
-            <name locale="ru_RU">Высота блока в пикселах</name>
-            <name locale="en_US">Block height in pixels</name>
-        </setting>
-        <setting var="facebook_colorscheme" control_type="select">
-            <value>light</value>
-            <name locale="en_US">The color scheme</name>
-            <name locale="ru_RU">Цветовая схема</name>
-            <options>
-                <option value="light">
-                    <name locale="en_US">light</name>
-                    <name locale="ru_RU">light</name>
-                </option>
-                <option value="dark">
-                    <name locale="en_US">dark</name>
-                    <name locale="ru_RU">dark</name>
-                </option>
-            </options>
-        </setting>
-        <setting var="facebook_show_faces" control_type="checkbox">
+        <setting var="news_block" control_type="checkbox">
             <value>1</value>
-            <name locale="ru_RU">Показать список участников</name>
-            <name locale="en_US">Show the list of participants</name>
+            <name locale="en_US">news</name>
+            <name locale="ru_RU">Новости</name>
         </setting>
-        <setting var="facebook_stream" control_type="checkbox">
-            <value></value>
-            <name locale="ru_RU">Показать новости группы</name>
-            <name locale="en_US">Show the news of the group</name>
-        </setting>
-        <setting var="facebook_header" control_type="checkbox">
-            <value>1</value>
-            <name locale="ru_RU">Показать надпись "Найдите нас на Facebook"</name>
-            <name locale="en_US">Show the inscription "Find us on Facebook"</name>
-        </setting>		
-        <setting var="facebook_show_border" control_type="checkbox">
-            <value>1</value>
-            <name locale="ru_RU">Объвести рамкой блок "группа Facebook"</name>
-            <name locale="en_US">Add a border to block "Facebook group"</name>
+        <setting var="news_block_count" control_type="text">
+            <value>3</value>
+            <name locale="ru_RU">Количество выводимых новостей</name>
+            <name locale="en_US">count news</name>
         </setting>
        
         <setting var="category_settings_title" control_type="text">
@@ -744,6 +803,18 @@
                 ]]>
             </name>
         </setting>
+        
+        <setting var="products_pers" control_type="text">
+            <value>6,12,24,30,50,100</value>
+            <name locale="en_US">The possible number of products per page</name>
+            <name locale="ru_RU">Возможное количество товаров на странице</name>
+        </setting>
+        <setting var="lazyloading" control_type="checkbox">
+            <value>0</value>
+            <name locale="en_US">Lazy loading of products</name>
+            <name locale="ru_RU">Ленивая подгрузка товаров</name>
+        </setting>
+        
         
         <setting var="default_product_view" control_type="select">
             <value>grid</value>
@@ -837,11 +908,78 @@
             <name locale="en_US">VK widget.</name>
             <name locale="ru_RU">Виджет ВКонтакте.</name>
         </setting>
+        <setting var="category_vk_widget_code" control_type="text">
+            <value><![CDATA[
+<script type="text/javascript" src="http://vk.com/js/api/openapi.js?121"></script>
+<!-- VK Widget -->
+<div id="vk_groups" style="margin: 0 auto;"></div>
+<script type="text/javascript">
+VK.Widgets.Group("vk_groups", {mode: 0, width: "260", height: "280", color1: 'FFFFFF', color2: '2B587A', color3: '5B7FA6'}, 62260728);
+</script>]]></value>
+            <name locale="en_US">VK widget</name>
+            <name locale="ru_RU">Виджет ВКонтакте</name>
+            <description locale="en_US">Place the widget code in this field. The code can be found here <![CDATA[<a target="_blank" href="https://vk.com/dev/Community">VK widget</a>]]></description>
+            <description locale="ru_RU">Поместите код виджета в это поле. Код пожно получить по ссылке <![CDATA[<a target="_blank" href="https://vk.com/dev/Community">Виджет ВКонтакте</a>]]></description>
+        </setting>
         <setting var="category_facebook_widget" control_type="checkbox">
             <value>0</value>
             <name locale="en_US">Facebook widget.</name>
             <name locale="ru_RU">Виджет Facebook</name>
         </setting>
+        <setting var="category_facebook_widget_code" control_type="text">
+            <value><![CDATA[
+<div id="fb-root"></div>
+<div class="fb-like-box" 
+     data-href="https://www.facebook.com/FacebookDevelopers" 
+     data-colorscheme="light" 
+     data-width="330"
+     data-height="500"
+     data-show-faces="true" 
+     data-header="true" 
+     data-stream="false" 
+     data-show-border="true"></div>
+<script>(function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id))
+            return;
+        js = d.createElement(s);
+        js.id = id;
+        js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.0";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+</script>]]></value>
+            <name locale="en_US">facebook widget</name>
+            <name locale="ru_RU">Виджет facebook</name>
+            <description locale="en_US">Place the widget code in this field. The code can be found here <![CDATA[<a target="_blank" href="https://facebook.com/dev/Community">facebook widget</a>]]></description>
+            <description locale="ru_RU">Поместите код виджета в это поле. Код пожно получить по ссылке <![CDATA[<a target="_blank" href="https://facebook.com/dev/Community">Виджет facebook</a>]]></description>
+        </setting>
+        <setting var="sidebar_brands_plugin" control_type="radio">
+            <value>brands</value>
+            <name locale="en_US">Brands plugin</name>
+            <name locale="ru_RU">Плагин брендов</name>
+            <options>
+                <option value="brands">
+                    <name locale="en_US">Use plugin <![CDATA[<a target="_blank" href="https://www.webasyst.com/store/plugin/shop/brands/">Brands</a><br/>]]></name>
+                    <name locale="ru_RU">Использовать плагин <![CDATA[<a target="_blank" href="https://www.webasyst.ru/store/plugin/shop/brands/">Бренды</a><br/>]]></name>
+                </option>
+                <option value="productbrands">
+                    <name locale="en_US">Use plugin <![CDATA[<a target="_blank" href="https://www.webasyst.ru/store/plugin/shop/productbrands/">Brands with images and descriptions</a><br/>]]></name>
+                    <name locale="ru_RU">Использовать плагин <![CDATA[<a target="_blank" href="https://www.webasyst.ru/store/plugin/shop/productbrands/">Бренды с картинками и описаниями</a><br/>]]></name>
+                </option>
+                <option value="">
+                    <name locale="en_US">Hide<![CDATA[<br/>]]></name>
+                    <name locale="ru_RU">Не показывать<![CDATA[<br/>]]></name>
+                </option>
+            </options>
+        </setting>
+        <setting var="sidebar_brands_plugin_count" control_type="text">
+            <value>10</value>
+            <name locale="en_US">Brands Count</name>
+            <name locale="ru_RU">Количесвто выводимых брендов</name>
+            <description locale="ru_RU">0 или пусто - не ограничивать количесвто выводимых брендов</description>
+        </setting>
+        
+        
         
         <setting var="product_settings_title" control_type="text">
             <value></value>
@@ -874,7 +1012,25 @@
                 </option>
             </options>
         </setting>
-        
+        <setting var="zoom_images" control_type="radio">
+            <value>zoom_fancybox</value>
+            <name locale="ru_RU">Увеличение изображений</name>
+            <name locale="en_US">Zoom images</name>
+            <options>
+                <option value="zoom">
+                    <name locale="ru_RU">Лупа<![CDATA[<br/><br/>]]></name>
+                    <name locale="en_US">Zoom<![CDATA[<br/><br/>]]></name>
+                </option>
+                <option value="fancybox">
+                    <name locale="ru_RU">Всплывающее окно<![CDATA[<br/><br/>]]></name>
+                    <name locale="en_US">popup<![CDATA[<br/><br/>]]></name>
+                </option>
+                <option value="zoom_fancybox">
+                    <name locale="ru_RU">Лупа + всплывающее окно<![CDATA[<br/><br/>]]></name>
+                    <name locale="en_US">Zoom + popup<![CDATA[<br/><br/>]]></name>
+                </option>
+            </options>
+        </setting>
         
         
     </settings>

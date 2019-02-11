@@ -1,11 +1,39 @@
-$(document).ready(function() {
-    $('#views_block li a').hover(
-            function() {
+$(document).ready(function () {
+    $('#views_block li a').click(
+            function () {
                 displayImage($(this));
-            },
-            function() {
+                return false;
             }
     );
+});
+
+$(document).ready(function () {
+    $('body.content_only').each(function () {
+        $("select,input:not([type=submit],[type=button],.comparator,#search_query_top),textarea").uniform();
+
+        $(document).on('click', '.product_quantity_up', function (e) {
+            e.preventDefault();
+            fieldName = $(this).data('field-qty');
+            var currentVal = parseInt($('input[name=' + fieldName + ']').val());
+            if (!isNaN(currentVal)) {
+                $('input[name=' + fieldName + ']').val(currentVal + 1).trigger('keyup');
+            }
+        });
+
+        $(document).on('click', '.product_quantity_down', function (e) {
+            e.preventDefault();
+            fieldName = $(this).data('field-qty');
+            var currentVal = parseInt($('input[name=' + fieldName + ']').val());
+            if (!isNaN(currentVal) && currentVal > 1) {
+                $('input[name=' + fieldName + ']').val(currentVal - 1).trigger('keyup');
+            } else {
+                $('input[name=' + fieldName + ']').val(1);
+            }
+        });
+        $('body.content_only .ajax_add_to_cart_button').click(function () {
+                window.parent.$('.fancybox-close').delay(1000).click();
+        });
+    });
 
 });
 
@@ -55,25 +83,11 @@ $(document).ready(galeryReload);
 
 
 
-$(document).ready(function(e) {
+$(document).ready(function (e) {
     productWishlist();
 
     if ($("#product-image").length) {
-        $("#product-image").elevateZoom({
-            zoomType: "window",
-            cursor: "crosshair",
-            zoomWindowFadeIn: 500,
-            zoomWindowFadeOut: 750,
-            gallery: "thumbs_list_frame",
-            galleryActiveClass: "thumbActive",
-            zoomWindowWidth: 400,
-            borderSize: 1,
-            borderColour: '#e5e5e5',
-            lensOpacity: 0.7,
-            scrollZoom: true,
-            constrainType: 'width'
-        });
-        $("#product-image").bind("click", function(e) {
+        $("#product-image.fancybox").bind("click", function (e) {
             var ez = $('#product-image').data('elevateZoom');
             $.fancybox(ez.getGalleryList());
             return false;
@@ -95,6 +109,7 @@ $(document).ready(function(e) {
             hideControlOnEnd: true
         });
     }
+
 });
 
 
@@ -111,7 +126,8 @@ function productWishlist() {
     });
 
 
-    $('.favorite a').click(function() {
+
+    $('.favorite a').click(function () {
         var wishlist = $.cookie('shop_wishlist');
         if (!$(this).hasClass('checked')) {
             if (wishlist) {

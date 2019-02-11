@@ -5,13 +5,12 @@
     </a>
     {if isset($breadcrumbs) && $breadcrumbs}
         {foreach $breadcrumbs as $breadcrumb}
-            <a title="{$breadcrumb.name|escape}" href="{$breadcrumb.url}">{$breadcrumb.name|escape}</a><span class="navigation-pipe" >&gt;</span>
+            <a title="{$breadcrumb.name|escape}" href="{$breadcrumb.url}">{$breadcrumb.name|escape}</a>
             {/foreach}
         {/if}
         {if isset($category)}
         <span class="navigation_page">{$category.name|escape}</span>
     {/if}
-    <span class="navigation-pipe">&gt;</span>
     <span class="navigation_page">[`Affiliate program`]</span>
 </div>
 <!-- /Breadcrumb -->

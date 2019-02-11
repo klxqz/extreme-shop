@@ -3,7 +3,7 @@
 <div class="breadcrumb clearfix">
     <a class="home" href="{$wa_app_url}" title="{$wa->accountName()}">
         <i class="icon-home"></i>
-    </a><span class="navigation-pipe" >&gt;</span>
+    </a>
     <span class="navigation_page">[`Checkout`]</span>
 </div>
 
@@ -22,9 +22,31 @@
         {if isset($checkout_steps)}
             <!-- Steps -->
             <ul id="order_step" class="step clearfix">
+                {$n=1}
+                <li class="step_todo first">
+                    <a href="{$wa_url}cart"><em>{$n}.</em> Корзина</a>
+                </li>
+                {$step_preper="cart"}
+                {$step_preper_name='Корзина'}
+                {$step_passed=0}
                 {foreach $checkout_steps as $step_id => $s}
-                    <li class="{if $checkout_current_step == $step_id}step_current{else}step_todo{/if}{if $s@first} first{/if}{if $s@last} last{/if}"{if $s@last} id="step_end"{/if}>
-                        <span><em>{$s@iteration}.</em> {$s.name}</span>
+                    {$n=$n+1}
+                    {if $checkout_current_step == $step_id}
+                        {$step_passed=1}
+                    {else}
+                        {if !$step_passed}
+                            {$step_preper="checkout/`$step_id`"}
+                            {$step_preper_name= $s.name}
+                        {/if}
+                    {/if}
+                    <li class="{if $checkout_current_step == $step_id}step_current{else}step_todo{/if}{if $s@last} last{/if}"{if $s@last} id="step_end"{/if}>
+                        {if $step_passed == 0}
+                            <a style="z-index:{5-$n}" href="{$wa_url}checkout/{$step_id}"><em>{$n}.</em> {$s.name}</a>
+
+                        {else}
+                            <span><em>{$n}.</em> {$s.name}</span>
+                        {/if}
+
                     </li>
                 {/foreach}
             </ul>
@@ -42,7 +64,7 @@
                                     {if !$wa->user()->isAuth()}
                                         <!-- authorized / not authorized selector -->
                                         <ul class="menu-v">
-                                            <li><label><input name="user_type" type="radio" {if !$wa->post('wa_auth_login')}checked{/if} value="0"> [`I'm a new customer`]</label></li>
+                                            <li><label><input name="user_type" type="radio" {if !$wa->post('wa_auth_login')}checked{/if} value="0"> Я новый покупатель</label></li>
                                             <li><label><input name="user_type" type="radio" {if $wa->post('wa_auth_login')}checked{/if} value="1"> [`I already have an account`]</label></li>
                                         </ul>
                                         <div id="login-form"{if !$wa->post('wa_auth_login')} style="display:none"{/if}>
@@ -50,9 +72,9 @@
                                             {$wa->loginForm($error,false)}
                                         </div>
                                         <script type="text/javascript">
-                                            $(function() {
+                                            $(function () {
                                                 $("#login-form input").attr('disabled', 'disabled');
-                                                $("input[name='user_type']").change(function() {
+                                                $("input[name='user_type']").change(function () {
                                                     if ($("input[name='user_type']:checked").val() == '1') {
                                                         $("#login-form input").removeAttr('disabled');
                                                         $(this).closest('div.auth').next(".checkout-step-content").hide();
@@ -98,14 +120,14 @@
                                 {/if}
                                 <div class="clear-both"></div>
                                 <input type="hidden" name="step" value="{$step_id}">
+                                <a class="button-exclusive btn btn-default" href="{$wa_url}{$step_preper}"><i class="icon-chevron-left"></i>{$step_preper_name}</a>
+
                                 {if $s@last}
                                     {if empty($error)}
-                                        <div class="float-right">
-                                            <input type="submit" class="large bold" value="[`Place order`]">
-                                        </div>
+                                        <input type="submit" class="large bold button btn" value="[`Place order`]">
                                     {/if}
                                 {else}
-                                    <input type="submit" class="large bold" value="[`Next &rarr;`]">
+                                    <input type="submit" class="large bold button btn" value="[`Next &rarr;`]">
                                 {/if}
                                 <div class="clear-both"></div>
                             </div>

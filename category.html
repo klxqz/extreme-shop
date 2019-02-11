@@ -2,15 +2,18 @@
     {if $active_sort === null}
         {$active_sort = waRequest::get('sort')}
     {/if}
-
     {$inverted = in_array($sort, array('rating', 'create_datetime', 'total_sales', 'count', 'stock'))}
     {$data = waRequest::get()}
+    {$data_active = waRequest::get()}
     {$data['sort'] = $sort}
+    {$data_active['sort'] = $sort}
     {if $sort == $active_sort}
         {if waRequest::get('order') == 'asc'}
             {$data['order'] = 'desc'}
+            {$data_active['order'] = 'asc'}
         {else}
             {$data['order'] = 'asc'}
+            {$data_active['order'] = 'desc'}
         {/if}
     {else}
         {if $inverted}
@@ -19,7 +22,10 @@
             {$data['order'] = 'asc'}
         {/if}
     {/if}
-    <option value="?{http_build_query($data)}" {if $active_sort == $sort}selected="selected"{/if}>{$name} {if $active_sort == $sort}{if $data['order'] == 'asc'}&uarr;{else}&darr;{/if}{/if}</option>
+    {if $active_sort == $sort}
+        <option style="display: none;" value="?{http_build_query($data_active)}" {if $active_sort == $sort}selected="selected"{/if}>{$name} {if $active_sort == $sort}{if $data_active['order'] == 'asc'}&uarr;{else}&darr;{/if}{/if}</option>
+    {/if}
+    <option value="?{http_build_query($data)}">{$name} {if $active_sort == $sort}{if $data['order'] == 'asc'}&uarr;{else}&darr;{/if}{/if}</option>
 {/function}
 
 {$compare = waRequest::cookie('shop_compare', array(), waRequest::TYPE_ARRAY_INT)}
@@ -29,11 +35,10 @@
 <div class="breadcrumb clearfix">
     <a class="home" href="{$wa_app_url}" title="{$wa->accountName()}">
         <i class="icon-home"></i>
-    </a><span class="navigation-pipe" >&gt;</span>
+    </a>
     {if isset($breadcrumbs) && $breadcrumbs}
         {foreach $breadcrumbs as $breadcrumb}
             <a title="{$breadcrumb.name|escape}" href="{$breadcrumb.url}">{$breadcrumb.name|escape}</a>
-            <span class="navigation-pipe" >&gt;</span>
         {/foreach}
     {/if}
     {if isset($category)}
@@ -100,13 +105,11 @@
                     <li id="grid">
                         <a rel="nofollow" href="#" title="[`Grid`]">
                             <i class="icon-th-large"></i>
-                            [`Grid`]
                         </a>
                     </li>
                     <li id="list">
                         <a rel="nofollow" href="#" title="[`List`]">
                             <i class="icon-th-list"></i>
-                            [`List`]
                         </a>
                     </li>
                 </ul>
@@ -121,10 +124,16 @@
                     {/if}
                     <div id="productsSortForm" class="productsSortForm">
                         <div class="select selector1">
-                            <label for="selectProductSort">[`Sort by`]</label>
-                            <select id="selectProductSort" class="selectProductSort form-control">
+                            <label >[`Sort by`]</label>
+
+
+                            {$sort_fields = ['rating' => '[`Customer rating`]', 'total_sales' => '[`Bestsellers`]', 'price' => '[`Price`]', 'name' => '[`Name`]', 'create_datetime'=>'[`Date added`]', 'stock' => '[`In stock`]']}
+                            {if !isset($active_sort)}
+                                {$active_sort = $wa->get('sort', 'create_datetime')}
+                            {/if}
+                            <select id="selectProductSort" class="selectProductSort form-control ">
                                 {if !empty($category) && !$category.sort_products}
-                                    <option value="{$wa->currentUrl(0, 1)}" {if !$active_sort} selected="selected"{/if} >[`New & Popular`]</option>
+                                    <option value=" " {if !$active_sort} selected="selected"{/if} >[`New & Popular`]</option>
                                 {/if}
                                 {foreach $sort_fields as $sort => $name}
                                     {$params = ['sort' => $sort, 'name' => $name, 'active_sort' => $active_sort]}
@@ -134,14 +143,18 @@
                                     {/if}
                                 {/foreach}
                             </select>
+
                         </div>
                     </div>
                 {/if}
                 <!-- /Sort products -->
 
-                {$products_pers = array(6,12,24,30,50,100)}
+                {if $theme_settings.lazyloading}
+                    {$theme_settings.products_pers=24}
+                {/if}
+                {$products_pers = explode(',', $theme_settings.products_pers)}
                 <!-- nbr product/page -->
-                <div  class="nbrItemPage">
+                <div  class="nbrItemPage" {if $theme_settings.lazyloading}style="display:none;"{/if}>
                     <div class="clearfix selector1">
                         <label for="nb_item">
                             [`Show`]
@@ -162,9 +175,9 @@
 
             </div>
         </div>
-
-        {include file='list-thumbs.html' id="" class="product_list grid row"}
-
+        <div class="products-category">
+            {include file='list-thumbs.html' id="" class="product_list grid row"}
+        </div>
 
         <div class="content_sortPagiBar">
             <div class="bottom-pagination-content clearfix">
@@ -175,9 +188,9 @@
                         </span>
                     </a>
                 </div>
-                        
+
                 <!-- Pagination -->
-                <div id="pagination_bottom" class="pagination clearfix">                    
+                <div id="pagination_bottom" class="pagination clearfix {if $theme_settings.lazyloading}lazyloading-paging{/if}">                    
                     {wa_pagination total=$pages_count attrs=['class' => "pagination"] next = '<i class="icon-chevron-right"></i>' prev = '<i class="icon-chevron-left"></i>'}
                 </div>
                 <!-- /Pagination -->

@@ -5,10 +5,10 @@
 <div class="breadcrumb clearfix">
     <a class="home" href="{$wa_app_url}" title="{$wa->accountName()}">
         <i class="icon-home"></i>
-    </a><span class="navigation-pipe" >&gt;</span>
+    </a>
     {if isset($breadcrumbs) && $breadcrumbs}
         {foreach $breadcrumbs as $breadcrumb}
-            <a title="{$breadcrumb.name|escape}" href="{$breadcrumb.url}">{$breadcrumb.name|escape}</a><span class="navigation-pipe" >&gt;</span>
+            <a title="{$breadcrumb.name|escape}" href="{$breadcrumb.url}">{$breadcrumb.name|escape}</a>
 
         {/foreach}
     {/if}

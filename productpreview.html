@@ -15,9 +15,9 @@
         <link href='http://fonts.googleapis.com/css?family=Roboto:400,500,700,900' rel='stylesheet' type='text/css'>
 
         <meta name="apple-mobile-web-app-capable" content="yes" /> 
-        <link rel="stylesheet" href="{$wa_parent_theme_url}extreme.css?v{$wa_theme_version}" media="all" />
+        <link rel="stylesheet" href="{$wa_parent_theme_url}extreme.min.css?v{$wa_theme_version}" media="all" />
         <link rel="stylesheet" href="{$wa_parent_theme_url}responsive-tables.css" media="all" />
-        <link rel="stylesheet" href="{$wa_active_theme_url}product.css" media="all" />
+        <link rel="stylesheet" href="{$wa_active_theme_url}product.min.css" media="all" />
         <link href="{$wa_active_theme_url}poshytip/tip-darkgray/tip-darkgray.css" rel="stylesheet" type="text/css">
 
         <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:300,600" media="all" />
@@ -30,7 +30,7 @@
         <link href="{$wa_active_theme_url}extreme.shop.css?v{$wa_theme_version}" rel="stylesheet" type="text/css">
         
         {$wa->css()} {* links active plugins CSS *}
-
+    <script type="text/javascript" src="{$wa_url}wa-content/js/jquery/jquery-1.8.2.min.js"></script>
         {$compare = waRequest::cookie('shop_compare', array(), waRequest::TYPE_ARRAY_INT)}
         <script type="text/javascript">
             var add_to_compare = '[`Add to comparison table`]';
@@ -44,6 +44,18 @@
         <script type="text/javascript" src="{$wa_url}wa-content/js/jquery-plugins/jquery.cookie.js"></script>
         <script type="text/javascript" src="{$wa_active_theme_url}poshytip/jquery.poshytip.min.js"></script>
         <script type="text/javascript" src="{$wa_active_theme_url}bxslider/jquery.bxslider.min.js" ></script>
+        
+                    
+    {if $theme_settings.use_uniform}<script type="text/javascript" src="{$wa_theme_url}js/jquery.uniform.min.js"></script>{/if}
+    <script type="text/javascript">
+            var is_autocomplete = '{$theme_settings.is_autocomplete}';
+            var use_uniform = '{$theme_settings.use_uniform}';
+            var floating_top_menu = '{$theme_settings.floating_top_menu}';
+            var cart_url = '{$wa->getUrl("shop/frontend/cart")}';
+            var shop_search_url = '{$wa->getUrl("/frontend/search")}';
+    </script>
+    {if $theme_settings.use_uniform}<link rel="stylesheet" href="{$wa_theme_url}css/uniform/{$theme_settings.uniform_theme}/css/uniform.{$theme_settings.uniform_theme}.min.css"  media="all"/>{/if}
+   
         <!--[if IE 8]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>

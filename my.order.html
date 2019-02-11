@@ -3,11 +3,10 @@
     <a href="{$wa_url}" class="home">
         <i class="icon-home"></i>
     </a>
-    <span class="navigation-pipe">&gt;</span>
 
     {if isset($breadcrumbs) && $breadcrumbs}
         {foreach $breadcrumbs as $breadcrumb}
-            <a title="{$breadcrumb.name|escape}" href="{$breadcrumb.url}">{$breadcrumb.name|escape}</a><span class="navigation-pipe" >&gt;</span>
+            <a title="{$breadcrumb.name|escape}" href="{$breadcrumb.url}">{$breadcrumb.name|escape}</a>
             {/foreach}
         {/if}
         {if isset($category)}

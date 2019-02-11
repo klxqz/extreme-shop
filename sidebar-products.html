@@ -2,7 +2,9 @@
     {foreach $products as $p}
         <li class="clearfix" itemscope itemtype="http://schema.org/Product">
             <a class="products-block-image" href="{$p.frontend_url}"  title="{$p.name}{if $p.summary} &mdash; {strip_tags($p.summary|escape)}{/if}">
-                {$wa->shop->productImgHtml($p, '98', ['class' => 'replace-2x img-responsive', 'itemprop' => 'image', 'alt' => $p.name, 'default' => "`$wa_theme_url`img/dummy200.png"])}
+                <div>
+                    {$wa->shop->productImgHtml($p, '98', ['class' => 'replace-2x img-responsive', 'itemprop' => 'image', 'alt' => $p.name, 'default' => "`$wa_theme_url`img/dummy200.png"])}
+                </div>
             </a>
             <div class="product-content">
                 <h5 itemprop="name">

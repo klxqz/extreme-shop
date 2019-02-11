@@ -1,14 +1,15 @@
-<link rel="stylesheet" href="{$wa_active_theme_url}product.css"  media="all" />
+<script type="text/javascript" src="{$wa_active_theme_url}js/jquery.elevatezoom.min.js"></script>
+
+<link rel="stylesheet" href="{$wa_active_theme_url}product.min.css"  media="all" />
 
 <!-- Breadcrumb -->
 <div class="breadcrumb clearfix">
     <a class="home" href="{$wa_app_url}" title="{$wa->accountName()}">
         <i class="icon-home"></i>
-    </a><span class="navigation-pipe" >&gt;</span>
+    </a>
     {if isset($breadcrumbs) && $breadcrumbs}
         {foreach $breadcrumbs as $breadcrumb}
             <a title="{$breadcrumb.name|escape}" href="{$breadcrumb.url}">{$breadcrumb.name|escape}</a>
-            <span class="navigation-pipe" >&gt;</span>
         {/foreach}
     {/if}
     <span class="navigation_page">{$product.name|escape}</span>
@@ -55,7 +56,7 @@
 
                 <!-- product img-->
                 <div id="image-block">
-                    <img id="product-image" src="{shopImage::getUrl(['id' => $product.image_id, 'product_id' => $product.id, 'ext' => $product.ext], '360', false)}"  
+                    <img id="product-image" class="{if $theme_settings.zoom_images != 'zoom'}fancybox{/if} {if $theme_settings.zoom_images == 'fancybox'}zoom_no{/if}" src="{shopImage::getUrl(['id' => $product.image_id, 'product_id' => $product.id, 'ext' => $product.ext], '360', false)}"  
                          data-zoom-image="{shopImage::getUrl(['id' => $product.image_id, 'product_id' => $product.id, 'ext' => $product.ext], '900', false)}"/>
                 </div>
 
@@ -68,7 +69,7 @@
                                        href="#"
                                        data-image="{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '360', false)}"
                                        data-zoom-image="{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '900', false)}"
-                                       class="elevatezoom-gallery">
+                                       class="thumbnail elevatezoom-gallery">
                                         <img id="thumb_{$image.id}" src="{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '70x70', false)}"  />
                                     </a>
                                 </li>
@@ -76,6 +77,64 @@
                         </ul>
                     </div>
                 </div>
+
+                <script type="text/javascript">
+                    $(function () {
+                        var zoomDisable = '{$theme_settings.zoom_images == 'fancybox'}';
+                        var fancyboxDisable = '{$theme_settings.zoom_images == 'zoom'}';
+                        $("#product-image").elevateZoom({
+                            zoomType: "window",
+                            cursor: "crosshair",
+                            zoomWindowFadeIn: 500,
+                            zoomWindowFadeOut: 750,
+                            gallery: "thumbs_list_frame",
+                            galleryActiveClass: "thumbActive",
+                            zoomWindowWidth: 400,
+                            borderSize: 1,
+                            borderColour: '#e5e5e5',
+                            lensOpacity: 0.7,
+                            scrollZoom: true,
+                            constrainType: 'width'
+                        }).load(function () {
+                            $(this).removeAttr('style');
+                            $('.zoomWrapper').css({
+                                'width': $(this).width(),
+                                'height': $(this).height()
+                            });
+                        });
+
+                        if (zoomDisable) {
+                            var ez = $('#product-image').data('elevateZoom');
+                            ez.changeState('disable');
+                            $('.zoomContainer').hide();
+                        } else {
+                            function zoomResize() {
+                                var ez = $('#product-image').data('elevateZoom');
+                                if ($(document).width() > 993) {
+                                    ez.changeState('enable');
+                                    $('.zoomContainer').show();
+                                } else {
+                                    ez.changeState('disable');
+                                    $('.zoomContainer').hide();
+                                }
+                            }
+                            $(window).resize(zoomResize);
+                            zoomResize();
+                        }
+                    {if $theme_settings.zoom_images == 'fancybox'}
+                        function zoomZontainerdelete() {
+                            if ($('.zoomContainer').length) {
+                                var ez = $('#product-image').data('elevateZoom');
+                                ez.changeState('disable');
+                                $('.zoomContainer').hide();
+                            } else
+                                setTimeout(zoomZontainerdelete, 50);
+                        }
+                        setTimeout(zoomZontainerdelete, 50);
+                    {/if}
+                    });
+                </script>
+
                 <!-- end views-block -->
                 <!-- end thumbnails -->
             </div> 
@@ -245,7 +304,7 @@
 
             </div>
             <script type="text/javascript">
-                $(function() {
+                $(function () {
                     $('#product-tabs li:first').addClass('active');
                     $('.tab-content .tab-pane:first').addClass('active');
                 });
@@ -363,5 +422,9 @@
     </div><!-- #center_column -->
 </div><!-- .row -->
 
-<script type="text/javascript" src="{$wa_active_theme_url}js/jquery.elevateZoom-3.0.8.min.js" ></script>
+{*<script type="text/javascript" src="{$wa_active_theme_url}js/jquery.elevateZoom-3.0.8.min.js" ></script>*}
+
+
+
 <script type="text/javascript" src="{$wa_active_theme_url}product_script.js"></script>
+

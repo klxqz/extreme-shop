@@ -1,5 +1,5 @@
-<link rel="stylesheet" href="{$wa_active_theme_url}homeslider.css"  media="all"/>
-<script type="text/javascript" src="{$wa_active_theme_url}homeslider.js" ></script>
+<link rel="stylesheet" href="{$wa_active_theme_url}homeslider.min.css"  media="all"/>
+<script type="text/javascript" src="{$wa_active_theme_url}homeslider.min.js" ></script>
 <script type="text/javascript" src="{$wa_active_theme_url}bootstrap.min.js" ></script>
 
 {$compare = waRequest::cookie('shop_compare', array(), waRequest::TYPE_ARRAY_INT)}
@@ -148,7 +148,7 @@
     </div> 
 </div> 
 <script type="text/javascript">
-    $(function() {
+    $(function () {
         $('#home-page-tabs li:first').addClass('active');
         $('#center_column .product_list:first').addClass('active');
     });
@@ -212,76 +212,79 @@
         </div>
     {/if}
     <div id="fb-root"></div>
-
+{*равномерная табличка блоков*}
+    {if $theme_settings.data_down && $theme_settings.news_block}
+        {$colpol=6}
+    {else}
+        {$colpol=12}
+    {/if}
+    {if $theme_settings.vk_widget && $theme_settings.facebook_widget}
+        {if $colpol==12}
+            {$colx=4}
+        {else}
+            {$colx=3}
+        {/if}
+    {else}
+        {if $colpol==12}
+            {$colx=6}
+        {else}
+            {$colx=4}
+        {/if}
+    {/if}
     {if $theme_settings.vk_widget}
-        <div id="facebook_block" class="col-xs-4">
+        <div id="facebook_block" class="col-xs-{$colx}">
             <h4>[`We VKontakte`]</h4>
-            {include file="widget.vk.html"}
+            {$theme_settings.vk_widget_code}
         </div>
     {/if}
     {if $theme_settings.facebook_widget}
-        <div id="facebook_block" class="col-xs-4">
+        <div id="facebook_block" class="col-xs-{$colx}">
             <h4>[`Follow us on facebook`]</h4>
-            {include file="widget.facebook.html"}
+            {$theme_settings.facebook_widget_code}
         </div>
     {/if}
 
     <div id="cmsinfo_block">
-        <div class="col-xs-6">
-            <ul>
-                <li><em class="icon-truck" id="icon-truck"></em>
-                    <div class="type-text">
-                        <h3>[`Free shipping`]</h3>
-                        <p>[`Free shipping`]</p>
-                    </div>
-                </li>
-                <li><em class="icon-phone" id="icon-phone"></em>
-                    <div class="type-text">
-                        <h3>{$wa->shop->settings('phone')}</h3>
-                        <p>{$wa->shop->settings('phone')}</p>
-                    </div>
-                </li>
-                <li><em class="icon-credit-card" id="icon-credit-card"></em>
-                    <div class="type-text">
-                        <h3>[`Gift cards`]</h3>
-                        <p>[`Gift cards`]</p>
-                    </div>
-                </li>
-            </ul>
-        </div>
-        <div class="col-xs-6">
-            <h3>[`News`]</h3>
-
-            {if $wa->blog && $wa->blog->posts()}
-                {$latest_posts = $wa->blog->posts()}
-                <ul class="list-cms-info">
-                    {foreach $latest_posts as $post}
-                        <li class="post">
-                            <h3>
-                                <a href="{$post.link}">{$post.title}</a>
-                                {* @event prepare_posts_frontend.%plugin_id%.post_title *}
-                                {if !empty($post.plugins.post_title)}
-                                    {foreach $post.plugins.post_title as $plugin => $output}
-                                        {$output}
-                                    {/foreach}
-                                {/if}
-                            </h3>
-                            <div class="credentials">
-                                {if $post.user.posts_link}
-                                    <a href="{$post.user.posts_link}" class="username">{$post.user.name}</a>
-                                {else}
-                                    <span class="username">{$post.user.name}</span>
-                                {/if}
-                                {$post.datetime|wa_datetime:"humandate"}
-                            </div>
-                            <p>
-                                {$post.text|strip_tags|truncate:100}
-                            </p>
-                        </li>
-                    {/foreach}
-                </ul>
-            {/if}
-        </div>
+        {if $theme_settings.data_down}
+            <div class="col-xs-{$colpol}">
+                {$theme_settings.data_down_code}
+            </div>
+        {/if}
+        {if $theme_settings.news_block}
+            <div class="col-xs-{$colpol}">
+                <h3>[`News`]</h3>
+                {if $wa->blog && $wa->blog->posts()}
+                    {$latest_posts = $wa->blog->posts()}
+                    <ul class="list-cms-info">
+                        {foreach $latest_posts as $post}
+                            {if $post@index>=$theme_settings.news_block_count}
+                                {break}
+                            {/if}
+                            <li class="post">
+                                <h3>
+                                    <a href="{$post.link}">{$post.title}</a>
+                                    {* @event prepare_posts_frontend.%plugin_id%.post_title *}
+                                    {if !empty($post.plugins.post_title)}
+                                        {foreach $post.plugins.post_title as $plugin => $output}
+                                            {$output}
+                                        {/foreach}
+                                    {/if}
+                                </h3>
+                                <div class="credentials">
+                                    {if $post.user.posts_link}
+                                        <a href="{$post.user.posts_link}" class="username">{$post.user.name}</a>
+                                    {else}
+                                        <span class="username">{$post.user.name}</span>
+                                    {/if}
+                                    {$post.datetime|wa_datetime:"humandate"}
+                                </div>
+                                <p>
+                                    {$post.text|strip_tags|truncate:100}
+                                </p>
+                            </li>
+                        {/foreach}
+                    </ul>
+                {/if}
+            </div>
+        {/if}
     </div>
-
-</div>
