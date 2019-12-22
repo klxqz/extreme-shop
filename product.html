@@ -56,23 +56,40 @@
 
                 <!-- product img-->
                 <div id="image-block">
-                    <img id="product-image" class="{if $theme_settings.zoom_images != 'zoom'}fancybox{/if} {if $theme_settings.zoom_images == 'fancybox'}zoom_no{/if}" src="{shopImage::getUrl(['id' => $product.image_id, 'product_id' => $product.id, 'ext' => $product.ext], '360', false)}"  
+                    {$video = $product->video}
+                    {if $video}
+                    <div id="video-container" style="display:none" class="video-container" itemprop="video" itemscope itemtype="http://schema.org/VideoObject">
+                        <div itemprop="embedHTML">
+                            <iframe src="{$video.url}" width="{$video.width}" height="{$video.height}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+                        </div>
+                        <meta itemprop="width" content="{$video.width}">
+                        <meta itemprop="height" content="{$video.height}">
+                    </div>
+                    {/if}
+                    <img id="product-image" class="{if $theme_settings.zoom_images != 'zoom'}fancybox{/if} {if $theme_settings.zoom_images == 'fancybox'}zoom_no{/if}" src="{shopImage::getUrl(['id' => $product.image_id, 'product_id' => $product.id, 'ext' => $product.ext], '360', false)}"
                          data-zoom-image="{shopImage::getUrl(['id' => $product.image_id, 'product_id' => $product.id, 'ext' => $product.ext], '900', false)}"/>
                 </div>
 
                 <div id="views_block" class="clearfix ">
                     <div id="thumbs_list">
                         <ul id="thumbs_list_frame">
+                            {if $video}
+                            <li>
+                                <a id="product-image-video" href="{$video.url}" class="thumbnail elevatezoom-gallery">
+                                    <img src="{$video.images[0]}">
+                                </a>
+                            </li>
+                            {/if}
                             {foreach $product.images as $image}
-                                <li>
-                                    <a id="product-image-{$image.id}" 
-                                       href="#"
-                                       data-image="{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '360', false)}"
-                                       data-zoom-image="{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '900', false)}"
-                                       class="thumbnail elevatezoom-gallery">
-                                        <img id="thumb_{$image.id}" src="{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '70x70', false)}"  />
-                                    </a>
-                                </li>
+                            <li>
+                                <a id="product-image-{$image.id}"
+                                   href="#"
+                                   data-image="{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '360', false)}"
+                                   data-zoom-image="{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '900', false)}"
+                                   class="thumbnail elevatezoom-gallery">
+                                    <img id="thumb_{$image.id}" src="{shopImage::getUrl(['id' => $image.id, 'product_id' => $product.id, 'ext' => $image.ext], '70x70', false)}"  />
+                                </a>
+                            </li>
                             {/foreach}
                         </ul>
                     </div>
@@ -80,6 +97,15 @@
 
                 <script type="text/javascript">
                     $(function () {
+
+                        $('#product-image-video').click(function () {
+                            $('#product-image').hide();
+                            $('#video-container').show();
+                            $('.product-gallery .image').removeClass('selected');
+                            $(this).parent().addClass('selected');
+                            return false;
+                        });
+
                         var zoomDisable = '{$theme_settings.zoom_images == 'fancybox'}';
                         var fancyboxDisable = '{$theme_settings.zoom_images == 'zoom'}';
                         $("#product-image").elevateZoom({
@@ -96,6 +122,7 @@
                             scrollZoom: true,
                             constrainType: 'width'
                         }).load(function () {
+                            $('#video-container').hide();
                             $(this).removeAttr('style');
                             $('.zoomWrapper').css({
                                 'width': $(this).width(),
@@ -121,7 +148,7 @@
                             $(window).resize(zoomResize);
                             zoomResize();
                         }
-                    {if $theme_settings.zoom_images == 'fancybox'}
+                        {if $theme_settings.zoom_images == 'fancybox'}
                         function zoomZontainerdelete() {
                             if ($('.zoomContainer').length) {
                                 var ez = $('#product-image').data('elevateZoom');
@@ -131,8 +158,8 @@
                                 setTimeout(zoomZontainerdelete, 50);
                         }
                         setTimeout(zoomZontainerdelete, 50);
-                    {/if}
-                    });
+                        {/if}
+                        });
                 </script>
 
                 <!-- end views-block -->

@@ -344,3 +344,5 @@ h1 .order-status{font-size:0.75em;margin-left:10px}
 }
 .checkout-step [type="submit"]{float:right}
 .content_only #usefull_link_block{display:none}
+.video-container { text-align: center; margin-right: 50px; max-width: 750px; }
+.video-container iframe { box-shadow: 0 5px 15px rgba(0,0,0,0.15); max-width: 100%; }
